@@ -1,55 +1,174 @@
-<?= $this->doctype() ?>
+<?php echo $this->doctype() ?>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('filini')->setSeparator(' - ')->setAutoEscape(false); ?>
+    <style>body { opacity: 0; overflow-x: hidden; } html { background-color: #fff; }</style>
+    <!-- Le styles -->
+    <?php echo $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+        ->prependStylesheet($this->basePath('css/main.min.css'));
+        // ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+        // ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+    ?>
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
-
-        <?= $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
-
-        <!-- Le styles -->
-        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
-            ->prependStylesheet($this->basePath('css/style.css'))
-            ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-            ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
-        ?>
-
-        <!-- Scripts -->
-        <?= $this->headScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
-        ?>
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?= $this->url('home') ?>">
-                        <img src="<?= $this->basePath('img/zf-logo-mark.svg') ?>" height="28" alt="Zend Framework <?= \Application\Module::VERSION ?>"/>&nbsp;Skeleton Application
+    <!-- Scripts -->
+    <?php // echo $this->headScript()
+        //->prependFile($this->basePath('js/bootstrap.min.js'))
+    ?>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <!--Блок для 724px-->
+                <div class="col-sm-12  hidden-md hidden-lg table-phone">
+                    <div class="phone">
+                        <i class="fa fa-mobile"></i> 
+                        <a href="tel:+375447112336">+375447112336</a>
+                    </div>
+                    <a href="#small-dialog" class="popup-with-zoom-anim button">
+                        заказать звонок
                     </a>
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?= $this->url('home') ?>">Home</a></li>
+                <!--Конец Блок для 724px-->
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <a href="<?php echo $this->url('home'); ?>">
+                        <img src="<?php echo $this->basePath('img/logo.jpg') ?>" alt="" class="logo">
+                    </a>
+                </div>
+                <div class="col-md-7 col-sm-9 col-xs-9">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="#">Каталог</a></li>
+                            <li><a href="#">Наши работы</a></li>
+                            <li><a href="#">Дизайнерам</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-1 mobile-lang" >
+                    <ul class="lang">
+                        <li><a href="<?php echo $this->url('home'); ?>" class="active">ru</a></li>
+                        <!-- <li><a href="#">en</a></li> -->
                     </ul>
                 </div>
+                <!--Блок для 1170px и выше-->
+                <div class="col-md-2 col-xs-5 mobile-phone">
+                    <div class="phone">
+                        <i class="fa fa-mobile"></i>
+                        <a href="tel:+375447112336">+375447112336</a>
+                    </div>
+                    <a href="#small-dialog" class="popup-with-zoom-anim button">заказать звонок</a>
+                    <img src="<?php echo $this->basePath('img/menu.jpg') ?>" alt="" class="hidden-lg hidden-md hidden-sm mobile-icon">
+                </div>
+                <!--Конец Блок для 1170px и выше-->
+                <!--Мобильное меню-->
+                <div class="shadow-menu"></div>
+                <div class="mobile-nav">
+                    <nav>
+                        <ul>
+                            <li><a href="<?php echo $this->url('home'); ?>">Главная</a></li>
+                            <li><a href="#">Каталог</a></li>
+                            <li><a href="#">Наши работы</a></li>
+                            <li><a href="#">Дизайнерам</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                    </nav>
+                    <span class="close-menu">x</span>
+                    <!--Конец мобильное меню-->
+                </div>
             </div>
-        </nav>
-        <div class="container">
-            <?= $this->content ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?= date('Y') ?> by Zend Technologies Ltd. All rights reserved.</p>
-            </footer>
         </div>
-        <?= $this->inlineScript() ?>
-    </body>
+
+        <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+        <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+            <form action="">
+                <input type="text" placeholder="Ваше имя">
+                <input type="text" placeholder="Телефон">
+                <button class="button">заказать</button>
+            </form>
+        </div>
+    </header>
+
+
+    <?= $this->content ?>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <a href="<?php echo $this->url('home'); ?>">
+                        <img src="<?php echo $this->basePath('img/logo.png') ?>" alt="" class="logo">
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <strong>Каталог</strong>
+                    <nav class="footer-nav">
+                        <ul>
+                            <li><a href="">Мебель Horeca</a></li>
+                            <li><a href="">Диваны для дома</a></li>
+                            <li><a href="">Кровати</a></li>
+                            <li><a href="">Кресла</a></li>
+                            <li><a href="">Стулья</a></li>
+                            <li><a href="">Барные стулья</a></li>
+                            <li><a href="">Пуфы и банкетки</a></li>
+                            <li><a href="">Чугунные подстолья</a></li>
+                            <li><a href="">Подстолья из нержавеющей стали</a></li>
+                            <li><a href="">Подстолья из чугуна и дерева</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <strong>Дизайнерам</strong>
+                    <nav class="footer-nav">
+                        <ul>
+                            <li><a href="">Модели 2D-3D</a></li>
+                            <li><a href="">Скачать каталог</a></li>
+                        </ul>
+                    </nav>
+                    <strong>Наши работы</strong>
+                    <nav class="footer-nav">
+                        <ul>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <strong>Контакты</strong>
+                    <div class="phone">
+                        <i class="fa fa-mobile"></i>
+                        <a href="tel:+375447112336">+375447112336</a>
+                    </div>
+                    <div class="phone mail-footer">
+                        <i class="fa fa-envelope-o"></i>
+                        <a href="mailto:test@test.ru">test@test.ru</a>
+                    </div>
+                    <div class="soc-item">
+                        <a href="#">
+                            <img src="<?php echo $this->basePath('img/icon/1.png') ?>" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="<?php echo $this->basePath('img/icon/2.png') ?>" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="copy">2017 @ Все права защищены</p>
+    </footer>
+
+    <?= $this->inlineScript()
+        ->appendFile($this->basePath('app/config.js'), 'text/javascript')
+    ?>
+    <script>
+        $(function() {
+
+            $(".owl-carousel").owlCarousel({
+            items: 1,
+            nav: true,
+            loop:true,
+        });
+        });
+    </script>
+</body>
 </html>

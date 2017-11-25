@@ -13,5 +13,8 @@
 return [
     'Zend\Router',
     'Zend\Validator',
+
+    // custom
+    'Core',
     'Application',
 ];

@@ -1,0 +1,62 @@
+<div class="breadcrumbs breadcrumbs-contact">
+    <div class="container">
+        <div class="row">
+            <ul>
+                <li>
+                	<a href="<?php echo $this->url('application_contact'); ?>">Контакты</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <h1 class="heading">Контакты</h1>
+            <div class="col-md-6">
+                <div class="contact-str">
+                    <div class="row">
+                        <div class="col-xs-4 right">Телефон</div>
+                        <div class="col-xs-8 left">
+                            <a href="tel:+3754471123336">+3754471123336</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-str">
+                    <div class="row">
+                        <div class="col-xs-4 right">E-mail</div>
+                        <div class="col-xs-8 left">
+                            <a href="mailto:tralivali@tut.by">tralivali@tut.by</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-str">
+                    <div class="row">
+                        <div class="col-xs-4 right">Адрес производства</div>
+                        <div class="col-xs-8 left">Республика Беларусь, <br>Минск, траливали, 55</div>
+                    </div>
+                </div>
+                <div id="map">
+                    <iframe src="https://yandex.ua/map-widget/v1/-/CBU~6VT5pA" width="560" height="340" frameborder="0"></iframe>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <p>Заполните форму, и мы свяжемся <br>с вами в ближайшее рабочее время: </p>
+                    <form action="">
+                        <p>Как вам ответить?</p>
+                        <div class="form-choise">
+                            <span class="phone">Телефон<span class="off"></span></span>
+                            <span class="email">E-mail</span>
+                        </div>
+                        <input type="text" placeholder="Имя" class="name">
+                        <input type="text" placeholder="Телефон" id="input-phone" class="contact-form-input">
+                        <input type="text" placeholder="E-mail" id="input-email" class="contact-form-input">
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Сообщение"></textarea>
+                        <button class="button">отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

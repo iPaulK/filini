@@ -39,18 +39,18 @@
                 <div class="col-md-7 col-sm-9 col-xs-9">
                     <nav>
                         <ul>
-                            <li><a href="/">Главная</a></li>
-                            <li><a href="#">Каталог</a></li>
-                            <li><a href="#">Наши работы</a></li>
-                            <li><a href="#">Дизайнерам</a></li>
-                            <li><a href="#">Контакты</a></li>
+                            <li><a href="<?php echo $this->url('home')?>">Главная</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Каталог</a></li>
+                            <li><a href="<?php echo $this->url('application_work_list')?>">Наши работы</a></li>
+                            <li><a href="<?php echo $this->url('application_designers')?>">Дизайнерам</a></li>
+                            <li><a href="<?php echo $this->url('application_contact')?>">Контакты</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-md-1 col-sm-1 col-xs-1 mobile-lang" >
                     <ul class="lang">
                         <li><a href="<?php echo $this->url('home'); ?>" class="active">ru</a></li>
-                        <!-- <li><a href="#">en</a></li> -->
+                        <li><a href="#">en</a></li>
                     </ul>
                 </div>
                 <!--Блок для 1170px и выше-->
@@ -68,11 +68,11 @@
                 <div class="mobile-nav">
                     <nav>
                         <ul>
-                            <li><a href="<?php echo $this->url('home'); ?>">Главная</a></li>
-                            <li><a href="#">Каталог</a></li>
-                            <li><a href="#">Наши работы</a></li>
-                            <li><a href="#">Дизайнерам</a></li>
-                            <li><a href="#">Контакты</a></li>
+                            <li><a href="<?php echo $this->url('home')?>">Главная</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Каталог</a></li>
+                            <li><a href="<?php echo $this->url('application_work_list')?>">Наши работы</a></li>
+                            <li><a href="<?php echo $this->url('application_designers')?>">Дизайнерам</a></li>
+                            <li><a href="<?php echo $this->url('application_contact')?>">Контакты</a></li>
                         </ul>
                     </nav>
                     <span class="close-menu">x</span>
@@ -106,16 +106,16 @@
                     <strong>Каталог</strong>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="">Мебель Horeca</a></li>
-                            <li><a href="">Диваны для дома</a></li>
-                            <li><a href="">Кровати</a></li>
-                            <li><a href="">Кресла</a></li>
-                            <li><a href="">Стулья</a></li>
-                            <li><a href="">Барные стулья</a></li>
-                            <li><a href="">Пуфы и банкетки</a></li>
-                            <li><a href="">Чугунные подстолья</a></li>
-                            <li><a href="">Подстолья из нержавеющей стали</a></li>
-                            <li><a href="">Подстолья из чугуна и дерева</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Мебель Horeca</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Диваны для дома</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Кровати</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Кресла</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Стулья</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Барные стулья</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Пуфы и банкетки</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Чугунные подстолья</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Подстолья из нержавеющей стали</a></li>
+                            <li><a href="<?php echo $this->url('application_catalog')?>">Подстолья из чугуна и дерева</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -123,8 +123,8 @@
                     <strong>Дизайнерам</strong>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="">Модели 2D-3D</a></li>
-                            <li><a href="">Скачать каталог</a></li>
+                            <li><a href="<?php echo $this->url('application_designers')?>">Модели 2D-3D</a></li>
+                            <li><a href="<?php echo $this->url('application_designers')?>">Скачать каталог</a></li>
                         </ul>
                     </nav>
                     <strong>Наши работы</strong>

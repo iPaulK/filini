@@ -17,7 +17,7 @@
         "zendframework/zend-mvc": "^3.0.1",
         "zfcampus/zf-development-mode": "^3.0",
         "zendframework/zend-mvc-form": "^1.0",
-        "doctrine/doctrine-orm-module": "^1.1"
+        "doctrine/doctrine-orm-module": "1.1"
     },
     "autoload": {
         "psr-4": {
@@ -42,5 +42,10 @@
         ],
         "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit"
+    },
+    "config": {
+        "platform": {
+            "php": "7.0.23"
+        }
     }
 }

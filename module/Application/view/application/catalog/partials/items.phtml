@@ -1,0 +1,15 @@
+<?php
+/** @var ArrayCollection $categories */
+$categories = $this->categories;
+/** @var Core\Entity\Category $curentCategory */
+$curentCategory = $this->curentCategory;
+?>
+<?php if ($curentCategory): ?>
+    <?php echo $this->partial('application/catalog/partials/item', ['category' => $curentCategory]); ?>
+<?php else : // show all categories with products?>
+    <?php foreach ($categories as $category): ?>
+        <?php if ($category->getProducts()->count() > 0): ?>
+            <?php echo $this->partial('application/catalog/partials/item', ['category' => $category]); ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

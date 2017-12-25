@@ -35,12 +35,13 @@ return [
                 ],
             ],
             'application_catalog' => [
-                'type' => Literal::class,
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/catalog',
+                    'route' => '/catalog[/:slug]',
                     'defaults' => [
                         'controller' => Controller\CatalogController::class,
-                        'action'     => 'index',
+                        'action' => 'index',
+                        'slug' => '[-a-z0-9]*',
                     ],
                 ],
             ],
@@ -65,7 +66,6 @@ return [
                 ],
             ],
             'application_work_list' => [
-                'type' => Literal::class,
                 'type' => Segment::class,
                 'options' => [
                     'route' => '/works',

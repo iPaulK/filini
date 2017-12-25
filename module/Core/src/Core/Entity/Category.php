@@ -2,186 +2,83 @@
 
 namespace Core\Entity;
 
-use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Zend\Form\Annotation as AT;
-use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
-use Core\Service\Entity\Category as EntityService;
-
 /**
- * @ORM\Entity(repositoryClass="Core\Repository\CategoryRepository")
- * @ORM\Table(name="categories")
- * @AT\Name("Category")
+ * Category
  */
 class Category
 {
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 2;
-
     /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @AT\Exclude
+     * @var integer
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     * @AT\Options({"label":"Category Name: "})
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})
-     * @AT\Required({"required":"true" })
      */
-    protected $name;
-
-    /**
-     * @var string $slug
-     *
-     * @ORM\Column(type="string", length=255)
-     * @AT\Options({"label":"Slug", "allow_empty":true})
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})
-     * @AT\Validator({"name":"Regex", "options":{
-     *     "pattern":"/^[a-z0-9]+(?:-[a-z0-9]+)*$/i"
-     * }})
-     * @AT\Required({"required":"true"})
-     */
-    protected $slug;
+    private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="status", type="integer", length=1)
-     * @AT\Type("select")
-     * @AT\Options({"label":"Status: ", "required":true, "value_options":{
-     *      \Core\Entity\Category::STATUS_ENABLED :"Enabled",
-     *      \Core\Entity\Category::STATUS_DISABLED :"Disabled"
-     * }})
-     * @AT\Required({"required":"true"})
      */
-    protected $status;
+    private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
-     * @AT\Exclude
-     **/
-    protected $children;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Core\Entity\Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true )
-     * @AT\Options({"label":"Parent Category: "})
-     * @AT\Required({"required":"true"})
-     * @AT\Exclude
-     **/
-    protected $parent;
+     * @var integer
+     */
+    private $status;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Meta Title"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"250"}})
-     * @AT\Required({"required":"false"})
      */
-    protected $metaTitle;
+    private $metaTitle;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="meta_keywords", type="text", length=500, nullable=true)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Meta Keywords"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"500"}})
-     * @AT\Attributes({"type":"textarea" })
-     * @AT\Required({"required":"false"})
      */
-    protected $metaKeywords;
+    private $metaKeywords;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="meta_description", type="text", length=5000, nullable=true)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Meta Descrition"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
-     * @AT\Attributes({"type":"textarea" })
-     * @AT\Required({"required":"false" })
      */
-    protected $metaDescription;
+    private $metaDescription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Core\Entity\Image")
-     * @ORM\JoinColumn(name="thumbnail_id", referencedColumnName="id", onDelete="SET NULL")
-     * @AT\Type("Zend\Form\Element\Hidden")
-     * @AT\Options({"label":"Thumbnail: "})
+     * @var \DateTime
      */
-    protected $thumbnail;
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * @ORM\OneToMany(targetEntity="Core\Entity\Product", mappedBy="category")
-     * @AT\Exclude
-     **/
-    protected $products;
+     */
+    private $children;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     * @AT\Exclude
+     * @var \Core\Entity\Category
      */
-    protected $createdAt;
+    private $parent;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     * @AT\Exclude
+     * @var \Core\Entity\Image
      */
-    protected $updatedAt;
+    private $thumbnail;
 
     /**
-     * @var \Core\Service\Entity\Category
-     *
-     * @AT\Exclude
+     * @var \Doctrine\Common\Collections\Collection
      */
-    protected $service;
+    private $products;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
-
-        $this->children = new ArrayCollection();
-        $this->products = new ArrayCollection();
-    }
-
-    /**
-     * Operations before update
-     *
-     * @ORM\PreUpdate
-     */
-    public function preUpdate()
-    {
-        $this->updatedAt = new DateTime();
-    }
-
-    /**
-     * @return \Core\Service\Entity\Category
-     */
-    public function getService()
-    {
-        if (!$this->service) {
-            $this->service = new EntityService($this);
-        }
-        return $this->service;
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -502,3 +399,4 @@ class Category
         return $this->products;
     }
 }
+

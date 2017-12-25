@@ -1,0 +1,37 @@
+<?php
+/** @var ArrayCollection $categories */
+$categories = $this->categories;
+/** @var Core\Entity\Category $curentCategory */
+$curentCategory = $this->curentCategory;
+?>
+<div class="col-md-2 col-xs-3">
+    <ul class="catalog-category">
+        <li<?php if (!$curentCategory): ?> class="active"<?php endif;?>>
+            <a href="<?php echo $this->url('application_catalog')?>">
+                <?php echo $this->translate('Посмотреть все') ?>
+            </a>
+        </li>
+        <?php foreach ($categories as $category): ?>
+            <li<?php if ($curentCategory == $category): ?> class="active"<?php endif;?>>
+                <a href="<?php echo $this->url('application_catalog', ['action' => 'index', 'slug' => $category->getSlug()])?>">
+                    <?php echo $category->getName(); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<div class="owl-carousel owl-theme">
+    <div class="item">
+        <a href="<?php echo $this->url('application_catalog')?>">
+            <?php echo $this->translate('Посмотреть все') ?>
+        </a>
+    </div>
+    <?php foreach ($categories as $category): ?>
+        <div class="item">
+            <a href="<?php echo $this->url('application_catalog', ['action' => 'index', 'slug' => $category->getSlug()])?>">
+                <?php echo $category->getName(); ?>
+            </a>
+        </div>
+    <?php endforeach; ?>
+    <div class="item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+</div>

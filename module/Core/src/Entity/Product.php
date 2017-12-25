@@ -84,10 +84,10 @@ abstract class Product
     /**
      * @var float
      *
-     * @ORM\Column(name="price", type="float", precision=12, scale=4, nullable=true)
+     * @ORM\Column(name="price", type="decimal", precision=12, scale=4, nullable=true)
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"9"}})
-     * @AT\Validator({"name":"float"})
+     * @AT\Validator({"name":"Float"})
      * @AT\Options({"label":"Price"})
      * @AT\Attributes({"value":"0"})
      * @AT\Required({"required":"true" })
@@ -97,7 +97,7 @@ abstract class Product
     /**
      * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Core\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="Core\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      * @AT\Type("DoctrineORMModule\Form\Element\EntitySelect")
      * @AT\Options({"label":"Category", "property":"name", "target_class":"Core\Entity\Category"})

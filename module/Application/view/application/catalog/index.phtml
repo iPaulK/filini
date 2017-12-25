@@ -1,173 +1,30 @@
+<?php
+/** @var ArrayCollection $categories */
+$categories = $this->categories;
+/** @var Core\Entity\Category $curentCategory */
+$curentCategory = $this->curentCategory;
+?>
 <div class="breadcrumbs breadcrumbs-catalog">
     <div class="container">
         <div class="row">
             <ul>
-                <li><a href="<?php echo $this->url('application_catalog')?>">Каталог</a></li>
+                <li>
+                    <a href="<?php echo $this->url('application_catalog')?>">
+                        <?php echo $this->translate('Каталог') ?>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
+
 <section id="catalog">
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-xs-3">
-                <ul class="catalog-category">
-                    <li class="active"><a href="<?php echo $this->url('application_catalog')?>">Посмотреть все</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Мебель HOREA</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Диваны для дома</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Кровати</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Кресла</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Стулья</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Барные стулья</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Пуфы и банкетки</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Чугунные подстолья</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Подстолья из нержавеющей стали</a></li>
-                    <li><a href="<?php echo $this->url('application_catalog')?>">Подстолья из чугуна и дерева</a></li>
-                </ul>
-            </div>
-            <div class="owl-carousel owl-theme">
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Посмотреть все</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Мебель HOREA</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Диваны для дома</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Кровати</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Кресла</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Стулья</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Барные стулья</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Пуфы и банкетки</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Чугунные подстолья</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Подстолья из нержавеющей стали</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_catalog')?>">Подстолья из чугуна и дерева</a></div>
-                <div class="item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            </div>
+            <?php echo $this->partial('application/catalog/partials/sidebar', ['categories' => $categories, 'curentCategory' => $curentCategory]); ?>
     
             <div class="col-md-10 col-xs-9 catatolog-block">
-                <h2>Мебель HOREA</h2>
-                <div class="row">
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/1.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/2.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/3.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/1.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/2.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/3.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                </div>
-
-                <h2>Диваны для дома</h2>
-                <div class="row">
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/4.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/5.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/6.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/4.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/5.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                    <!--start-->
-                    <div class="col-md-4 col-xs-6">
-                        <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
-                            <img src="img/catalog/6.png" alt="">
-                            <hr>
-                            <div class="name">Глостер</div>
-                            <div class="price">12000 р</div>
-                        </a>
-                    </div>
-                    <!--end-->
-                </div>
+                <?php echo $this->partial('application/catalog/partials/items', ['categories' => $categories, 'curentCategory' => $curentCategory]); ?>
             </div>
         </div>
     </div>

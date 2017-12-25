@@ -1,0 +1,53 @@
+<?php
+/** @var \Core\Entity\Product $product */
+$product = $this->product;
+/** @var \Core\Entity\Image $thumbnail  */
+$thumbnail = $product->getImages()->count() > 0 ? $product->getImages()->first() : false;
+?>
+<tr>
+    <td><?php echo $product->getId(); ?></td>
+    <td>
+        <?php if ($thumbnail): ?>
+            <img src="<?php echo $thumbnail->getRelativeUrl('small'); ?>">
+        <?php endif; ?>
+    </td>
+    <td><?php echo $product->getName(); ?></td>
+    <td>
+        <?php if ($product->getService()->isEnabled()): ?>
+            <span class="label label-success">
+                <?php echo $this->translate('Enabled'); ?>
+            </span>
+        <?php else: ?>
+            <span class="label label-warning">
+                <?php echo $this->translate('Disabled'); ?>
+            </span>
+        <?php endif; ?>
+    </td>
+    <td><?php echo $product->getPrice(); ?></td>
+    <td>
+        <?php if ($product->getIsInStock()): ?>
+            <span class="label label-success">
+                <?php echo $this->translate('In stock'); ?>
+            </span>
+        <?php else: ?>
+            <span class="label label-warning">
+                <?php echo $this->translate('Out of stock'); ?>
+            </span>
+        <?php endif; ?>
+    </td>
+    <td><?php echo $product->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="#" class="btn btn-success" title="<?php echo $this->translate('View') ?>">
+            <i class="fa fa-eye"></i>
+            <?php //echo $this->translate('View')?>
+        </a>
+        <a href="<?php echo $this->url('admin_product', ['action' => 'edit', 'id' => $product->getId()]) ?>" class="btn btn-primary" title="<?php echo $this->translate('Edit') ?>">
+            <i class="fa fa-edit"></i>
+            <?php //echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_product', ['action' => 'remove', 'id' => $product->getId()]) ?>" class="btn btn-danger" onclick="return confirm('Are u sure?');" title="<?php echo $this->translate('Remove') ?>">
+            <i class="fa fa-trash-o"></i>
+            <?php //echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

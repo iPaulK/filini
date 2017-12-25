@@ -1,0 +1,99 @@
+<?php
+use Core\Entity\Product as ProductEntity;
+
+/** @var [] $productsCounter */
+$productsCounter = $this->productsCounter
+?>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img src="<?php echo $this->basePath('/img/icon/sofa.png');?>" width="100px">
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?php echo $productsCounter[ProductEntity::TYPE_SOFA] ?? 0; ?></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?php echo $this->url('admin_product', ['action' => 'edit'], ['query' => ['type' => ProductEntity::TYPE_SOFA]])?>">
+                <div class="panel-footer">
+                    <span class="pull-left"><?php echo $this->translate('Add a sofa'); ?></span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img src="<?php echo $this->basePath('/img/icon/chair.png');?>" width="100px">
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?php echo $productsCounter[ProductEntity::TYPE_CHAIR] ?? 0; ?></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?php echo $this->url('admin_product', ['action' => 'edit'], ['query' => ['type' => ProductEntity::TYPE_CHAIR]])?>">
+                <div class="panel-footer">
+                    <span class="pull-left"><?php echo $this->translate('Add a chair'); ?></span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img src="<?php echo $this->basePath('/img/icon/stool.png');?>" width="100px">
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?php echo $productsCounter[ProductEntity::TYPE_STOOL] ?? 0; ?></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?php echo $this->url('admin_product', ['action' => 'edit'], ['query' => ['type' => ProductEntity::TYPE_STOOL]])?>">
+                <div class="panel-footer">
+                    <span class="pull-left"><?php echo $this->translate('Add a stool'); ?></span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img src="<?php echo $this->basePath('/img/icon/bed.png');?>" width="100px">
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?php echo $productsCounter[ProductEntity::TYPE_BED] ?? 0; ?></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?php echo $this->url('admin_product', ['action' => 'edit'], ['query' => ['type' => ProductEntity::TYPE_BED]])?>">
+                <div class="panel-footer">
+                    <span class="pull-left"><?php echo $this->translate('Add a bed'); ?></span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

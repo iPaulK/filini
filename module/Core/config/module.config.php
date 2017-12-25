@@ -2,12 +2,18 @@
 
 namespace Core;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
-
 return [
-	'controllers' => [
+    'controllers' => [
         'factories' => [
-            Controller\CoreController::class => InvokableFactory::class,
+            Controller\CoreController::class => Controller\Factory\CoreControllerFactory::class,
         ],
+    ],
+    'controller_plugins' => [
+        'factories' => [
+            Controller\Plugin\UploadFilePlugin::class => Controller\Plugin\Factory\UploadFilePluginFactory::class,
+        ],
+        'aliases' => [
+            'uploader' => Controller\Plugin\UploadFilePlugin::class,
+        ]
     ],
 ];

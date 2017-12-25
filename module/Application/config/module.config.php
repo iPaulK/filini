@@ -90,12 +90,12 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
-            Controller\ContactController::class => InvokableFactory::class,
-            Controller\CatalogController::class => InvokableFactory::class,
-            Controller\WorkController::class => InvokableFactory::class,
-            Controller\DesignersController::class => InvokableFactory::class,
-            Controller\ProductController::class => InvokableFactory::class,
+            Controller\IndexController::class =>  Controller\Factory\IndexControllerFactory::class,
+            Controller\ContactController::class => Controller\Factory\ContactControllerFactory::class,
+            Controller\CatalogController::class => Controller\Factory\CatalogControllerFactory::class,
+            Controller\WorkController::class => Controller\Factory\WorkControllerFactory::class,
+            Controller\DesignersController::class => Controller\Factory\DesignersControllerFactory::class,
+            Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,
         ],
     ],
     'view_manager' => [

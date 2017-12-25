@@ -1,0 +1,177 @@
+<?php
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->prepare();
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->translate('Product') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <?php echo $this->form()->openTag($form) ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Add Product') ?>
+            </div>
+            <!-- .panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <h2><?php echo $this->translate('General information'); ?></h2>
+                        <?php 
+                            $element = $form->get('name');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('slug');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('status');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('price');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('category');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('description');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('isInStock');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <h2><?php echo $this->translate('Meta information'); ?></h2>
+
+                        <?php 
+                            $element = $form->get('metaTitle');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('metaKeywords');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <?php 
+                            $element = $form->get('metaDescription');
+                            $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+                        ?>
+                        <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+                            <label><?php echo $this->formLabel($element); ?></label>
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors()->render($element); ?>
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+                        
+                        <h2><?php echo $this->translate('Special attributes'); ?></h2>
+
+                        <?php if ($form->getObject() instanceof \Core\Entity\Product\Sofa): ?>
+                            <?php echo $this->partial('admin/product/partials/edit/sofa', ['form' => $form]); ?>
+                        <?php elseif ($form->getObject() instanceof \Core\Entity\Product\Chair): ?>
+                            <?php echo $this->partial('admin/product/partials/edit/chair', ['form' => $form]); ?>
+                        <?php elseif ($form->getObject() instanceof \Core\Entity\Product\Stool): ?>
+                            <?php echo $this->partial('admin/product/partials/edit/stool', ['form' => $form]); ?>
+                        <?php elseif ($form->getObject() instanceof \Core\Entity\Product\Bed): ?>
+                            <?php echo $this->partial('admin/product/partials/edit/bed', ['form' => $form]); ?>
+                        <?php endif;?>
+
+
+                        <h2><?php echo $this->translate('Images'); ?></h2>
+
+                        <?php echo $this->partial('admin/product/partials/media', ['form' => $form]); ?>
+                    </div>
+                    <div class="col-lg-2 hidden"></div>
+                </div>
+            </div>
+            <!-- .panel-body -->
+
+            <!-- .panel-footer -->
+            <div class="panel-footer">
+                <a href="<?php echo $this->url('admin_product')?>" class="btn btn-default">
+                    <i class="fa fa-arrow-left"></i>
+                    <?php echo $this->translate('Back') ?>
+                </a>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn btn-primary">
+                        <i class="fa fa-send-o"></i>
+                        <?php echo $this->translate('Submit') ?>
+                    </button>
+                    <button type="reset" class="btn btn-warning"><?php echo $this->translate('Reset') ?></button>
+                </div>
+            </div>
+            <!-- /.panel-footer -->
+        </div>
+        <!-- /.panel -->
+        <?php echo $this->form()->closeTag() ?>
+    </div>
+</div>

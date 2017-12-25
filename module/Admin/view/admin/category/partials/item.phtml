@@ -1,0 +1,35 @@
+<?php
+/** @var \Core\Entity\Category $category */
+$category = $this->category;
+?>
+<tr>
+    <td><?php echo $category->getId(); ?></td>
+    <td>
+        <?php if ($category->getThumbnail()): ?>
+            <img src="<?php echo $category->getThumbnail()->getRelativeUrl('preview'); ?>">
+        <?php endif; ?>
+    </td>
+    <td><?php echo $category->getName(); ?></td>
+    <td>
+        <?php if ($category->getService()->isEnabled()): ?>
+            <span class="label label-success">
+                <?php echo $this->translate('Enabled'); ?>
+            </span>
+        <?php else: ?>
+            <span class="label label-warning">
+                <?php echo $this->translate('Disabled'); ?>
+            </span>
+        <?php endif; ?>
+    </td>
+    <td><?php echo $category->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="<?php echo $this->url('admin_product_category', ['action' => 'edit', 'id' => $category->getId()]) ?>" class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>
+            <?php echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_product_category', ['action' => 'remove', 'id' => $category->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are u sure?');">
+            <i class="fa fa-trash-o"></i>
+            <?php echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

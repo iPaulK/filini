@@ -159,7 +159,7 @@
         <p class="copy">2017 @ Все права защищены</p>
     </footer>
 
-    <?= $this->inlineScript()
+    <?php echo $this->inlineScript()
         ->appendFile($this->basePath('js/scripts.min.js'), 'text/javascript')
     ?>
     <script>

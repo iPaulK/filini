@@ -1,0 +1,29 @@
+<?php
+$paginator = $this->paginator;
+?>
+<?php if ($paginator->getCurrentItemCount()) : ?>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">#</th>
+                    <th class="col-md-2"><?php echo $this->translate('Thumbnail') ?></th>
+                    <th class="col-md-2"><?php echo $this->translate('Name') ?></th>
+                    <th class="col-md-1"><?php echo $this->translate('Status') ?></th>
+                    <th class="col-md-1"><?php echo $this->translate('Price') ?></th>
+                    <th class="col-md-1"><?php echo $this->translate('In Stock') ?></th>
+                    <th class="col-md-2"><?php echo $this->translate('Updated At') ?></th>
+                    <th class="col-md-2"><?php echo $this->translate('Action') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($paginator as $product) : ?>
+                    <?php echo $this->partial('admin/product/partials/item', ['product' => $product]); ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php //echo $this->partial('core/partials/paginator/paginator', ['paginator' => $paginator]); ?>
+<?php else: ?>
+    <p class="small"><?php echo $this->translate('Products not found.'); ?></p>
+<?php endif; ?>

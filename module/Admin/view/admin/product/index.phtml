@@ -1,0 +1,31 @@
+<?php
+/** @var [] $productsCounter */
+$productsCounter = $this->productsCounter
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->translate('Products') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+<?php echo $this->partial('admin/product/partials/types', ['productsCounter' => $productsCounter]); ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Products') ?>
+            </div>
+            <!-- .panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <?php echo $this->partial('admin/product/partials/list', ['paginator' => $this->paginator]); ?>
+                </div>
+            </div>
+            <!-- .panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>

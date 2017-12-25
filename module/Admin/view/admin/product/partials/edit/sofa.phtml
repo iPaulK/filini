@@ -1,0 +1,37 @@
+<?php
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->prepare();
+?>
+<?php 
+    $element = $form->get('weight');
+    $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+?>
+<div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+    <label><?php echo $this->formLabel($element); ?></label>
+    <?php echo $this->formElement($element); ?>
+    <?php echo $this->formElementErrors()->render($element); ?>
+    <!-- <p class="help-block">Example block-level help text here.</p> -->
+</div>
+
+<?php 
+    $element = $form->get('height');
+    $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+?>
+<div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+    <label><?php echo $this->formLabel($element); ?></label>
+    <?php echo $this->formElement($element); ?>
+    <?php echo $this->formElementErrors()->render($element); ?>
+    <!-- <p class="help-block">Example block-level help text here.</p> -->
+</div>
+
+<?php 
+    $element = $form->get('depth');
+    $element->setAttributes(['class' => 'form-control', 'placeholder' => $element->getLabel()]);
+?>
+<div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">
+    <label><?php echo $this->formLabel($element); ?></label>
+    <?php echo $this->formElement($element); ?>
+    <?php echo $this->formElementErrors()->render($element); ?>
+    <!-- <p class="help-block">Example block-level help text here.</p> -->
+</div>

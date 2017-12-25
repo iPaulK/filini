@@ -10,7 +10,7 @@ $products = $category->getProducts();
         <?php foreach ($products as $product): ?>
         <!--start-->
         <div class="col-md-4 col-xs-6">
-            <a href="<?php echo $this->url('application_product') ?>" class="catalog-item">
+            <a href="<?php echo $this->url('application_product', ['action' => 'view', 'slug' => $product->getSlug()]) ?>" class="catalog-item">
                 <?php if ($product->getImages()->count() > 0): ?>
                     <img src="<?php echo $product->getImages()->first()->getRelativeUrl('preview'); ?>" alt="<?php echo $product->getName(); ?>">
                 <?php endif; ?>

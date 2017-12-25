@@ -56,12 +56,13 @@ return [
                 ],
             ],
             'application_product' => [
-                'type' => Literal::class,
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/product',
+                    'route'    => '/product[/:slug]',
                     'defaults' => [
                         'controller' => Controller\ProductController::class,
                         'action'     => 'view',
+                        'slug' => '[-a-z0-9]*',
                     ],
                 ],
             ],

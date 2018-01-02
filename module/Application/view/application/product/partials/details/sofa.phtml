@@ -1,0 +1,22 @@
+<?php
+/** @var Core\Entity\Product $product */
+$product = $this->product;
+?>
+<div class="product-str">
+    <span class="name">Габариты (ШхВxГ):</span>
+    <span class="numb">
+        <?php echo sprintf('%sx%sx%s мм', $product->getWeight(), $product->getHeight(), $product->getDepth()); ?>
+    </span>
+</div>
+<div class="product-str">
+    <span class="name">Спальное место:</span>
+    <span class="numb">140х200 см</span>
+</div>
+<div class="product-str">
+    <span class="name">Объем бельевицы:    </span>
+    <span class="numb">210 литров</span>
+</div>
+<div class="product-str">
+    <span class="name">Материал обивки:    </span>
+    <span class="numb">Экокожа</span>
+</div>

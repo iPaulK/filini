@@ -3,28 +3,11 @@
 $product = $this->product;
 ?>
 <h1 class="heading"><?php echo $this->escapeHtml($product->getName()); ?></h1>
-<div class="product-str">
-    <span class="name">Габариты (ШхВxГ):</span>
-    <span class="numb">
-        <?php echo sprintf('%sx%sx%s мм', $product->getWeight(), $product->getHeight(), $product->getDepth()); ?>
-    </span>
-</div>
-<div class="product-str">
-    <span class="name">Спальное место:</span>
-    <span class="numb">140х200 см</span>
-</div>
-<div class="product-str">
-    <span class="name">Объем бельевицы:    </span>
-    <span class="numb">210 литров</span>
-</div>
-<div class="product-str">
-    <span class="name">Материал обивки:    </span>
-    <span class="numb">Экокожа</span>
-</div>
-<div class="product-str">
-    <span class="name">Цвет:</span>
-    <span class="numb">Бежевый</span>
-</div>
+
+<?php if ($product->getService()->isSofa()): ?>
+    <?php echo $this->partial('application/product/partials/details/sofa', ['product' => $product]); ?>
+<?php endif;?>
+
 <div class="product-important">
     <span class="name">В наличие на складе</span>
     <span class="numb"><i class="fa fa-check"></i></span>

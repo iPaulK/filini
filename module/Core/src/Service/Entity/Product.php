@@ -23,4 +23,14 @@ class Product extends AbstractEntityService
     {
         return $this->getProduct()->getStatus() == ProductEntity::STATUS_ENABLED;
     }
+
+    /**
+     * Check if sofa
+     *
+     * @return bool
+     */
+    public function isSofa()
+    {
+        return $this->getProduct() instanceof ProductEntity\Sofa;
+    }
 }

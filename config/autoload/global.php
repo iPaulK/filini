@@ -38,5 +38,14 @@ return [
                 'preview' => ['x' => 283,'y' => 148, 'crop' => true],
             ],
         ],
+        'our-work' => [
+            'path' => './public/uploads/our-work/',
+            'presets' => [
+                // to do set resolution
+                'medium' => ['x' => 600,'y' => 480, 'crop' => true],
+                'preview' => ['x' => 200,'y' => 160,  'crop' => true],
+                'small' => ['x' => 100,'y' => 80, 'crop' => true],
+            ],
+        ],
     ],
 ];

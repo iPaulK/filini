@@ -14,6 +14,15 @@ class WorkController extends CoreController
 
     public function viewAction(): ViewModel
     {
-        return new ViewModel();
+    	$slug = $this->params()->fromRoute('slug', false);
+        $work = $this->getRepository('OurWork')->findOneBySlug($slug);
+        if (!$work) {
+            // Error condition - work not found
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+        return new ViewModel([
+            'work' => $work,
+        ]);
     }
 }

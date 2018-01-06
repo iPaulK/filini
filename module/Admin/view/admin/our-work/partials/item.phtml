@@ -1,0 +1,42 @@
+<?php
+/** @var \Core\Entity\OurWork $work */
+$work = $this->work;
+/** @var \Core\Entity\Image $thumbnail  */
+$thumbnail = $work->getImages()->count() > 0 ? $work->getImages()->first() : false;
+?>
+<tr>
+    <td><?php echo $work->getId(); ?></td>
+    <td>
+        <?php if ($thumbnail): ?>
+            <img src="<?php echo $thumbnail->getRelativeUrl('small'); ?>">
+        <?php endif; ?>
+    </td>
+    <td><?php echo $work->getName(); ?></td>
+    <td>
+        <?php if ($work->getService()->isEnabled()): ?>
+            <span class="label label-success">
+                <?php echo $this->translate('Enabled'); ?>
+            </span>
+        <?php else: ?>
+            <span class="label label-warning">
+                <?php echo $this->translate('Disabled'); ?>
+            </span>
+        <?php endif; ?>
+    </td>
+    <td><?php echo $work->getPrice(); ?></td>
+    <td><?php echo $work->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="<?php echo $this->url('application_work_view', ['slug' => $work->getSlug()]) ?>" class="btn btn-success" title="<?php echo $this->translate('View') ?>" target="_blanc">
+            <i class="fa fa-eye"></i>
+            <?php //echo $this->translate('View')?>
+        </a>
+        <a href="<?php echo $this->url('admin_work', ['action' => 'edit', 'id' => $work->getId()]) ?>" class="btn btn-primary" title="<?php echo $this->translate('Edit') ?>">
+            <i class="fa fa-edit"></i>
+            <?php //echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_work', ['action' => 'remove', 'id' => $work->getId()]) ?>" class="btn btn-danger" onclick="return confirm('Are u sure?');" title="<?php echo $this->translate('Remove') ?>">
+            <i class="fa fa-trash-o"></i>
+            <?php //echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

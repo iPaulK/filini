@@ -1,0 +1,32 @@
+<?php
+/** @var Core\Entity\OurWork $work */
+$work = $this->work;
+?>
+<h1 class="heading"><?php echo $this->escapeHtml($work->getName()); ?></h1>
+<div class="product-important">
+    <span class="name">Стоимость</span>
+    <span class="numb"><?php echo $work->getPrice(); ?></span>
+</div>
+<div class="work-str">
+    <span class="head">Комплектация:</span>
+    <span class="name">Диваны</span>
+    <span class="numb">10 шт.</span><br>
+    <span class="name">Барные стулья</span>
+    <span class="numb">20 шт.</span><br>
+    <span class="name">Еще что-то</span>
+    <span class="numb">20 шт.</span><br>
+</div>
+<div class="work-str">
+    <span class="head">Материалы:</span>
+    <span class="name">Первый</span>
+    <span class="numb"> </span><br>
+    <span class="name">Второй</span>
+    <span class="numb"> </span><br>
+    <span class="name">Третий</span>
+    <span class="numb"> </span><br>
+</div>
+<hr>
+<ul class="product-soc">
+    <li><a href=""><i class="fa fa-facebook"></i></a></li>
+    <li><a href=""><i class="fa fa-vk"></i></a></li>
+</ul>

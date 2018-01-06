@@ -44,7 +44,7 @@ return [
                 'options' => [
                     'route' => '/admin/work[/:action[/:id]]',
                     'defaults' => [
-                        'controller' => Controller\CategoryController::class,
+                        'controller' => Controller\OurWorkController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -66,6 +66,7 @@ return [
             Controller\DashboardController::class => Controller\Factory\DashboardControllerFactory::class,
             Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,
             Controller\CategoryController::class => Controller\Factory\CategoryControllerFactory::class,
+            Controller\OurWorkController::class => Controller\Factory\OurWorkControllerFactory::class,
         ],
     ],
     'view_manager' => [

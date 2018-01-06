@@ -1,10 +1,26 @@
+<?php
+/** @var Core\Entity\OurWork $work */
+$work = $this->work;
+?>
 <div class="breadcrumbs breadcrumbs-product">
     <div class="container">
         <div class="row">
             <ul>
-                <li><a href="<?php echo $this->url('application_catalog'); ?>">Каталог</a></li>
-                <li><a href="<?php echo $this->url('application_work_list'); ?>">Наши работы</a></li>
-                <li><a href="#">Бар Клевер</a></li>
+                <li>
+                    <a href="<?php echo $this->url('application_catalog'); ?>">
+                    <?php echo $this->translate('Каталог') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->url('application_work_list'); ?>">
+                    <?php echo $this->translate('Наши работы') ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->url('application_work_view', ['slug' => $work->getSlug()]) ?>">
+                    <?php echo $this->escapeHtml($work->getName()); ?>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -13,53 +29,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 product-item-left">
+                <?php if ($work->getImages()->count() > 0): ?>
                 <div class="section-gallery fotorama" data-nav="thumbs" data-thumbwidth="110.5" data-thumbheight="66" data-thumbmargin="10" data-thumbborderwidth="4">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
-                    <img src="<?php echo $this->basePath('img/work-image.png') ?>" alt="">
+                    <?php foreach ($work->getImages() as $image): ?>
+                        <img src="<?php echo $image->getRelativeUrl('medium'); ?>" alt="<?php echo $this->escapeHtml($work->getName()); ?>">
+                    <?php endforeach;?>
                 </div>
+                <?php endif; ?>
             </div>
             <div class="col-md-4 product-item-right">
-                <h1 class="heading">Бар Клевер</h1>
-                <div class="product-important">
-                    <span class="name">Стоимость</span>
-                    <span class="numb">100 000 Р</span>
-                </div>
-                <div class="work-str">
-                    <span class="head">Комплектация:</span>
-                    <span class="name">Диваны</span>
-                    <span class="numb">10 шт.</span><br>
-                    <span class="name">Барные стулья</span>
-                    <span class="numb">20 шт.</span><br>
-                    <span class="name">Еще что-то</span>
-                    <span class="numb">20 шт.</span><br>
-                </div>
-                <div class="work-str">
-                    <span class="head">Материалы:</span>
-                    <span class="name">Первый</span>
-                    <span class="numb"> </span><br>
-                    <span class="name">Второй</span>
-                    <span class="numb"> </span><br>
-                    <span class="name">Третий</span>
-                    <span class="numb"> </span><br>
-                </div>
-                <hr>
-                <ul class="product-soc">
-                    <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                    <li><a href=""><i class="fa fa-vk"></i></a></li>
-                </ul>
+                <?php echo $this->partial('application/work/partials/details', ['work' => $work]); ?>
             </div>
         </div>
-        <div class="row bonus-buy">
+        <!-- <div class="row bonus-buy">
             <div class="container">
                 <h2>Другие работы...</h2>
                 <div class="col-md-4 col-xs-6">
@@ -84,6 +66,6 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>

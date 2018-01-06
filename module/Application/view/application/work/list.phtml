@@ -1,96 +1,34 @@
+<?php
+/** @var ArrayCollection $categories */
+$categories = $this->categories;
+/** @var Core\Entity\OurWorkCategory $curentCategory */
+$curentCategory = $this->curentCategory;
+?>
 <div class="breadcrumbs breadcrumbs-catalog">
     <div class="container">
         <div class="row">
             <ul>
-                <li><a href="<?php echo $this->url('application_work_list'); ?>">Наши работы</a></li>
+                <li>
+                    <a href="<?php echo $this->url('application_work_list'); ?>">
+                    <?php echo $this->translate('Наши работы') ?>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
+
 <section id="works">
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-xs-3">
-                <ul class="catalog-category">
-                    <li class="active"><a href="<?php echo $this->url('application_work_list'); ?>">Посмотреть все</a></li>
-                    <li><a href="<?php echo $this->url('application_work_list'); ?>">Квартиры и дома</a></li>
-                    <li><a href="<?php echo $this->url('application_work_list'); ?>">Рестораны, бары и кафе</a></li>
-                    <li><a href="<?php echo $this->url('application_work_list'); ?>">Офисы и отели</a></li>
-                </ul>
-            </div>
-            <div class="owl-carousel owl-theme">
-                <div class="item"><a href="<?php echo $this->url('application_work_list'); ?>">Посмотреть все</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_work_list'); ?>">Квартиры и дома</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_work_list'); ?>">Рестораны, бары и кафе</a></div>
-                <div class="item"><a href="<?php echo $this->url('application_work_list'); ?>">Офисы и отели</a></div>
-                <div class="item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            </div>
+            <?php echo $this->partial('application/work/partials/sidebar', ['categories' => $categories, 'curentCategory' => $curentCategory]); ?>
+            
             <div class="col-md-10 col-xs-9 catatolog-block works-block">
-                <h1 class="heading">Наши работы</h1>
+                <?php if (!$curentCategory): ?>
+                <h1 class="heading"><?php echo $this->translate('Наши работы') ?></h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-
-                <h2>Квартиры и дома</h2>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="work-item-left">
-                            <img src="img/work/1.jpg" alt="">
-                            <span>Мебель для однокомнатной квартиры</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="work-item-right">
-                            <p>Минск</p>
-                            <p>ул. Сурганова</p>
-                            <p>Мебель для <br>однокомнатной квартиры</p>
-                            <a href="<?php echo $this->url('application_work_view', ['slug' => 'example'])?>" class="button">подробнее</a>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="work-item-left">
-                            <img src="img/work/1.jpg" alt="">
-                            <span>Мебель для однокомнатной квартиры</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="work-item-right">
-                            <p>Минск</p>
-                            <p>ул. Сурганова</p>
-                            <p>Мебель для <br>однокомнатной квартиры</p>
-                            <a href="<?php echo $this->url('application_work_view', ['slug' => 'example'])?>" class="button">подробнее</a>
-                        </div>
-                    </div>
-                </div>
-                <h2>Рестораны, бары и кафе</h2>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="work-item-left">
-                            <img src="img/work/2.jpg" alt="">
-                            <span>Бар «Клевер»</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="work-item-right">
-                            <p>Минск</p>
-                            <p>ул. Сурганова</p>
-                            <p>Мебель для <br>однокомнатной квартиры</p>
-                            <a href="<?php echo $this->url('application_work_view', ['slug' => 'example'])?>" class="button">подробнее</a>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="work-item-left">
-                            <img src="img/work/2.jpg" alt="">
-                            <span>Бар «Клевер»</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="work-item-right">
-                            <p>Минск</p>
-                            <p>ул. Сурганова</p>
-                            <p>Мебель для <br>однокомнатной квартиры</p>
-                            <a href="<?php echo $this->url('application_work_view', ['slug' => 'example'])?>" class="button">подробнее</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endif; ?>
+                <?php echo $this->partial('application/work/partials/items', ['categories' => $categories, 'curentCategory' => $curentCategory]); ?>
             </div>
         </div>
     </div>

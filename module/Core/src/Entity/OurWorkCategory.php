@@ -6,14 +6,14 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation as AT;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
-use Core\Service\Entity\OurWork as EntityService;
+use Core\Service\Entity\OurWorkCategory as EntityService;
 
 /**
- * @ORM\Entity(repositoryClass="Core\Repository\OurWorkRepository")
- * @ORM\Table(name="our_works")
- * @AT\Name("OrWork")
+ * @ORM\Entity(repositoryClass="Core\Repository\OurWorkCategoryRepository")
+ * @ORM\Table(name="our_work_categories")
+ * @AT\Name("OurWorkCategory")
  */
-class OurWork
+class OurWorkCategory
 {
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 2;
@@ -32,7 +32,7 @@ class OurWork
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     * @AT\Options({"label":"Name: "})
+     * @AT\Options({"label":"Category Name: "})
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})
      * @AT\Required({"required":"true" })
@@ -67,40 +67,19 @@ class OurWork
     protected $status;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=5000)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Descrition"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
-     * @AT\Attributes({"type":"textarea" })
-     * @AT\Required({"required":"true" })
-     */
-    protected $description;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="price", type="decimal", precision=12, scale=4, nullable=true)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"9"}})
-     * @AT\Validator({"name":"Float"})
-     * @AT\Options({"label":"Price"})
-     * @AT\Attributes({"value":"0"})
-     * @AT\Required({"required":"true" })
-     */
-    protected $price;
-
-    /**
-     * @var OurWorkCategory
-     *
-     * @ORM\ManyToOne(targetEntity="Core\Entity\OurWorkCategory", inversedBy="ourWorks")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
-     * @AT\Type("DoctrineORMModule\Form\Element\EntitySelect")
-     * @AT\Options({"label":"Category", "property":"name", "target_class":"Core\Entity\OurWorkCategory"})
-     * @AT\Required({"required":"true" })
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @AT\Exclude
      **/
-    protected $ourWorkCategory;
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Core\Entity\Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true )
+     * @AT\Options({"label":"Parent Category: "})
+     * @AT\Required({"required":"true"})
+     * @AT\Exclude
+     **/
+    protected $parent;
 
     /**
      * @var string
@@ -138,13 +117,11 @@ class OurWork
     protected $metaDescription;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="Core\Entity\Image")
-     * @ORM\JoinTable(name="our_work_images_linker")
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Core\Entity\OurWork", mappedBy="ourWorkCategory")
      * @AT\Exclude
-     */
-    protected $images;
+     **/
+    protected $ourWorks;
 
     /**
      * @var DateTime
@@ -163,7 +140,7 @@ class OurWork
     protected $updatedAt;
 
     /**
-     * @var \Core\Service\Entity\Category
+     * @var \Core\Service\Entity\OurWorkCategory
      *
      * @AT\Exclude
      */
@@ -174,7 +151,8 @@ class OurWork
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
 
-        $this->images = new ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->ourWorks = new ArrayCollection();
     }
 
     /**
@@ -188,7 +166,7 @@ class OurWork
     }
 
     /**
-     * @return \Core\Service\Entity\Category
+     * @return \Core\Service\Entity\OurWorkCategory
      */
     public function getService()
     {
@@ -213,7 +191,7 @@ class OurWork
      *
      * @param string $name
      *
-     * @return OurWork
+     * @return Category
      */
     public function setName($name)
     {
@@ -237,7 +215,7 @@ class OurWork
      *
      * @param string $slug
      *
-     * @return OurWork
+     * @return Category
      */
     public function setSlug($slug)
     {
@@ -261,7 +239,7 @@ class OurWork
      *
      * @param integer $status
      *
-     * @return OurWork
+     * @return Category
      */
     public function setStatus($status)
     {
@@ -281,83 +259,11 @@ class OurWork
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return OurWork
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return OurWork
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Set ourWorkCategory
-     *
-     * @param \Core\Entity\OurWorkCategory $ourWorkCategory
-     *
-     * @return Product
-     */
-    public function setOurWorkCategory(\Core\Entity\OurWorkCategory $ourWorkCategory = null)
-    {
-        $this->ourWorkCategory = $ourWorkCategory;
-
-        return $this;
-    }
-
-    /**
-     * Get ourWorkCategory
-     *
-     * @return \Core\Entity\OurWorkCategory
-     */
-    public function getOurWorkCategory()
-    {
-        return $this->ourWorkCategory;
-    }
-
-    /**
      * Set metaTitle
      *
      * @param string $metaTitle
      *
-     * @return OurWork
+     * @return Category
      */
     public function setMetaTitle($metaTitle)
     {
@@ -381,7 +287,7 @@ class OurWork
      *
      * @param string $metaKeywords
      *
-     * @return OurWork
+     * @return Category
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -405,7 +311,7 @@ class OurWork
      *
      * @param string $metaDescription
      *
-     * @return OurWork
+     * @return Category
      */
     public function setMetaDescription($metaDescription)
     {
@@ -429,7 +335,7 @@ class OurWork
      *
      * @param \DateTime $createdAt
      *
-     * @return OurWork
+     * @return Category
      */
     public function setCreatedAt($createdAt)
     {
@@ -453,7 +359,7 @@ class OurWork
      *
      * @param \DateTime $updatedAt
      *
-     * @return OurWork
+     * @return Category
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -473,36 +379,94 @@ class OurWork
     }
 
     /**
-     * Add image
+     * Add child
      *
-     * @param \Core\Entity\Image $image
+     * @param \Core\Entity\Category $child
      *
-     * @return OurWork
+     * @return Category
      */
-    public function addImage(\Core\Entity\Image $image)
+    public function addChild(\Core\Entity\Category $child)
     {
-        $this->images[] = $image;
+        $this->children[] = $child;
 
         return $this;
     }
 
     /**
-     * Remove image
+     * Remove child
      *
-     * @param \Core\Entity\Image $image
+     * @param \Core\Entity\Category $child
      */
-    public function removeImage(\Core\Entity\Image $image)
+    public function removeChild(\Core\Entity\Category $child)
     {
-        $this->images->removeElement($image);
+        $this->children->removeElement($child);
     }
 
     /**
-     * Get images
+     * Get children
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImages()
+    public function getChildren()
     {
-        return $this->images;
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Core\Entity\Category $parent
+     *
+     * @return Category
+     */
+    public function setParent(\Core\Entity\Category $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Core\Entity\Category
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    
+    /**
+     * Add our work
+     *
+     * @param \Core\Entity\OurWork $ourWorks
+     *
+     * @return OurWorkCategory
+     */
+    public function addOurWork(\Core\Entity\OurWork $ourWork)
+    {
+        $this->ourWorks[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove our work
+     *
+     * @param \Core\Entity\OurWork $ourWork
+     */
+    public function removeOurWork(\Core\Entity\OurWork $ourWork)
+    {
+        $this->ourWorks->removeElement($product);
+    }
+
+    /**
+     * Get ourWorks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOurWorks()
+    {
+        return $this->ourWorks;
     }
 }

@@ -1,0 +1,34 @@
+<?php
+/** @var Core\Entity\OurWorkCategory $category */
+$category = $this->category;
+/** @var ArrayCollection $ourWorks */
+$ourWorks = $category->getOurWorks();
+?>
+<h2><?php echo $category->getName(); ?></h2>
+<?php if ($ourWorks->count() > 0): ?>
+    <?php foreach ($ourWorks as $ourWork): ?>
+    <div class="row">
+        <!--start-->
+        <div class="col-md-8">
+            <div class="work-item-left">
+                <?php if ($ourWork->getImages()->count() > 0): ?>
+                    <img src="<?php echo $ourWork->getImages()->first()->getRelativeUrl('medium'); ?>" alt="<?php echo $this->escapeHtml($ourWork->getName()); ?>">
+                <?php endif; ?>
+                <span><?php echo $this->escapeHtml($ourWork->getName()); ?></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="work-item-right">
+                <p>Минск</p>
+                <p><?php echo $this->escapeHtml($ourWork->getName()); ?></p>
+                <a href="<?php echo $this->url('application_work_view', ['slug' => $ourWork->getSlug()]) ?>" class="button">
+                    <?php echo $this->translate('подробнее') ?>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--end-->
+    <?php endforeach; ?>
+<?php else: ?>
+    <div class="row"><p><?php echo $this->translate('Работ не найдено.'); ?></p></div>
+<?php endif; ?>

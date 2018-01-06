@@ -69,10 +69,11 @@ return [
             'application_work_list' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/works',
+                    'route' => '/works[/:slug]',
                     'defaults' => [
                         'controller' => Controller\WorkController::class,
                         'action'     => 'list',
+                        'slug' => '[-a-z0-9]*',
                     ],
                 ],
              ],

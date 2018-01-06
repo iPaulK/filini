@@ -42,7 +42,7 @@ return [
             'path' => './public/uploads/our-work/',
             'presets' => [
                 // to do set resolution
-                'medium' => ['x' => 600,'y' => 480, 'crop' => true],
+                'medium' => ['x' => 600,'y' => 321, 'crop' => true],
                 'preview' => ['x' => 200,'y' => 160,  'crop' => true],
                 'small' => ['x' => 100,'y' => 80, 'crop' => true],
             ],

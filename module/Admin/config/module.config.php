@@ -49,6 +49,16 @@ return [
                     ],
                 ],
             ],
+            'admin_work_category' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin/work-category[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\OurWorkCategoryController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
             'admin_designers' => [
                 'type' => Segment::class,
                 'options' => [
@@ -67,6 +77,7 @@ return [
             Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,
             Controller\CategoryController::class => Controller\Factory\CategoryControllerFactory::class,
             Controller\OurWorkController::class => Controller\Factory\OurWorkControllerFactory::class,
+            Controller\OurWorkCategoryController::class => Controller\Factory\OurWorkCategoryControllerFactory::class,
         ],
     ],
     'view_manager' => [

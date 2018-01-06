@@ -105,9 +105,22 @@
                         </li>
                         <li>
                             <a href="<?php echo $this->url('admin_work', ['action' => 'index']) ?>">
-                                <i class="fa"></i>
+                                <i class="fa fa-briefcase"></i>
                                 <?php echo $this->translate('Our Works') ?>
                             </a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo $this->url('admin_work', ['action' => 'index'])?>">
+                                        <?php echo $this->translate('Manage Works') ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->url('admin_work_category', ['action' => 'index'])?>">
+                                        <?php echo $this->translate('Categories') ?>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <!-- <li>
                             <a href="<?php echo $this->url('admin_designers', ['action' => 'index']) ?>">

@@ -34,28 +34,27 @@ $categories = $this->categories;
     <div class="container">
         <div class="row">
             <h1 class="h1-index">
-                <span>Мягкая мебель: классика, и новаторство </span>
+                <span><?php echo $this->translate('Мягкая мебель: классика, и новаторство') ?></span>
             </h1>
             
             <!--start-->
             <div class="col-md-4 col-sm-6 col-xs-6 index-block-first">
-                <a href="<?php echo $this->url('application_catalog')?>" class="index-block-item">
-                    <img src="img/index-nav/1.jpg" alt="" class="img-desctop">
-                    <img src="img/index-nav/5.png" alt="" class="img-mobile">
-                    <span>Дизайнерские вещи</span>
+                <a href="<?php echo $this->url('application_designers')?>" class="index-block-item">
+                    <img src="<?php echo $this->basePath('img/index-nav/1.jpg') ?>" alt="" class="img-desctop">
+                    <img src="<?php echo $this->basePath('img/index-nav/5.png') ?>" alt="" class="img-mobile">
+                    <span><?php echo $this->translate('Дизайнерские вещи') ?></span>
                 </a>
             </div>
             <!--end-->
 
             <!--start-->
             <div class="col-md-4 col-sm-6 col-xs-6 index-block-second">
-                <a href="<?php echo $this->url('application_catalog')?>" class="index-block-item index-block-item-mobile">
-                    <img src="img/index-nav/2.jpg" alt="" class="">
-                    <!--<img src="img/index-nav/6.jpg" alt="" class="visible-xs">-->
-                    <span>Готовые проекты</span>
+                <a href="<?php echo $this->url('application_work_list')?>" class="index-block-item index-block-item-mobile">
+                    <img src="<?php echo $this->basePath('img/index-nav/2.jpg') ?>" alt="" class="">
+                    <span><?php echo $this->translate('Готовые проекты') ?></span>
                 </a>
                 <a href="http://www.youtube.com/watch?v=0O2aH4XLbto" class="popup-youtube index-block-item index-block-item-mobile">
-                    <img src="img/index-nav/3.jpg" alt="">
+                    <img src="<?php echo $this->basePath('img/index-nav/3.jpg') ?>" alt="">
                     <div class="play"><i class="fa fa-play"></i></div>
                 </a>
             </div>
@@ -64,8 +63,8 @@ $categories = $this->categories;
             <!--start-->
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <a href="<?php echo $this->url('application_catalog')?>" class="index-block-item col-md-12 col-sm-6 col-xs-6 index-block-third">
-                    <img src="img/index-nav/4.jpg" alt="">
-                    <span>Как выбрать мебель</span>
+                    <img src="<?php echo $this->basePath('img/index-nav/4.jpg') ?>" alt="">
+                    <span><?php echo $this->translate('Как выбрать мебель') ?></span>
                 </a>
                 <p class="index-block-p col-sm-6 col-md-12 col-xs-6">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 

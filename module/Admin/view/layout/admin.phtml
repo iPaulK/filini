@@ -122,12 +122,24 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <!-- <li>
-                            <a href="<?php echo $this->url('admin_designers', ['action' => 'index']) ?>">
-                                <i class="fa"></i>
-                                <?php echo $this->translate('For designers') ?>
+                        <li>
+                            <a href="<?php echo $this->url('admin_news', ['action' => 'index']) ?>">
+                                <i class="fa fa-newspaper-o"></i>
+                                <?php echo $this->translate('News') ?>
                             </a>
-                        </li> -->
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->url('admin_page', ['action' => 'index']) ?>">
+                                <i class="fa fa-file-text-o"></i>
+                                <?php echo $this->translate('Static Pages') ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->url('admin_setting', ['action' => 'index']) ?>">
+                                <i class="fa fa-cog"></i>
+                                <?php echo $this->translate('Settings') ?>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

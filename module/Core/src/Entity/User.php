@@ -1,9 +1,11 @@
 <?php
-
 namespace Core\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Form\Annotation as AT;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Core\Service\Entity\User as EntityService;
 
 /**
  * @ORM\Entity(repositoryClass="Core\Repository\UserRepository")
@@ -11,12 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User 
 {
-	/**
+    /**
      * @var int
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @AT\Exclude
      */
     protected $id;
 
@@ -24,23 +27,58 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=128, unique=true)
+     * @AT\Options({"label":"Email"})
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"128"}})
+     * @AT\Validator({"name":"EmailAddress", "options" : {
+     *   "messages" : {Zend\Validator\EmailAddress::INVALID_FORMAT : "Please enter a valid email address in format eample@domain.com"}
+     * }})
+     * @AT\Required({"required":"true"})
      */
     protected $email;
 
     /**
      * @var string
      *
+     * @ORM\Column(name="first_name", type="string", length=50, nullable=true)
+     * @AT\Options({"label":"First Name"})
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"50"}})
+     * @AT\Required(true)
+     */
+    protected $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=50, nullable=true)
+     * @AT\Options({"label":"Last Name"})
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"50"}})
+     * @AT\Required(true)
+     */
+    protected $lastName;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="password", type="string", length=128)
+     * @AT\Options({"label":"Password"})
+     * @AT\Type("Zend\Form\Element\Password")
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"128"}})
      */
     protected $password;
 
     /**
-     * @ORM\Column(name="pwd_reset_token", type="string", length=128)  
+     * @ORM\Column(name="pwd_reset_token", type="string", length=128, nullable=true)
+     * @AT\Exclude
      */
     protected $passwordResetToken;
     
     /**
-     * @ORM\Column(name="pwd_reset_token_creation_date", type="datetime")  
+     * @ORM\Column(name="pwd_reset_token_creation_date", type="datetime", nullable=true)
+     * @AT\Exclude
      */
     protected $passwordResetTokenCreationDate;
 
@@ -48,6 +86,7 @@ class User
      * @var DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @AT\Exclude
      */
     protected $createdAt;
 
@@ -55,6 +94,7 @@ class User
      * @var DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @AT\Exclude
      */
     protected $updatedAt;
 
@@ -109,6 +149,55 @@ class User
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return $this
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return $this
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 
     /**

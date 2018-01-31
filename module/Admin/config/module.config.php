@@ -99,6 +99,36 @@ return [
                     ],
                 ],
             ],
+            'admin_user' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin/users[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\UserController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'admin_login' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/login',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'login',
+                    ],
+                ],
+            ],
+            'admin_logout' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/logout',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'logout',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -111,6 +141,8 @@ return [
             Controller\NewsController::class => Controller\Factory\NewsControllerFactory::class,
             Controller\PageController::class => Controller\Factory\PageControllerFactory::class,
             Controller\SettingController::class => Controller\Factory\SettingControllerFactory::class,
+            Controller\UserController::class => Controller\Factory\UserControllerFactory::class,
+            Controller\AuthController::class => Controller\Factory\AuthControllerFactory::class,
         ],
     ],
     'view_manager' => [

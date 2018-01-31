@@ -64,10 +64,10 @@ class Category extends \Core\Entity\Category implements \Doctrine\ORM\Proxy\Prox
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'createdAt', 'updatedAt', 'service'];
+            return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'products', 'createdAt', 'updatedAt', 'service'];
         }
 
-        return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'createdAt', 'updatedAt', 'service'];
+        return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'products', 'createdAt', 'updatedAt', 'service'];
     }
 
     /**
@@ -461,6 +461,39 @@ class Category extends \Core\Entity\Category implements \Doctrine\ORM\Proxy\Prox
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getThumbnail', []);
 
         return parent::getThumbnail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addProduct(\Core\Entity\Product $product)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addProduct', [$product]);
+
+        return parent::addProduct($product);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeProduct(\Core\Entity\Product $product)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeProduct', [$product]);
+
+        return parent::removeProduct($product);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProducts()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProducts', []);
+
+        return parent::getProducts();
     }
 
 }

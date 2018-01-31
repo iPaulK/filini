@@ -1,5 +1,4 @@
 <?php
-
 namespace Admin\Controller;
 
 use Core\Controller\CoreController;

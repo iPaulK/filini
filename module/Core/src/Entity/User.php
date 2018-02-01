@@ -99,6 +99,13 @@ class User
     protected $updatedAt;
 
     /**
+     * @var \Core\Service\Entity\User
+     *
+     * @AT\Exclude
+     */
+    protected $service;
+
+    /**
      * Initializes variables
      */
     public function __construct()
@@ -115,6 +122,17 @@ class User
     public function preUpdate()
     {
         $this->updatedAt = new DateTime();
+    }
+
+    /**
+     * @return \Core\Service\Entity\User
+     */
+    public function getService()
+    {
+        if (!$this->service) {
+            $this->service = new EntityService($this);
+        }
+        return $this->service;
     }
 
     /**

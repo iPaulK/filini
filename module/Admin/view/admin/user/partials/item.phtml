@@ -5,6 +5,7 @@ $user = $this->user;
 <tr>
     <td><?php echo $user->getId(); ?></td>
     <td><?php echo $user->getEmail(); ?></td>
+    <td><?php echo $user->getService()->getFullName(); ?></td>
     <td><?php echo $user->getUpdatedAt()->format('d M Y, m:i'); ?></td>
     <td>
         <a href="<?php echo $this->url('admin_user', ['action' => 'edit', 'id' => $user->getId()]) ?>" class="btn btn-primary" title="<?php echo $this->translate('Edit') ?>">

@@ -13,6 +13,11 @@ use Core\Service\Entity\User as EntityService;
  */
 class User 
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_RETIRED = 0;
+
+    const BCRYPT_PASSWORD_COST = 18;
+
     /**
      * @var int
      *
@@ -36,6 +41,20 @@ class User
      * @AT\Required({"required":"true"})
      */
     protected $email;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer", nullable=true)
+     * @AT\Options({"label":"Status"})
+     * @AT\Required(true)
+     * @AT\Type("Zend\Form\Element\Select")
+     * @AT\Options({"label":"Status: ", "required":true, "value_options":{
+     *      \Core\Entity\User::STATUS_ACTIVE :"Active",
+     *      \Core\Entity\User::STATUS_RETIRED :"Retired"
+     * }})
+     */
+    protected $status;
 
     /**
      * @var string
@@ -69,6 +88,17 @@ class User
      * @AT\Validator({"name":"StringLength", "options":{"max":"128"}})
      */
     protected $password;
+
+    /**
+     * @var string
+     *
+     * @AT\Options({"label":"Confirm Password"})
+     * @AT\Type("Zend\Form\Element\Password")
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"Identical", "options":{"token" : "password"}})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"128"}})
+     */
+    protected $confirmPassword;
 
     /**
      * @ORM\Column(name="pwd_reset_token", type="string", length=128, nullable=true)
@@ -170,11 +200,35 @@ class User
     }
 
     /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return User
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
      * Set firstName
      *
      * @param string $firstName
      *
-     * @return $this
+     * @return User
      */
     public function setFirstName($firstName)
     {
@@ -193,13 +247,12 @@ class User
         return $this->firstName;
     }
 
-
     /**
      * Set lastName
      *
      * @param string $lastName
      *
-     * @return $this
+     * @return User
      */
     public function setLastName($lastName)
     {

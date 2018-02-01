@@ -6,11 +6,19 @@ $user = $this->user;
     <td><?php echo $user->getId(); ?></td>
     <td><?php echo $user->getEmail(); ?></td>
     <td><?php echo $user->getService()->getFullName(); ?></td>
+    <td>
+        <span class="label<?php echo $user->getService()->isActive() ? ' label-success' : ' label-warning' ?>">
+            <?php echo $user->getService()->getStatusAsString(); ?>
+        </span>
+    </td>
     <td><?php echo $user->getUpdatedAt()->format('d M Y, m:i'); ?></td>
     <td>
         <a href="<?php echo $this->url('admin_user', ['action' => 'edit', 'id' => $user->getId()]) ?>" class="btn btn-primary" title="<?php echo $this->translate('Edit') ?>">
             <i class="fa fa-edit"></i>
-            <?php //echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_user', ['action' => 'change-password', 'id' => $user->getId()]) ?>" class="btn btn-info" title="<?php echo $this->translate('Change Password') ?>">
+            <i class="fa fa-gear"></i>
+            <?php echo $this->translate('Change Password') ?>
         </a>
     </td>
 </tr>

@@ -1,0 +1,16 @@
+<?php if ($this->pageCount): ?>
+    <?php foreach ($this->pagesInRange as $page): ?>
+        <?php if ($page != $this->current): ?>
+            <li>
+                <a href="<?php echo $this->url($this->route, [], ["query" => ["page" => $page]]) ?>"
+                   class="pagination__item__link" data-page="<?php echo $page; ?>">
+                    <?php echo $page; ?>
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="active">
+                <span class="pagination__item__link disabled"><?php echo $page; ?></span>
+            </li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif;?>

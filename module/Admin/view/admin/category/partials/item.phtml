@@ -21,6 +21,8 @@ $category = $this->category;
             </span>
         <?php endif; ?>
     </td>
+    <td><?php echo $category->getProducts()->count(); ?></td>
+    <td><?php echo $category->getCreatedAt()->format('d M Y, m:i'); ?></td>
     <td><?php echo $category->getUpdatedAt()->format('d M Y, m:i'); ?></td>
     <td>
         <a href="<?php echo $this->url('admin_product_category', ['action' => 'edit', 'id' => $category->getId()]) ?>" class="btn btn-primary btn-sm">

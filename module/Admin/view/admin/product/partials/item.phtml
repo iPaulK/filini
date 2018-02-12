@@ -35,17 +35,18 @@ $thumbnail = $product->getImages()->count() > 0 ? $product->getImages()->first()
             </span>
         <?php endif; ?>
     </td>
-    <td><?php echo $product->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td><?php echo $product->getCreatedAt()->format('d.m.Y, m:i'); ?></td>
+    <td><?php echo $product->getUpdatedAt()->format('d.m.Y, m:i'); ?></td>
     <td>
-        <a href="<?php echo $this->url('application_product', ['slug' => $product->getSlug()]) ?>" class="btn btn-success" title="<?php echo $this->translate('View') ?>" target="_blanc">
+        <a href="<?php echo $this->url('application_product', ['slug' => $product->getSlug()]) ?>" class="btn btn-xs btn-success" title="<?php echo $this->translate('View') ?>" target="_blanc">
             <i class="fa fa-eye"></i>
             <?php //echo $this->translate('View')?>
         </a>
-        <a href="<?php echo $this->url('admin_product', ['action' => 'edit', 'id' => $product->getId()]) ?>" class="btn btn-primary" title="<?php echo $this->translate('Edit') ?>">
+        <a href="<?php echo $this->url('admin_product', ['action' => 'edit', 'id' => $product->getId()]) ?>" class="btn btn-xs btn-primary" title="<?php echo $this->translate('Edit') ?>">
             <i class="fa fa-edit"></i>
             <?php //echo $this->translate('Edit') ?>
         </a>
-        <a href="<?php echo $this->url('admin_product', ['action' => 'remove', 'id' => $product->getId()]) ?>" class="btn btn-danger" onclick="return confirm('Are u sure?');" title="<?php echo $this->translate('Remove') ?>">
+        <a href="<?php echo $this->url('admin_product', ['action' => 'remove', 'id' => $product->getId()]) ?>" class="btn btn-xs btn-danger" onclick="return confirm('Are u sure?');" title="<?php echo $this->translate('Remove') ?>">
             <i class="fa fa-trash-o"></i>
             <?php //echo $this->translate('Remove') ?>
         </a>

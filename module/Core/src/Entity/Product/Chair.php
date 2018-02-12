@@ -2,7 +2,6 @@
 
 namespace Core\Entity\Product;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation as AT;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
@@ -45,16 +44,6 @@ class Chair extends ProductEntity
     public function __construct()
     {
         parent::__construct();
-    }
-
-    /**
-     * Operations before update
-     *
-     * @ORM\PreUpdate
-     */
-    public function preUpdate()
-    {
-        $this->updatedAt = new \DateTime();
     }
 
     /**

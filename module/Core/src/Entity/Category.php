@@ -11,6 +11,7 @@ use Core\Service\Entity\Category as EntityService;
 /**
  * @ORM\Entity(repositoryClass="Core\Repository\CategoryRepository")
  * @ORM\Table(name="categories")
+ * @ORM\HasLifecycleCallbacks
  * @AT\Name("Category")
  */
 class Category

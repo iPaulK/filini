@@ -13,6 +13,7 @@ use Core\Service\Entity\Product as EntityService;
  * It is abstract because we never have a Product entity, it's either Sofa or ...
  *
  * @ORM\Entity(repositoryClass="Core\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="products", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string", length=32)
@@ -209,7 +210,7 @@ abstract class Product
      */
     public function preUpdate()
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new DateTime();
     }
 
     /**

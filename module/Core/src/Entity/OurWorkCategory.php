@@ -10,6 +10,7 @@ use Core\Service\Entity\OurWorkCategory as EntityService;
 
 /**
  * @ORM\Entity(repositoryClass="Core\Repository\OurWorkCategoryRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="our_work_categories")
  * @AT\Name("OurWorkCategory")
  */

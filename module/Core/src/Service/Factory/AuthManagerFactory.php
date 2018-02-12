@@ -5,8 +5,8 @@ use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Session\SessionManager;
-use User\Service\AuthManager;
-use User\Service\RbacManager;
+use Core\Service\AuthManager;
+use Core\Service\RbacManager;
 
 class AuthManagerFactory implements FactoryInterface
 {

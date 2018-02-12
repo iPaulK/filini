@@ -19,7 +19,8 @@
         "zendframework/zend-mvc-form": "^1.0",
         "doctrine/doctrine-orm-module": "1.1",
         "zendframework/zendframework": "^3.0",
-        "sybio/image-workshop": "2.0.*"
+        "sybio/image-workshop": "2.0.*",
+        "zendframework/zend-permissions-rbac": "^2.6"
     },
     "autoload": {
         "psr-4": {

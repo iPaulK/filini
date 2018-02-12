@@ -6,15 +6,15 @@ namespace Core\Repository;
  */
 class UserRepository extends AbstractRepository
 {
-	const TABLE_ALIAS = 'users';
+    const TABLE_ALIAS = 'users';
 
-	/**
+    /**
      * Find user by email
      *
      * @param string $email
      * @return User | null
      */
-    public function findOneBySlug($email)
+    public function findOneByEmail($email)
     {
         return $this->findOneBy(array(
             'email' => $email,

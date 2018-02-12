@@ -109,23 +109,23 @@ return [
                     ],
                 ],
             ],
-            'admin_login' => [
-                'type' => Literal::class,
+            'admin_user_role' => [
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/login',
+                    'route' => '/admin/roles[/:action[/:id]]',
                     'defaults' => [
-                        'controller' => Controller\AuthController::class,
-                        'action'     => 'login',
+                        'controller' => Controller\RoleController::class,
+                        'action' => 'index',
                     ],
                 ],
             ],
-            'admin_logout' => [
-                'type' => Literal::class,
+            'admin_user_permission' => [
+                'type' => Segment::class,
                 'options' => [
-                    'route'    => '/logout',
+                    'route' => '/admin/permissions[/:action[/:id]]',
                     'defaults' => [
-                        'controller' => Controller\AuthController::class,
-                        'action'     => 'logout',
+                        'controller' => Controller\PermissionController::class,
+                        'action' => 'index',
                     ],
                 ],
             ],
@@ -142,8 +142,48 @@ return [
             Controller\PageController::class => Controller\Factory\PageControllerFactory::class,
             Controller\SettingController::class => Controller\Factory\SettingControllerFactory::class,
             Controller\UserController::class => Controller\Factory\UserControllerFactory::class,
-            Controller\AuthController::class => Controller\Factory\AuthControllerFactory::class,
+            Controller\RoleController::class => Controller\Factory\RoleControllerFactory::class,
+            Controller\PermissionController::class => Controller\Factory\PermissionControllerFactory::class,
         ],
+    ],
+    // The 'access_filter' key is used by the User module to restrict or permit
+    // access to certain controller actions for unauthorized visitors.
+    'access_filter' => [
+        'controllers' => [
+            Controller\DashboardController::class => [
+                ['actions' => '*', 'allow' => '+dashboard.manage']
+            ],
+            Controller\ProductController::class => [
+                ['actions' => '*', 'allow' => '+product.manage']
+            ],
+            Controller\CategoryController::class => [
+                ['actions' => '*', 'allow' => '+category.manage']
+            ],
+            Controller\OurWorkController::class => [
+                ['actions' => '*', 'allow' => '+ourwork.manage']
+            ],
+            Controller\NewsController::class => [
+                ['actions' => '*', 'allow' => '+news.manage']
+            ],
+            Controller\PageController::class => [
+                ['actions' => '*', 'allow' => '+page.manage']
+            ],
+            Controller\SettingController::class => [
+                ['actions' => '*', 'allow' => '+setting.manage']
+            ],
+            Controller\UserController::class => [
+                // Give access to "index", "add", "edit", "view", "changePassword" actions to users having the "user.manage" permission.
+                ['actions' => ['index', 'add', 'edit', 'view', 'changePassword'], 'allow' => '+user.manage']
+            ],
+            Controller\RoleController::class => [
+                // Allow access to authenticated users having the "role.manage" permission.
+                ['actions' => '*', 'allow' => '+role.manage']
+            ],
+            Controller\PermissionController::class => [
+                // Allow access to authenticated users having "permission.manage" permission.
+                ['actions' => '*', 'allow' => '+permission.manage']
+            ],
+        ]
     ],
     'view_manager' => [
         'template_path_stack' => [

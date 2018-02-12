@@ -27,8 +27,10 @@ class CoreController extends AbstractActionController
 
         $controller = $e->getTarget();
         $controllerClass = get_class($controller);
-
-        if (strpos($controllerClass, 'Admin') !== false) {
+        
+        if ($controllerClass == 'Application\Controller\AuthController') {
+            $controller->layout('layout/login');
+        } else if (strpos($controllerClass, 'Admin') !== false) {
             $controller->layout('layout/admin');
         } else {
             $controller->layout('layout/layout');

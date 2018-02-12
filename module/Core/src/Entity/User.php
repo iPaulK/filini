@@ -9,6 +9,7 @@ use Core\Service\Entity\User as EntityService;
 
 /**
  * @ORM\Entity(repositoryClass="Core\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="users")
  */
 class User 
@@ -99,6 +100,16 @@ class User
      * @AT\Validator({"name":"StringLength", "options":{"max":"128"}})
      */
     protected $confirmPassword;
+
+    /**
+     * @AT\Options({"label":"Roles"})
+     * @ORM\ManyToMany(targetEntity="Core\Entity\Role")
+     * @ORM\JoinTable(name="user_role",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $roles;
 
     /**
      * @ORM\Column(name="pwd_reset_token", type="string", length=128, nullable=true)
@@ -341,6 +352,40 @@ class User
     public function getPasswordResetTokenCreationDate()
     {
         return $this->passwordResetTokenCreationDate;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \Core\Entity\Role $role
+     *
+     * @return User
+     */
+    public function addRole(\Core\Entity\Role $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \Core\Entity\Role $role
+     */
+    public function removeRole(\Core\Entity\Role $role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 
     /**

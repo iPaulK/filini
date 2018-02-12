@@ -20,7 +20,21 @@ return [
             \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
             Service\AuthAdapter::class => Service\Factory\AuthAdapterFactory::class,
             Service\AuthManager::class => Service\Factory\AuthManagerFactory::class,
+            Service\RbacAssertionManager::class => Service\Factory\RbacAssertionManagerFactory::class,
+            Service\RbacManager::class => Service\Factory\RbacManagerFactory::class,
         ],
+    ],
+    'view_helpers' => [
+        'factories' => [
+            View\Helper\Access::class => View\Helper\Factory\AccessFactory::class,
+        ],
+        'aliases' => [
+            'access' => View\Helper\Access::class,
+        ],
+    ],
+    // This key stores configuration for RBAC manager.
+    'rbac_manager' => [
+        'assertions' => [Service\RbacAssertionManager::class],
     ],
     'view_manager' => [
         'template_path_stack' => [

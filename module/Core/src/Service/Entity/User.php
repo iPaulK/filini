@@ -60,4 +60,18 @@ class User extends AbstractEntityService
         
         return 'Unknown';
     }
+
+    /**
+     * Retrieve name of roles comma separated.
+     *
+     * @return string
+     */
+    public function getRolesAsString()
+    {
+        $roleNames = [];
+        foreach ($this->getUser()->getRoles() as $role) {
+            $roleNames[] = $role->getName();
+        }
+        return implode(', ', $roleNames);
+    }
 }

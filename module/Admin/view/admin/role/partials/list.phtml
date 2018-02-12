@@ -7,20 +7,20 @@ $paginator = $this->paginator;
             <thead>
                 <tr>
                     <th class="col-md-1">#</th>
-                    <th class="col-md-4"><?php echo $this->translate('Name') ?></th>
-                    <th class="col-md-2"><?php echo $this->translate('Status') ?></th>
-                    <th class="col-md-2"><?php echo $this->translate('Updated At') ?></th>
+                    <th class="col-md-2"><?php echo $this->translate('Name') ?></th>
+                    <th class="col-md-4"><?php echo $this->translate('Description') ?></th>
+                    <th class="col-md-2"><?php echo $this->translate('Created At') ?></th>
                     <th class="col-md-3"><?php echo $this->translate('Action') ?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($paginator as $category) : ?>
-                    <?php echo $this->partial('admin/our-work-category/partials/item', ['category' => $category]); ?>
+                <?php foreach ($paginator as $role) : ?>
+                    <?php echo $this->partial('admin/role/partials/item', ['role' => $role]); ?>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
     <?php echo $this->partial('core/partials/paginator/paginator', ['paginator' => $paginator]); ?>
 <?php else: ?>
-    <p class="small"><?php echo $this->translate('Categories not found.'); ?></p>
+    <p class="small"><?php echo $this->translate('Roles not found.'); ?></p>
 <?php endif; ?>

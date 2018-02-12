@@ -1,9 +1,10 @@
 <?php
-namespace Admin\Controller\Factory;
+namespace Application\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Admin\Controller\AuthController;
+use Application\Controller\AuthController;
+use Core\Service\AuthManager;
 
 class AuthControllerFactory implements FactoryInterface
 {
@@ -13,7 +14,8 @@ class AuthControllerFactory implements FactoryInterface
         array $options = null
     ) {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
-        
-        return new AuthController($entityManager);
+        $authManager = $container->get(AuthManager::class);
+
+        return new AuthController($entityManager, $authManager);
     }
 }

@@ -1,0 +1,20 @@
+<?php
+/** @var \Core\Entity\Role $role */
+$role = $this->role;
+?>
+<tr>
+    <td><?php echo $role->getId(); ?></td>
+    <td><?php echo $role->getName(); ?></td>
+    <td><?php echo $role->getDescription(); ?></td>
+    <td><?php echo $role->getCreatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="<?php echo $this->url('admin_user_role', ['action' => 'edit', 'id' => $role->getId()]) ?>" class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>
+            <?php echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_user_role', ['action' => 'remove', 'id' => $role->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are u sure?');">
+            <i class="fa fa-trash-o"></i>
+            <?php echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

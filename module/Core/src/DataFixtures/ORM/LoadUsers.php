@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Crypt\Password\Bcrypt;
-use Core\Entity\User\Admin;
+use Core\Entity\User;
 use Core\Entity\Role;
 use Core\Entity\UserAddress;
 
@@ -31,7 +31,7 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Serv
     {
         $zfcUserService = $this->getServiceLocator()->get('zfcuser_user_service');
         $bcrypt = new Bcrypt();
-        $bcrypt->setCost($zfcUserService->getOptions()->getPasswordCost());
+        $bcrypt->setCost(USER::BCRYPT_PASSWORD_COST);
 
         foreach ($this->users as $data) {
             $user = $this->findOrCreateAdmin($data['email'], $manager);
@@ -54,11 +54,11 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Serv
      * @param string $email
      * @param ObjectManager $manager
      *
-     * @return Core\Entity\User
+     * @return Core\Entity\User\Admin
      */
     protected function findOrCreateAdmin($email, ObjectManager $manager)
     {
-        return $manager->getRepository('Core\Entity\User')->findOneBy(['email' => $email]) ?: new User();
+        return $manager->getRepository('Core\Entity\User\Admin')->findOneBy(['email' => $email]) ?: new Admin();
     }
 
     public function getOrder()

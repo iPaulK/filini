@@ -24,6 +24,36 @@ return [
                     ],
                 ],
             ],
+            'login' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/login',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'login',
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/logout',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'logout',
+                    ],
+                ],
+            ],
+            'not-authorized' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/not-authorized',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'notAuthorized',
+                    ],
+                ],
+            ],
             'application_contact' => [
                 'type' => Literal::class,
                 'options' => [
@@ -98,6 +128,7 @@ return [
             Controller\WorkController::class => Controller\Factory\WorkControllerFactory::class,
             Controller\DesignersController::class => Controller\Factory\DesignersControllerFactory::class,
             Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,
+            Controller\AuthController::class => Controller\Factory\AuthControllerFactory::class,
         ],
     ],
     'view_manager' => [

@@ -3,6 +3,7 @@ namespace Core\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Core\Service\AuthAdapter;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class AuthAdapterFactory implements FactoryInterface
 {

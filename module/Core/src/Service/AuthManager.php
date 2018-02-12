@@ -1,5 +1,5 @@
 <?php
-namespace User\Service;
+namespace Core\Service;
 
 use Zend\Authentication\Result;
 

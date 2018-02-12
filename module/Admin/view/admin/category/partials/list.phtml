@@ -21,7 +21,7 @@ $paginator = $this->paginator;
             </tbody>
         </table>
     </div>
-    <?php //echo $this->partial('core/partials/paginator/paginator', ['paginator' => $paginator]); ?>
+    <?php echo $this->partial('core/partials/paginator/paginator', ['paginator' => $paginator]); ?>
 <?php else: ?>
     <p class="small"><?php echo $this->translate('Categories not found.'); ?></p>
 <?php endif; ?>

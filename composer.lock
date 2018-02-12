@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c83f30f79fb242067ffd9b33157732db",
+    "content-hash": "b1d4628a1348b31c97762ef3d9cfd63e",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -5264,30 +5264,30 @@
         },
         {
             "name": "zendframework/zend-permissions-rbac",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-permissions-rbac.git",
-                "reference": "4213a4889ae7d7607c7974124965d12d1c395115"
+                "reference": "c10ad55e50f402bf14eb2eb9bc424dd9a44dfc78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-permissions-rbac/zipball/4213a4889ae7d7607c7974124965d12d1c395115",
-                "reference": "4213a4889ae7d7607c7974124965d12d1c395115",
+                "url": "https://api.github.com/repos/zendframework/zend-permissions-rbac/zipball/c10ad55e50f402bf14eb2eb9bc424dd9a44dfc78",
+                "reference": "c10ad55e50f402bf14eb2eb9bc424dd9a44dfc78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^5.7.15|| ^6.2.1",
+                "zendframework/zend-coding-standard": "~1.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -5305,7 +5305,7 @@
                 "rbac",
                 "zf2"
             ],
-            "time": "2015-06-03T14:05:54+00:00"
+            "time": "2018-02-01T09:55:50+00:00"
         },
         {
             "name": "zendframework/zend-progressbar",

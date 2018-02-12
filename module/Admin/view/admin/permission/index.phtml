@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->translate('Permissions') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Permissions') ?>
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <a href="<?php echo $this->url('admin_user_permission', ['action' => 'edit']) ?>"
+                             class="btn btn-default btn-xs">
+                            <i class="fa fa-plus"></i>
+                            <?php echo $this->translate('Add new') ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- .panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <?php echo $this->partial('admin/permission/partials/list', ['paginator' => $this->paginator]); ?>
+                </div>
+            </div>
+            <!-- .panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>

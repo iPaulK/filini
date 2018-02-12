@@ -107,6 +107,7 @@
                             <a href="<?php echo $this->url('admin_work', ['action' => 'index']) ?>">
                                 <i class="fa fa-briefcase"></i>
                                 <?php echo $this->translate('Our Works') ?>
+                                <span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -144,7 +145,26 @@
                             <a href="<?php echo $this->url('admin_user', ['action' => 'index']) ?>">
                                 <i class="fa fa-users"></i>
                                 <?php echo $this->translate('Users') ?>
+                                <span class="fa arrow"></span>
                             </a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo $this->url('admin_user', ['action' => 'index'])?>">
+                                        <?php echo $this->translate('Manage Users') ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->url('admin_user_role', ['action' => 'index'])?>">
+                                        <?php echo $this->translate('Manage Roles') ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->url('admin_user_permission', ['action' => 'index'])?>">
+                                        <?php echo $this->translate('Manage Permissions') ?>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>

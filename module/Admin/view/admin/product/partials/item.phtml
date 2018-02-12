@@ -37,7 +37,7 @@ $thumbnail = $product->getImages()->count() > 0 ? $product->getImages()->first()
     </td>
     <td><?php echo $product->getUpdatedAt()->format('d M Y, m:i'); ?></td>
     <td>
-        <a href="#" class="btn btn-success" title="<?php echo $this->translate('View') ?>">
+        <a href="<?php echo $this->url('application_product', ['slug' => $product->getSlug()]) ?>" class="btn btn-success" title="<?php echo $this->translate('View') ?>" target="_blanc">
             <i class="fa fa-eye"></i>
             <?php //echo $this->translate('View')?>
         </a>

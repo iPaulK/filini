@@ -58,7 +58,7 @@ abstract class Product
     /**
      * @var string $slug
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @AT\Options({"label":"Slug", "allow_empty":true})
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})

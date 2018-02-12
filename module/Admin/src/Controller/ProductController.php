@@ -10,6 +10,7 @@ use Core\Entity\Product\{
 use Zend\View\Model\{
     ViewModel, JsonModel
 };
+use DoctrineModule\Validator\NoObjectExists;
 
 class ProductController extends CoreController
 {
@@ -21,7 +22,7 @@ class ProductController extends CoreController
     public function indexAction(): ViewModel
     {
         $page = $this->params()->fromQuery('page', 1);
-        $limit = $this->params()->fromQuery('limit', 10);
+        $limit = $this->params()->fromQuery('limit', 20);
 
         $productsCounter = [
             Product::TYPE_SOFA => $this->getRepository('Product')->getCountByDiscr('\Core\Entity\Product\Sofa'),
@@ -56,6 +57,10 @@ class ProductController extends CoreController
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            // Do not allow to change product slug if another product with such slug already exits.
+            if($product->getSlug() != $request->getPost('slug')) {
+                $form = $this->attachSlugExistsValidator($form);
+            }
         	$data = $request->getPost();
             $form->setData($data);
             if ($form->isValid()) {
@@ -212,6 +217,23 @@ class ProductController extends CoreController
                 ]
             ]),
         ]);
+        return $form;
+    }
+
+    /**
+     * @var \Zend\Form\Form
+     * @return \Zend\Form\Form
+     */
+    protected function attachSlugExistsValidator($form)
+    {
+        $form->getInputFilter()->get('slug')->getValidatorChain()->attach(new NoObjectExists([
+            'object_repository' => $this->getRepository('Product'),
+            'fields' => ['slug'],
+            'messages' => [
+                NoObjectExists::ERROR_OBJECT_FOUND => "Slug already exists in database.",
+            ]
+        ]));
+
         return $form;
     }
 }

@@ -28,6 +28,8 @@ class ProductRepository extends AbstractRepository
      */
     public function findProducts()
     {
+        $this
+            ->sort('id', 'DESC');
         return $this->getQueryBuilder()->getQuery();
     }
 

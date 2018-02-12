@@ -20,9 +20,7 @@ $productsCounter = $this->productsCounter
             </div>
             <!-- .panel-heading -->
             <div class="panel-body">
-                <div class="table-responsive">
-                    <?php echo $this->partial('admin/product/partials/list', ['paginator' => $this->paginator]); ?>
-                </div>
+                <?php echo $this->partial('admin/product/partials/list', ['paginator' => $this->paginator]); ?>
             </div>
             <!-- .panel-body -->
         </div>

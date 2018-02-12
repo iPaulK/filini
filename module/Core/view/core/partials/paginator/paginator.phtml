@@ -1,8 +1,18 @@
 <?php if ($paginator->getCurrentItemCount()): ?>
-    <div class="pagination-row clearfix">
-        <p class="sm-min-pull-left mt-10 text-muted small"><?php echo $this->translate('Show') ?> <?php echo $paginator->getPages()->firstItemNumber; ?> <?php echo $this->translate('to') ?> <?php echo $paginator->getPages()->lastItemNumber ?> <?php echo $this->translate('of') ?> <?php echo $paginator->getPages()->totalItemCount ?> <?php echo $this->translate('items') ?></p>
-        <ul class="pagination sm-min-pull-right">
+<?php 
+    $firstItemNumber = $paginator->getPages()->firstItemNumber;
+    $lastItemNumber = $paginator->getPages()->lastItemNumber;
+    $totalItemCount = $paginator->getPages()->totalItemCount;
+?>
+<div class="row">
+    <div class="col-sm-12"><?php echo sprintf($this->translate('Showing %d to %d of %d entries'), $firstItemNumber, $lastItemNumber, $totalItemCount) ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="pagination">
             <?php echo $this->paginationControl($paginator, 'Sliding', 'core/partials/paginator/sliding'); ?>
         </ul>
     </div>
+</div>
 <?php endif; ?>

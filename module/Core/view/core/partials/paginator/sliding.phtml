@@ -1,4 +1,14 @@
 <?php if ($this->pageCount): ?>
+    <?php if (isset($this->previous)): ?>
+        <li>
+            <a href="<?php echo $this->url($this->route, [], ["query" => ["page" => $this->previous]]) ?>"
+                 class="previous" data-page="<?php echo $this->previous; ?>">
+                <i class="pagination-icn zmdi zmdi-chevron-left"></i>
+                <span class="pagination-text"><?php echo $this->translate('Previous'); ?></span>
+            </a>
+        </li>
+    <?php endif;?>
+
     <?php foreach ($this->pagesInRange as $page): ?>
         <?php if ($page != $this->current): ?>
             <li>
@@ -13,4 +23,14 @@
             </li>
         <?php endif; ?>
     <?php endforeach; ?>
+
+    <?php if (isset($this->next)): ?>
+        <li>
+             <a href="<?php echo $this->url($this->route, [], ["query" => ["page" => $this->next]]) ?>"
+                   class="pagination__item__link next" data-page="<?php echo $this->next; ?>">
+                <span class="pagination-text"><?php echo $this->translate('Next'); ?></span>
+                <i class="pagination-icn zmdi zmdi-chevron-right"></i>
+            </a>
+        </li>
+    <?php endif;?>
 <?php endif;?>

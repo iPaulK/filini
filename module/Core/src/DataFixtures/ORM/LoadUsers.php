@@ -3,17 +3,12 @@ namespace Core\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Zend\Crypt\Password\Bcrypt;
 use Core\Entity\User;
-use Core\Entity\Role;
-use Core\Entity\UserAddress;
 
-class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, ServiceLocatorAwareInterface
+class LoadUsers extends AbstractFixture implements DependentFixtureInterface
 {
-    use ServiceLocatorAwareTrait;
 
     /**
      * @var array The user that will be inserted in the database table
@@ -21,6 +16,9 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Serv
     protected $users = [
         [
             'email' => 'admin@filini.by',
+            'status' => USER::STATUS_ACTIVE,
+            'firstName' => 'Admin',
+            'lastName' => '',
         ],
     ];
 
@@ -29,9 +27,8 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Serv
      */
     public function load(ObjectManager $manager)
     {
-        $zfcUserService = $this->getServiceLocator()->get('zfcuser_user_service');
         $bcrypt = new Bcrypt();
-        $bcrypt->setCost(USER::BCRYPT_PASSWORD_COST);
+        $bcrypt->setCost(User::BCRYPT_PASSWORD_COST);
 
         foreach ($this->users as $data) {
             $user = $this->findOrCreateAdmin($data['email'], $manager);
@@ -61,8 +58,13 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Serv
         return $manager->getRepository('Core\Entity\User\Admin')->findOneBy(['email' => $email]) ?: new Admin();
     }
 
-    public function getOrder()
+    /**
+     * Fixture classes fixture is dependent on
+     *
+     * @return array
+     */
+    public function getDependencies()
     {
-        return 1;
+        return [];
     }
 }

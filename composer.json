@@ -20,7 +20,8 @@
         "doctrine/doctrine-orm-module": "1.1",
         "zendframework/zendframework": "^3.0",
         "sybio/image-workshop": "2.0.*",
-        "zendframework/zend-permissions-rbac": "^2.6"
+        "zendframework/zend-permissions-rbac": "^2.6",
+        "doctrine/data-fixtures": "^1.2"
     },
     "autoload": {
         "psr-4": {

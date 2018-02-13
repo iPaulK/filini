@@ -56,6 +56,6 @@ class LoadPermissions extends AbstractFixture
      */
     protected function findOrCreatePermission($name, ObjectManager $manager)
     {
-        return $manager->getRepository('Core\Entity\Permission')->findOneBy(['name' => $name]) ?: new Permission();
+        return $manager->getRepository(Permission::class)->findOneBy(['name' => $name]) ?: new Permission();
     }
 }

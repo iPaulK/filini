@@ -11,9 +11,9 @@ class CatalogController extends CoreController
     public function indexAction(): ViewModel
     {
         $slug = $this->params()->fromRoute('slug', false);
-        $curentCategory = $this->getRepository('Category')->findOneBySlug($slug);
+        $curentCategory = $this->getRepository(Category::class)->findOneBySlug($slug);
 
-        $query = $this->getRepository('Category')->findByStatus(Category::STATUS_ENABLED);
+        $query = $this->getRepository(Category::class)->findByStatus(Category::STATUS_ENABLED);
         $categories = $query->getResult();
         return new ViewModel([
             'curentCategory' => $curentCategory,

@@ -33,7 +33,7 @@ trait DoctrineBasicsTrait {
      */
     protected function getEntity($repository, $id)
     {
-        return $this->getEm()->find('\\Core\\Entity\\' . $repository, intval($id));
+        return $this->getEm()->find($repository, intval($id));
     }
 
     /**
@@ -45,7 +45,7 @@ trait DoctrineBasicsTrait {
      */
     protected function getRepository($repository)
     {
-        return $this->getEm()->getRepository('\\Core\\Entity\\' . $repository);
+        return $this->getEm()->getRepository($repository);
     }
 
     /**

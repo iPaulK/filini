@@ -18,7 +18,7 @@ class RoleController extends CoreController
         $page = $this->params()->fromQuery('page', 1);
         $limit = $this->params()->fromQuery('limit', 10);
 
-        $query = $this->getRepository('Role')->findRoles();
+        $query = $this->getRepository(Role::class)->findRoles();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
         return new ViewModel([
@@ -34,7 +34,7 @@ class RoleController extends CoreController
     public function editAction(): ViewModel
     {
         /** @var \Core\Entity\Role $role */
-        $role = $this->getEntity('Role', $this->params()->fromRoute('id'));
+        $role = $this->getEntity(Role::class, $this->params()->fromRoute('id'));
         if (!$role) {
             $role = new Role();
         }
@@ -63,7 +63,7 @@ class RoleController extends CoreController
      */
     public function removeAction(): ViewModel
     {
-        $role = $this->getEntity('Role', $this->params()->fromRoute('id'));
+        $role = $this->getEntity(Role::class, $this->params()->fromRoute('id'));
         if ($role) {
             $this->getEm()->remove($role);
             $this->getEm()->flush();

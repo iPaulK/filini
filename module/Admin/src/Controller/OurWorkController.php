@@ -4,6 +4,7 @@ namespace Admin\Controller;
 
 use Core\Controller\CoreController;
 use Core\Entity\OurWork;
+use Core\Entity\Image;
 use Zend\View\Model\{
     ViewModel, JsonModel
 };
@@ -21,7 +22,7 @@ class OurWorkController extends CoreController
         $page = $this->params()->fromQuery('page', 1);
         $limit = $this->params()->fromQuery('limit', 10);
 
-        $query = $this->getRepository('OurWork')->findOurWorks();
+        $query = $this->getRepository(OurWork::class)->findOurWorks();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
         return new ViewModel([
@@ -37,7 +38,7 @@ class OurWorkController extends CoreController
     public function editAction(): ViewModel
     {
         /** @var \Core\Entity\OurWork $work */
-        $work = $this->getEntity('OurWork', $this->params()->fromRoute('id'));
+        $work = $this->getEntity(OurWork::class, $this->params()->fromRoute('id'));
         if (!$work) {
             $work = new OurWork();
         }
@@ -55,7 +56,7 @@ class OurWorkController extends CoreController
             $work->getImages()->clear();
             if(!empty($data['images'])){
                 foreach($data['images'] as $image_id){
-                    $image = $this->getEntity('Image', $image_id);
+                    $image = $this->getEntity(Image::class, $image_id);
                     if ($image) {
                         $work->addImage($image);
                     }
@@ -81,7 +82,7 @@ class OurWorkController extends CoreController
      */
     public function removeAction(): ViewModel
     {
-        $work = $this->getEntity('OurWork', $this->params()->fromRoute('id'));
+        $work = $this->getEntity(OurWork::class, $this->params()->fromRoute('id'));
         if ($work) {
             $this->getEm()->remove($work);
             $this->getEm()->flush();
@@ -145,7 +146,7 @@ class OurWorkController extends CoreController
      */
     public function deleteImageAction(): JsonModel
     {
-        $image = $this->getEntity('Image', $this->params()->fromRoute('id'));
+        $image = $this->getEntity(Image::class, $this->params()->fromRoute('id'));
         if ($image) {
             $this->getEm()->remove($image);
             $this->getEm()->flush();

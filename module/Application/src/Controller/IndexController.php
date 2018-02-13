@@ -15,7 +15,7 @@ class IndexController extends CoreController
 {
     public function indexAction()
     {
-        $query = $this->getRepository('Category')->findByStatus(Category::STATUS_ENABLED);
+        $query = $this->getRepository(Category::class)->findByStatus(Category::STATUS_ENABLED);
         $categories = $query->getResult();
         return new ViewModel([
             'categories' => $categories,

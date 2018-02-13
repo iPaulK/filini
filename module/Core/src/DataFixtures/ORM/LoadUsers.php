@@ -67,7 +67,7 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface
      */
     protected function findOrCreateUser($email, ObjectManager $manager)
     {
-        return $manager->getRepository('Core\Entity\User')->findOneBy(['email' => $email]) ?: new User();
+        return $manager->getRepository(User::class)->findOneBy(['email' => $email]) ?: new User();
     }
 
     /**

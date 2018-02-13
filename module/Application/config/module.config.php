@@ -120,6 +120,33 @@ return [
             ],
         ],
     ],
+    // The 'access_filter' key is used by the User module to restrict or permit
+    // access to certain controller actions for unauthorized visitors.
+    'access_filter' => [
+        'controllers' => [
+            Controller\IndexController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+            Controller\AuthController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+            Controller\ContactController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+            Controller\CatalogController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+            Controller\DesignersController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+            Controller\ProductController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+            Controller\WorkController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
+        ]
+    ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class =>  Controller\Factory\IndexControllerFactory::class,

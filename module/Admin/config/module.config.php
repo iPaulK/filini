@@ -9,6 +9,16 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
 	'router' => [
         'routes' => [
+            'admin_home' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin[/]',
+                    'defaults' => [
+                        'controller' => Controller\DashboardController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
             'admin_dashboard' => [
                 'type' => Segment::class,
                 'options' => [

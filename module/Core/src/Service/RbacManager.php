@@ -74,7 +74,7 @@ class RbacManager
             $this->rbac = $rbac;
             // Construct role hierarchy by loading roles and permissions from database.
             $rbac->setCreateMissingRoles(true);
-            $roles = $this->getRepository(Role::class)->findRoles();
+            $roles = $this->getRepository(Role::class)->findRoles()->getResult();
             foreach ($roles as $role) {
                 $roleName = $role->getName();
 

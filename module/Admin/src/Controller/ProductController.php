@@ -3,6 +3,7 @@
 namespace Admin\Controller;
 
 use Core\Controller\CoreController;
+use Core\Entity\Image;
 use Core\Entity\Product;
 use Core\Entity\Product\{
     Sofa, Chair, Stool, Bed
@@ -25,13 +26,13 @@ class ProductController extends CoreController
         $limit = $this->params()->fromQuery('limit', 20);
 
         $productsCounter = [
-            Product::TYPE_SOFA => $this->getRepository('Product')->getCountByDiscr('\Core\Entity\Product\Sofa'),
-            Product::TYPE_CHAIR => $this->getRepository('Product')->getCountByDiscr('\Core\Entity\Product\Chair'),
-            Product::TYPE_STOOL => $this->getRepository('Product')->getCountByDiscr('\Core\Entity\Product\Stool'),
-            Product::TYPE_BED => $this->getRepository('Product')->getCountByDiscr('\Core\Entity\Product\Bed'),
+            Product::TYPE_SOFA => $this->getRepository(Product::class)->getCountByDiscr(Sofa::class),
+            Product::TYPE_CHAIR => $this->getRepository(Product::class)->getCountByDiscr(Chair::class),
+            Product::TYPE_STOOL => $this->getRepository(Product::class)->getCountByDiscr(Stool::class),
+            Product::TYPE_BED => $this->getRepository(Product::class)->getCountByDiscr(Bed::class),
         ];
 
-        $query = $this->getRepository('Product')->findProducts();
+        $query = $this->getRepository(Product::class)->findProducts();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
         return new ViewModel([
@@ -48,7 +49,7 @@ class ProductController extends CoreController
     public function editAction(): ViewModel
     {
         /** @var \Core\Entity\Product $product */
-        $product = $this->getEntity('Product', $this->params()->fromRoute('id'));
+        $product = $this->getEntity(Product::class, $this->params()->fromRoute('id'));
         if (!$product) {
             $product = $this->initProduct();
         }
@@ -70,7 +71,7 @@ class ProductController extends CoreController
                 $product->getImages()->clear();
                 if(!empty($data['images'])){
                     foreach($data['images'] as $image_id){
-                        $image = $this->getEntity('Image', $image_id);
+                        $image = $this->getEntity(Image::class, $image_id);
                         if ($image) {
                             $product->addImage($image);
                         }
@@ -95,7 +96,7 @@ class ProductController extends CoreController
      */
     public function removeAction(): ViewModel
     {
-        $product = $this->getEntity('Product', $this->params()->fromRoute('id'));
+        $product = $this->getEntity(Product::class, $this->params()->fromRoute('id'));
         if ($product) {
             $this->getEm()->remove($product);
             $this->getEm()->flush();
@@ -159,7 +160,7 @@ class ProductController extends CoreController
      */
     public function deleteImageAction(): JsonModel
     {
-        $image = $this->getEntity('Image', $this->params()->fromRoute('id'));
+        $image = $this->getEntity(Image::class, $this->params()->fromRoute('id'));
         if ($image) {
             $this->getEm()->remove($image);
             $this->getEm()->flush();
@@ -227,7 +228,7 @@ class ProductController extends CoreController
     protected function attachSlugExistsValidator($form)
     {
         $form->getInputFilter()->get('slug')->getValidatorChain()->attach(new NoObjectExists([
-            'object_repository' => $this->getRepository('Product'),
+            'object_repository' => $this->getRepository(Product::class),
             'fields' => ['slug'],
             'messages' => [
                 NoObjectExists::ERROR_OBJECT_FOUND => "Slug already exists in database.",

@@ -24,8 +24,8 @@ class Module
         $eventManager = $event->getApplication()->getEventManager();
         $sharedEventManager = $eventManager->getSharedManager();
         // Register the event listener method. 
-        //$sharedEventManager->attach(AbstractActionController::class, 
-        //        MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 100);
+        $sharedEventManager->attach(AbstractActionController::class, 
+                MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 100);
     }
     
     /**

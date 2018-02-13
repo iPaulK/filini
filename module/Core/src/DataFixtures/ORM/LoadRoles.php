@@ -51,7 +51,7 @@ class LoadRoles extends AbstractFixture implements DependentFixtureInterface
      */
     protected function findOrCreateRole($name, ObjectManager $manager)
     {
-        return $manager->getRepository('Core\Entity\Role')->findOneBy(['name' => $name]) ?: new Role();
+        return $manager->getRepository(Role::class)->findOneBy(['name' => $name]) ?: new Role();
     }
 
     /**

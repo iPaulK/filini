@@ -20,7 +20,7 @@ class UserController extends CoreController
         $page = $this->params()->fromQuery('page', 1);
         $limit = $this->params()->fromQuery('limit', 10);
 
-        $query = $this->getRepository('User')->findUsers();
+        $query = $this->getRepository(User::class)->findUsers();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
         return new ViewModel([
@@ -34,7 +34,7 @@ class UserController extends CoreController
     public function addAction(): ViewModel
     {
         /** @var \Core\Entity\User $user */
-        $user = $this->getEntity('User', $this->params()->fromRoute('id'));
+        $user = $this->getEntity(User::class, $this->params()->fromRoute('id'));
         if (!$user) {
             $user = new User();
         }
@@ -66,7 +66,7 @@ class UserController extends CoreController
     public function editAction(): ViewModel
     {
         /** @var \Core\Entity\User $user */
-        $user = $this->getEntity('User', $this->params()->fromRoute('id'));
+        $user = $this->getEntity(User::class, $this->params()->fromRoute('id'));
         if (!$user) {
             $user = new User();
         }
@@ -98,7 +98,7 @@ class UserController extends CoreController
     public function changePasswordAction(): ViewModel
     {
         /** @var \Core\Entity\User $user */
-        $user = $this->getEntity('User', $this->params()->fromRoute('id'));
+        $user = $this->getEntity(User::class, $this->params()->fromRoute('id'));
         if (!$user) {
             return $this->redirect()->toRoute('admin_user');
         }
@@ -188,7 +188,7 @@ class UserController extends CoreController
     protected function attachEmailExistsValidator($form)
     {
         $form->getInputFilter()->get('email')->getValidatorChain()->attach(new NoObjectExists([
-            'object_repository' => $this->getRepository('User'),
+            'object_repository' => $this->getRepository(User::class),
             'fields' => ['email'],
             'messages' => [
                 NoObjectExists::ERROR_OBJECT_FOUND => "Email already exists in database.",

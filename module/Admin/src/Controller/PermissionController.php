@@ -18,7 +18,7 @@ class PermissionController extends CoreController
         $page = $this->params()->fromQuery('page', 1);
         $limit = $this->params()->fromQuery('limit', 10);
 
-        $query = $this->getRepository('Permission')->findPermissions();
+        $query = $this->getRepository(Permission::class)->findPermissions();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
         return new ViewModel([
@@ -34,7 +34,7 @@ class PermissionController extends CoreController
     public function editAction(): ViewModel
     {
         /** @var \Core\Entity\Permission $permission */
-        $permission = $this->getEntity('Permission', $this->params()->fromRoute('id'));
+        $permission = $this->getEntity(Permission::class, $this->params()->fromRoute('id'));
         if (!$permission) {
             $permission = new Permission();
         }
@@ -63,7 +63,7 @@ class PermissionController extends CoreController
      */
     public function removeAction(): ViewModel
     {
-        $permission = $this->getEntity('Permission', $this->params()->fromRoute('id'));
+        $permission = $this->getEntity(Permission::class, $this->params()->fromRoute('id'));
         if ($permission) {
             $this->getEm()->remove($permission);
             $this->getEm()->flush();

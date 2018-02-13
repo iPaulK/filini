@@ -21,7 +21,7 @@ class OurWorkCategoryController extends CoreController
         $page = $this->params()->fromQuery('page', 1);
         $limit = $this->params()->fromQuery('limit', 10);
 
-        $query = $this->getRepository('OurWorkCategory')->findCategories();
+        $query = $this->getRepository(OurWorkCategory::class)->findCategories();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
         return new ViewModel([
@@ -37,7 +37,7 @@ class OurWorkCategoryController extends CoreController
     public function editAction(): ViewModel
     {
         /** @var \Core\Entity\OurWorkCategory $category */
-        $category = $this->getEntity('OurWorkCategory', $this->params()->fromRoute('id'));
+        $category = $this->getEntity(OurWorkCategory::class, $this->params()->fromRoute('id'));
         if (!$category) {
             $category = new OurWorkCategory();
         }
@@ -66,7 +66,7 @@ class OurWorkCategoryController extends CoreController
      */
     public function removeAction(): ViewModel
     {
-        $category = $this->getEntity('OurWorkCategory', $this->params()->fromRoute('id'));
+        $category = $this->getEntity(OurWorkCategory::class, $this->params()->fromRoute('id'));
         if ($category) {
             $this->getEm()->remove($category);
             $this->getEm()->flush();

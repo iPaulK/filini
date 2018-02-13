@@ -21,8 +21,15 @@
         "zendframework/zendframework": "^3.0",
         "sybio/image-workshop": "2.0.*",
         "zendframework/zend-permissions-rbac": "^2.6",
-        "doctrine/data-fixtures": "^1.2"
+        "doctrine/data-fixtures": "^1.2",
+        "iPaulK/doctrine-data-fixtures-ormloader-module": "dev-master"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:iPaulK/doctrine-data-fixtures-ormloader-module.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",

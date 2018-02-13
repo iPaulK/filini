@@ -19,6 +19,9 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface
             'status' => USER::STATUS_ACTIVE,
             'firstName' => 'Admin',
             'lastName' => '',
+            'roles' => [
+                'admin',
+            ],
         ],
     ];
 
@@ -31,12 +34,21 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface
         $bcrypt->setCost(User::BCRYPT_PASSWORD_COST);
 
         foreach ($this->users as $data) {
-            $user = $this->findOrCreateAdmin($data['email'], $manager);
+            $user = $this->findOrCreateUser($data['email'], $manager);
             /** Check if the object is managed (so already exists in the database) **/
             if (!$manager->contains($user)) {
                 $user
                     ->setEmail($data['email'])
-                    ->setPassword($bcrypt->create('password'));
+                    ->setPassword($bcrypt->create('password'))
+                    ->setFirstName($data['firstName'])
+                    ->setLastName($data['lastName']);
+                
+                foreach ($data['roles'] as $role) {
+                    $referenceName = $role . '-role';
+                    if ($this->hasReference($referenceName)) {
+                        $user->addRole($this->getReference($referenceName));
+                    }
+                }
                 $manager->persist($user);
             }
             $this->addReference($data['email'] . '-user', $user);
@@ -51,11 +63,11 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface
      * @param string $email
      * @param ObjectManager $manager
      *
-     * @return Core\Entity\User\Admin
+     * @return Core\Entity\User
      */
-    protected function findOrCreateAdmin($email, ObjectManager $manager)
+    protected function findOrCreateUser($email, ObjectManager $manager)
     {
-        return $manager->getRepository('Core\Entity\User\Admin')->findOneBy(['email' => $email]) ?: new Admin();
+        return $manager->getRepository('Core\Entity\User')->findOneBy(['email' => $email]) ?: new User();
     }
 
     /**
@@ -65,6 +77,8 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface
      */
     public function getDependencies()
     {
-        return [];
+        return [
+            LoadRoles::class
+        ];
     }
 }

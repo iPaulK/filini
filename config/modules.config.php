@@ -24,6 +24,7 @@ return [
     'Zend\Validator',
     'DoctrineModule',
     'DoctrineORMModule',
+    'DoctrineDataFixturesORMLoader',
 
     // custom
     'Core',

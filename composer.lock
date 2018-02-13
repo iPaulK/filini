@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4f8917ff6312fc953eb77fd0f29d594c",
-    "content-hash": "4851a5155e50a180139feadb953f6845",
+    "hash": "d59f62922f20ce3d3afc750970d07a0b",
+    "content-hash": "d88000a2cae9a063fe9d43a213e4cae4",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -929,6 +929,60 @@
             ],
             "abandoned": "http-interop/http-server-middleware",
             "time": "2016-09-25 13:30:27"
+        },
+        {
+            "name": "ipaulk/doctrine-data-fixtures-ormloader-module",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iPaulK/doctrine-data-fixtures-ormloader-module.git",
+                "reference": "7ddce9d008561cc26181f175aefa8001c101d4d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iPaulK/doctrine-data-fixtures-ormloader-module/zipball/7ddce9d008561cc26181f175aefa8001c101d4d7",
+                "reference": "7ddce9d008561cc26181f175aefa8001c101d4d7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/data-fixtures": "^1.2",
+                "doctrine/doctrine-orm-module": "^1.1",
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-debug": "^2.5 || ^3.0",
+                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
+                "zendframework/zend-modulemanager": "^2.7",
+                "zendframework/zend-mvc": "^2.7 || ^3.0.1",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DoctrineDataFixturesORMLoader\\": "src/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul K",
+                    "email": "ipaulk@gmail.com",
+                    "homepage": "https://github.com/iPaulK/"
+                }
+            ],
+            "description": "Doctrine Data Fixtures ORMLoader Module for Zend Framework 3.",
+            "homepage": "https://github.com/iPaulK/doctrine-data-fixtures-ormloader-module",
+            "keywords": [
+                "data-fixtures",
+                "doctrine",
+                "module",
+                "zf3"
+            ],
+            "support": {
+                "source": "https://github.com/iPaulK/doctrine-data-fixtures-ormloader-module/tree/master",
+                "issues": "https://github.com/iPaulK/doctrine-data-fixtures-ormloader-module/issues"
+            },
+            "time": "2018-02-13 16:27:46"
         },
         {
             "name": "myclabs/deep-copy",
@@ -6646,7 +6700,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "zendframework/zend-component-installer": 20
+        "zendframework/zend-component-installer": 20,
+        "ipaulk/doctrine-data-fixtures-ormloader-module": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

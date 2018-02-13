@@ -13,6 +13,34 @@ class LoadPermissions extends AbstractFixture
      */
     protected $permissions = [
         [
+            'name' => 'dashboard.manage',
+            'description' => 'Dashboard dashboard',
+        ],
+        [
+            'name' => 'product.manage',
+            'description' => 'Manage products',
+        ],
+        [
+            'name' => 'category.manage',
+            'description' => 'Manage categories',
+        ],
+        [
+            'name' => 'ourwork.manage',
+            'description' => 'Manage ourworks',
+        ],
+        [
+            'name' => 'news.manage',
+            'description' => 'Manage news',
+        ],
+        [
+            'name' => 'page.manage',
+            'description' => 'Manage pages',
+        ],
+        [
+            'name' => 'setting.manage',
+            'description' => 'Manage settings',
+        ],
+        [
             'name' => 'user.manage',
             'description' => 'Manage users',
         ],

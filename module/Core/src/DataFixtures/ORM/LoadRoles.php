@@ -17,6 +17,18 @@ class LoadRoles extends AbstractFixture implements DependentFixtureInterface
             'name' => 'admin',
             'description' => 'A Person who manages users, roles, etc',
             'parent' => null,
+            'permissions' => [
+                'dashboard.manage',
+                'product.manage',
+                'category.manage',
+                'ourwork.manage',
+                'news.manage',
+                'page.manage',
+                'setting.manage',
+                'user.manage',
+                'role.manage',
+                'permission.manage',
+            ]
         ],
     ];
 
@@ -33,6 +45,13 @@ class LoadRoles extends AbstractFixture implements DependentFixtureInterface
                     ->setName($data['name'])
                     ->setDescription($data['description'])
                     ->setParent($data['parent']);
+
+                foreach ($data['permissions'] as $permission) {
+                    $referenceName = $permission . '-permission';
+                    if ($this->hasReference($referenceName)) {
+                        $role->addPermission($this->getReference($referenceName));
+                    }
+                }
                 $manager->persist($role);
             }
             $this->addReference($data['name'] . '-role', $role);

@@ -108,6 +108,7 @@ class User
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      *      )
+     * @AT\Exclude
      */
     protected $roles;
 

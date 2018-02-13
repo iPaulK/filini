@@ -40,6 +40,7 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface
                 $user
                     ->setEmail($data['email'])
                     ->setPassword($bcrypt->create('password'))
+                    ->setStatus($data['status'])
                     ->setFirstName($data['firstName'])
                     ->setLastName($data['lastName']);
                 

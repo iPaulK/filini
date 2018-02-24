@@ -29,7 +29,7 @@ $product = $this->product;
                 <?php if ($product->getImages()->count() > 0): ?>
                 <div class="section-gallery fotorama" data-nav="thumbs" data-thumbwidth="110.5" data-thumbheight="66" data-thumbmargin="10" data-thumbborderwidth="4" data-allowfullscreen="true">
                     <?php foreach ($product->getImages() as $image): ?>
-                        <img src="<?php echo $image->getRelativeUrl(); ?>" alt="<?php echo $product->getName(); ?>">
+                        <img src="<?php echo $image->getRelativeUrl('medium'); ?>" alt="<?php echo $product->getName(); ?>">
                     <?php endforeach;?>
                 </div>
                 <?php endif; ?>

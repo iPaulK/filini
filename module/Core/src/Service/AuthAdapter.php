@@ -66,6 +66,7 @@ class AuthAdapter implements AdapterInterface
         // Now we need to calculate hash based on user-entered password and compare
         // it with the password hash stored in database.
         $bcrypt = new Bcrypt();
+        $bcrypt->setCost(USER::BCRYPT_PASSWORD_COST);
         if ($bcrypt->verify($this->password, $user->getPassword())) {
             return new Result(Result::SUCCESS, $this->email, [self::AUTH_MSG_SUCCESS]);
         }

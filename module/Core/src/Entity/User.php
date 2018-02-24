@@ -17,7 +17,7 @@ class User
     const STATUS_ACTIVE = 1;
     const STATUS_RETIRED = 0;
 
-    const BCRYPT_PASSWORD_COST = 18;
+    const BCRYPT_PASSWORD_COST = 10;
 
     /**
      * @var int

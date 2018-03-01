@@ -87,9 +87,10 @@ return [
             'path' => './public/uploads/our-work/',
             'presets' => [
                 // to do set resolution
-                'medium' => ['x' => 600,'y' => 321, 'crop' => true],
-                'preview' => ['x' => 200,'y' => 160,  'crop' => true],
-                'small' => ['x' => 100,'y' => 80, 'crop' => true],
+                //'medium' => ['x' => 600,'y' => 321, 'crop' => true],
+                'medium' => ['x' => 536,'y' => 356, 'crop' => true],
+                'preview' => ['x' => 268,'y' => 178,  'crop' => true],
+                'small' => ['x' => 107,'y' => 71, 'crop' => true],
             ],
         ],
     ],

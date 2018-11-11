@@ -6963,6 +6963,11 @@ footer nav ul li a {
     letter-spacing: 1px
 }
 
+#catalog p.description {
+    color: #000;
+    border-bottom: 3px solid #a29f9e;
+}
+
 #catalog .owl-carousel.owl-theme {
     display: none
 }

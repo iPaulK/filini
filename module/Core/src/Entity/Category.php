@@ -68,6 +68,18 @@ class Category
     protected $status;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=1000, nullable=true)
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Options({"label":"Description"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"1000"}})
+     * @AT\Attributes({"type":"textarea" })
+     * @AT\Required({"required":"false"})
+     */
+    protected $description;
+
+    /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      * @AT\Exclude
      **/
@@ -265,6 +277,30 @@ class Category
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Category
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

@@ -26,7 +26,7 @@
                 <div class="col-sm-12  hidden-md hidden-lg table-phone">
                     <div class="phone">
                         <i class="fa fa-mobile"></i> 
-                        <a href="tel:+375447112336">+375447112336</a>
+                        <a href="tel:+375447112336">+375&nbsp;44&nbsp;711-23-36</a>
                     </div>
                     <a href="#small-dialog" class="popup-with-zoom-anim button">
                         заказать звонок
@@ -59,7 +59,7 @@
                 <div class="col-md-2 col-xs-5 mobile-phone">
                     <div class="phone">
                         <i class="fa fa-mobile"></i>
-                        <a href="tel:+375447112336">+375447112336</a>
+                        <a href="tel:+375447112336">+375&nbsp;44&nbsp;711-23-36</a>
                     </div>
                     <a href="#small-dialog" class="popup-with-zoom-anim button">заказать звонок</a>
                     <img src="<?php echo $this->basePath('img/menu.jpg') ?>" alt="" class="hidden-lg hidden-md hidden-sm mobile-icon">
@@ -94,7 +94,7 @@
     </header>
 
 
-    <?= $this->content ?>
+    <?= $this->content; ?>
 
     <footer>
         <div class="container">
@@ -108,16 +108,9 @@
                     <strong>Каталог</strong>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Мебель Horeca</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Диваны для дома</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Кровати</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Кресла</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Стулья</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Барные стулья</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Пуфы и банкетки</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Чугунные подстолья</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Подстолья из нержавеющей стали</a></li>
-                            <li><a href="<?php echo $this->url('application_catalog')?>">Подстолья из чугуна и дерева</a></li>
+                            <?php foreach ($this->categories as $category): ?>
+                                <li><a href="<?php echo $this->url('application_catalog') . '/' . $category->getSlug(); ?>"><?php echo $category->getName(); ?></a></li>
+                            <?php endforeach; ?>
                         </ul>
                     </nav>
                 </div>

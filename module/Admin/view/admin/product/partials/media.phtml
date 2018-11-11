@@ -36,18 +36,24 @@ $this->inlineScript()
     <!-- The table listing the files available for upload/download -->
     <div class="table-responsive">
         <table class="table" role="presentation">
+            <thead>
+                <th>Превью</th>
+                <th>Имя файла</th>
+                <th>Размер</th>
+                <th>Опции</th>
+            </thead>
             <tbody class="files">
                 <?php if ($product->getImages()): ?>
                     <?php foreach ($product->getImages() as $image): ?>
                         <?php
                             /** @var Core\Entity\File */
-                            $file = $image->getFile(); 
+                            $file = $image->getFile();
                         ?>
                         <tr class="template-download">
                             <td>
                                 <span class="preview">
                                     <?php if ($file): ?>
-                                        <a href="<?php echo $file->getRelativeUrl(); ?>" title="<?php echo $file->getName() ?>" target="_blanc">
+                                        <a target="_blank" href="<?php echo $file->getRelativeUrl(); ?>" title="<?php echo $file->getName() ?>" target="_blanc">
                                             <img src="<?php echo $file->getRelativeUrl('preview'); ?>">
                                         </a>
                                     <?php endif; ?>
@@ -55,7 +61,7 @@ $this->inlineScript()
                             </td>
                             <td>
                                 <p class="name">
-                                    <a href="<?php echo $file->getRelativeUrl(); ?>" title="<?php echo $file->getName() ?>" target="_blanc"><?php echo $file->getName() ?></a>
+                                    <a target="_blank" href="<?php echo $file->getRelativeUrl(); ?>" title="<?php echo $file->getName() ?>" target="_blanc"><?php echo $file->getName() ?></a>
                                     <input type="hidden" name="images[]" value="<?php echo $image->getId() ?>">
                                 </p>
                             </td>

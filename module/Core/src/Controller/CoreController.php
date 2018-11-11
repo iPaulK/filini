@@ -5,6 +5,7 @@ namespace Core\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
+use Core\Entity\Category;
 use Core\Traits\{
     DoctrineBasicsTrait, PaginatorTrait
 };
@@ -13,6 +14,9 @@ class CoreController extends AbstractActionController
 {
     use DoctrineBasicsTrait;
     use PaginatorTrait;
+
+    /** @var array */
+    protected $activeCategories;
 
     /**
      * Execute the request
@@ -34,11 +38,22 @@ class CoreController extends AbstractActionController
             $controller->layout('layout/admin');
         } else {
             $controller->layout('layout/layout');
+            $controller->layout()->setVariable('categories', $this->getActiveCategories());
         }
     }
 
     public function __construct($entityManager) 
     {
         $this->entityManager = $entityManager;
+    }
+
+    protected function getActiveCategories()
+    {
+        if ($this->activeCategories === null) {
+            $query = $this->getRepository(Category::class)->findByStatus(Category::STATUS_ENABLED);
+            $this->activeCategories = $query->getResult();
+        }
+
+        return $this->activeCategories;
     }
 }

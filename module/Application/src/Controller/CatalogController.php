@@ -13,11 +13,9 @@ class CatalogController extends CoreController
         $slug = $this->params()->fromRoute('slug', false);
         $curentCategory = $this->getRepository(Category::class)->findOneBySlug($slug);
 
-        $query = $this->getRepository(Category::class)->findByStatus(Category::STATUS_ENABLED);
-        $categories = $query->getResult();
         return new ViewModel([
             'curentCategory' => $curentCategory,
-            'categories' => $categories,
+            'categories' => $this->getActiveCategories(),
         ]);
     }
 }

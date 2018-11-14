@@ -7515,6 +7515,10 @@ footer nav ul li a {
     display: none
 }
 
+.product-text .schema {
+    display: none
+}
+
 .bonus-buy {
     margin-top: 50px
 }

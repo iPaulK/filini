@@ -61,32 +61,48 @@ $(function() {
 
 // text size complect
 
-	$('.product-text .li-text').click(function(){
+	$('.product-text .li-text').click(function() {
 		$('.product-text .li-text').addClass('li-active');
 		$('.product-text .li-size').removeClass('li-active');
 		$('.product-text .li-complect').removeClass('li-active');
+		$('.product-text .li-schema').removeClass('li-active');
 		$('.product-text .text').show();
 		$('.product-text .size').hide();
 		$('.product-text .complect').hide();
+		$('.product-text .schema').hide();
 	});
 
-		$('.product-text .li-size').click(function(){
-			$(this).addClass('li-active');
-			$('.product-text .li-text').removeClass('li-active');
-			$('.product-text .li-complect').removeClass('li-active');
-			$('.product-text .size').show();
-			$('.product-text .text').hide();
-			$('.product-text .complect').hide();
+	$('.product-text .li-size').click(function() {
+		$(this).addClass('li-active');
+		$('.product-text .li-text').removeClass('li-active');
+		$('.product-text .li-complect').removeClass('li-active');
+        $('.product-text .li-schema').removeClass('li-active');
+		$('.product-text .size').show();
+		$('.product-text .text').hide();
+		$('.product-text .complect').hide();
+        $('.product-text .schema').hide();
 	});
 // text size complect
-		$('.product-text .li-complect').click(function(){
+	$('.product-text .li-complect').click(function() {
 		$(this).addClass('li-active');
 		$('.product-text .li-text').removeClass('li-active');
 		$('.product-text .li-size').removeClass('li-active');
+        $('.product-text .li-schema').removeClass('li-active');
 		$('.product-text .complect').show();
 		$('.product-text .text').hide();
 		$('.product-text .size').hide();
+		$('.product-text .schema').hide();
 	});
+    $('.product-text .li-schema').click(function() {
+        $(this).addClass('li-active');
+        $('.product-text .li-text').removeClass('li-active');
+        $('.product-text .li-size').removeClass('li-active');
+        $('.product-text .li-complect').removeClass('li-active');
+        $('.product-text .complect').hide();
+        $('.product-text .text').hide();
+        $('.product-text .size').hide();
+        $('.product-text .schema').show();
+    });
 
 	/*
 loop: true,

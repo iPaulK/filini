@@ -169,6 +169,29 @@ class ProductController extends CoreController
     }
 
     /**
+     * Toggle image type
+     *
+     * @return JsonModel
+     */
+    public function toggleImageTypeAction(): JsonModel
+    {
+        /** @var \Core\Entity\Image $image */
+        $image = $this->getEntity(Image::class, $this->params()->fromRoute('id'));
+        if ($image) {
+            $newType = $image->getImageType() == 'product' ? 'product_schema' : 'product';
+            $image->setImageType($newType);
+            $this->getEm()->persist($image);
+            $this->getEm()->flush();
+        }
+
+        return new JsonModel([
+            'type' => $newType,
+            'label' => $newType == 'product' ? 'сделать чертежом' : 'сделать иллюстрацией',
+            'typeLabel' => $newType == 'product' ? 'иллюстрация' : 'чертёж',
+        ]);
+    }
+
+    /**
      * Init product
      *
      * @param string $defaultType

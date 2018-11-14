@@ -195,6 +195,12 @@ abstract class Product
      */
     protected $service;
 
+    /** @var array|null */
+    protected $schemas = null;
+
+    /** @var array|null */
+    protected $pictures = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
@@ -547,12 +553,46 @@ abstract class Product
     }
 
     /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImages()
+    * Get images
+    *
+    * @return \Doctrine\Common\Collections\Collection
+    */
+    public function getImages($picturesOnly = false)
     {
-        return $this->images;
+        if (!$picturesOnly) {
+            return $this->images;
+        }
+
+        if ($this->pictures === null) {
+            $this->pictures = [];
+            foreach ($this->images as $image) {
+                /** @var \Core\Entity\Image $image */
+                if ($image->getImageType() == 'product') {
+                    $this->pictures[] = $image;
+                }
+            }
+        }
+
+        return $this->pictures;
+    }
+
+    /**
+     * Get schemas
+     *
+     * @return array
+     */
+    public function getSchemas()
+    {
+        if ($this->schemas === null) {
+            $this->schemas = [];
+            foreach ($this->images as $image) {
+                /** @var \Core\Entity\Image $image */
+                if ($image->getImageType() == 'product_schema') {
+                    $this->schemas[] = $image;
+                }
+            }
+        }
+
+        return $this->schemas;
     }
 }

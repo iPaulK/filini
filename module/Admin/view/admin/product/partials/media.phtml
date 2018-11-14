@@ -40,12 +40,14 @@ $this->inlineScript()
                 <th>Превью</th>
                 <th>Имя файла</th>
                 <th>Размер</th>
+                <th>Тип</th>
                 <th>Опции</th>
             </thead>
             <tbody class="files">
                 <?php if ($product->getImages()): ?>
                     <?php foreach ($product->getImages() as $image): ?>
                         <?php
+                            /** @var Core\Entity\Image $image */
                             /** @var Core\Entity\File */
                             $file = $image->getFile();
                         ?>
@@ -69,6 +71,13 @@ $this->inlineScript()
                                 <span class="size"><?php echo $file->getSize() ?></span>
                             </td>
                             <td>
+                                <span class="type"><?php echo $image->getImageType() == 'product' ? 'иллюстрация' : 'чертёж'; ?></span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm toggle" data-url="<?php echo $this->url('admin_product', ['action' => 'toggle-image-type', 'id' => $image->getId()]);?>">
+                                    <i class="glyphicon glyphicon-flag"></i>
+                                    <span><?php echo $this->translate($image->getImageType() == 'product' ? 'сделать чертежом' : 'сделать иллюстрацией') ?></span>
+                                </button>
                                 <button class="btn btn-danger btn-sm delete" data-type="DELETE" data-url="<?php echo $this->url('admin_product', ['action' => 'delete-image', 'id' => $image->getId()]);?>">
                                     <i class="glyphicon glyphicon-trash"></i>
                                     <span><?php echo $this->translate('Delete') ?></span>
@@ -217,6 +226,14 @@ $this->inlineScript()
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
             dataType: 'json',
             maxNumberOfFiles: 10,
+        });
+
+        $('#fileupload').on('click', 'button.toggle', function (e) {
+            let button = $(this);
+            $.get($(this).attr('data-url')).done(function (data) {
+                button.find('span').text(data.label);
+                button.parents('tr').find('td span.type').text(data.typeLabel);
+            });
         });
     });
 })(jQuery);

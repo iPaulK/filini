@@ -26,9 +26,9 @@ $product = $this->product;
     <div class="container">
         <div class="row">
             <div class="col-md-8 product-item-left">
-                <?php if ($product->getImages()->count() > 0): ?>
+                <?php if (count($product->getImages(true)) > 0): ?>
                 <div class="section-gallery fotorama" data-nav="thumbs" data-thumbwidth="110.5" data-thumbheight="66" data-thumbmargin="10" data-thumbborderwidth="4" data-allowfullscreen="true">
-                    <?php foreach ($product->getImages() as $image): ?>
+                    <?php foreach ($product->getImages(true) as $image): ?>
                         <img src="<?php echo $image->getRelativeUrl('medium'); ?>" alt="<?php echo $product->getName(); ?>">
                     <?php endforeach;?>
                 </div>
@@ -44,11 +44,17 @@ $product = $this->product;
                     <li class="li-text li-active"><?php echo $this->translate('Описание') ?></li>
                     <li class="li-size"><?php echo $this->translate('Размеры') ?></li>
                     <li class="li-complect"><?php echo $this->translate('Комплектация') ?></li>
+                    <?php if (count($product->getSchemas())): ?><li class="li-schema"><?php echo $this->translate('Чертежи') ?></li><?php endif; ?>
                 </ul>
                 <p class="text"><?php echo $this->escapeHtml($product->getDescription()); ?></p>
                 <p class="size">&nbsp;</p>
                 <p class="complect">&nbsp;</p>
-                
+                <?php if (count($product->getSchemas())): ?><p class="schema">
+                    <?php foreach ($product->getSchemas() as $schema): ?>
+                        <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
+                    <?php endforeach; ?>
+                </p><?php endif; ?>
+
             </div>
         </div>
         <!-- <div class="row bonus-buy">

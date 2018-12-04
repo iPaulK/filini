@@ -109,10 +109,10 @@ abstract class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=5000)
+     * @ORM\Column(name="description", type="text", length=10000)
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Descrition"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
+     * @AT\Options({"label":"Description"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"10000"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"true" })
      */
@@ -146,7 +146,7 @@ abstract class Product
      *
      * @ORM\Column(name="meta_description", type="text", length=5000, nullable=true)
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Meta Descrition"})
+     * @AT\Options({"label":"Meta Description"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"false" })
@@ -162,6 +162,19 @@ abstract class Product
      * @AT\Options({"label":"In Stock"})
      */
     protected $isInStock;
+
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="Core\Entity\ConversionType")
+     * @ORM\JoinColumn(name="conversion_id", referencedColumnName="id", onDelete="SET NULL")
+     * @AT\Type("select")
+     * @AT\Options({"label":"Conversion Type", "required":true, "value_options":{
+     *      0: "No conversion type"
+     * }})
+     * @AT\Required({"required":"true"})
+     */
+    protected $conversionType;
 
     /**
      * @var ArrayCollection
@@ -526,6 +539,30 @@ abstract class Product
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set conversion type
+     *
+     * @param \Core\Entity\ConversionType $conversionType
+     *
+     * @return Product
+     */
+    public function setConversionType(\Core\Entity\ConversionType $conversionType = null)
+    {
+        $this->conversionType = $conversionType;
+
+        return $this;
+    }
+
+    /**
+     * Get conversion type
+     *
+     * @return \Core\Entity\ConversionType
+     */
+    public function getConversionType()
+    {
+        return $this->conversionType;
     }
 
     /**

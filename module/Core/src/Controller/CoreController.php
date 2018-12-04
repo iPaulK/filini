@@ -3,9 +3,10 @@
 namespace Core\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
-use Core\Entity\Category;
+use Core\Entity\{
+    Category, OurWorkCategory
+};
 use Core\Traits\{
     DoctrineBasicsTrait, PaginatorTrait
 };
@@ -18,12 +19,15 @@ class CoreController extends AbstractActionController
     /** @var array */
     protected $activeCategories;
 
+    /** @var array */
+    protected $ourWorkCategories;
+
     /**
      * Execute the request
      *
      * @param  MvcEvent $e
      * @return mixed
-     * @throws Exception\DomainException
+     * @throws \Exception|\DomainException
      */
     public function onDispatch(MvcEvent $e)
     {
@@ -38,7 +42,9 @@ class CoreController extends AbstractActionController
             $controller->layout('layout/admin');
         } else {
             $controller->layout('layout/layout');
-            $controller->layout()->setVariable('categories', $this->getActiveCategories());
+            $controller->layout()
+                ->setVariable('categories', $this->getActiveCategories())
+                ->setVariable('ourWorkCategories', $this->getOurWorkCategories());
         }
     }
 
@@ -50,10 +56,20 @@ class CoreController extends AbstractActionController
     protected function getActiveCategories()
     {
         if ($this->activeCategories === null) {
-            $query = $this->getRepository(Category::class)->findByStatus(Category::STATUS_ENABLED);
+            $query = $this->getRepository(Category::class)->getActive();
             $this->activeCategories = $query->getResult();
         }
 
         return $this->activeCategories;
+    }
+
+    protected function getOurWorkCategories()
+    {
+        if ($this->ourWorkCategories === null) {
+            $query = $this->getRepository(OurWorkCategory::class)->getActive();
+            $this->ourWorkCategories = $query->getResult();
+        }
+
+        return $this->ourWorkCategories;
     }
 }

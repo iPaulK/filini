@@ -24,6 +24,7 @@ class CategoryController extends CoreController
         $query = $this->getRepository(Category::class)->findCategories();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
+
         return new ViewModel([
             'paginator' => $paginator
         ]);

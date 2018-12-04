@@ -1,4 +1,15 @@
-<?php echo $this->doctype() ?>
+<?php
+    /** @var Application\View\Helper\Layout $layoutHelper */
+    $layoutHelper = $this->layoutHelper();
+    if (!$categories = $this->categories) {
+        $categories = $layoutHelper->getActiveCategories();
+    }
+    if (!$ourWorkCategories = $this->ourWorkCategories) {
+        $ourWorkCategories = $layoutHelper->getOurWorkCategories();
+    }
+
+    echo $this->doctype();
+?>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -35,7 +46,7 @@
                 <!--Конец Блок для 724px-->
                 <div class="col-md-2 col-sm-2 col-xs-2">
                     <a href="<?php echo $this->url('home'); ?>">
-                        <img src="<?php echo $this->basePath('img/logo.jpg') ?>" alt="" class="logo">
+                        <img src="<?php echo $this->basePath('img/logo.jpg'); ?>" alt="" class="logo">
                     </a>
                 </div>
                 <div class="col-md-7 col-sm-9 col-xs-9">
@@ -62,7 +73,7 @@
                         <a href="tel:+375447112336">+375&nbsp;44&nbsp;711-23-36</a>
                     </div>
                     <a href="#small-dialog" class="popup-with-zoom-anim button">заказать звонок</a>
-                    <img src="<?php echo $this->basePath('img/menu.jpg') ?>" alt="" class="hidden-lg hidden-md hidden-sm mobile-icon">
+                    <img src="<?php echo $this->basePath('img/menu.jpg'); ?>" alt="" class="hidden-lg hidden-md hidden-sm mobile-icon">
                 </div>
                 <!--Конец Блок для 1170px и выше-->
                 <!--Мобильное меню-->
@@ -93,7 +104,6 @@
         </div>
     </header>
 
-
     <?= $this->content; ?>
 
     <footer>
@@ -101,15 +111,19 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-xs-2">
                     <a href="<?php echo $this->url('home'); ?>">
-                        <img src="<?php echo $this->basePath('img/logo.png') ?>" alt="" class="logo">
+                        <img src="<?php echo $this->basePath('img/logo.png'); ?>" alt="" class="logo">
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <strong>Каталог</strong>
                     <nav class="footer-nav">
                         <ul>
-                            <?php foreach ($this->categories as $category): ?>
-                                <li><a href="<?php echo $this->url('application_catalog') . '/' . $category->getSlug(); ?>"><?php echo $category->getName(); ?></a></li>
+                            <?php foreach ($categories as $category): ?>
+                                <li>
+                                    <a href="<?php echo $this->url('application_catalog') . '/' . $category->getSlug(); ?>">
+                                        <?php echo $category->getName(); ?>
+                                    </a>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </nav>
@@ -125,6 +139,13 @@
                     <strong>Наши работы</strong>
                     <nav class="footer-nav">
                         <ul>
+                            <?php foreach ($ourWorkCategories as $ourWorkCategory): ?>
+                                <li>
+                                    <a href="<?php echo $this->url('application_work_list') . '/' . $ourWorkCategory->getSlug(); ?>">
+                                        <?php echo $ourWorkCategory->getName(); ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </nav>
                 </div>
@@ -132,7 +153,7 @@
                     <strong>Контакты</strong>
                     <div class="phone">
                         <i class="fa fa-mobile"></i>
-                        <a href="tel:+375447112336">+375447112336</a>
+                        <a href="tel:+375447112336">+375&nbsp;44&nbsp;711-23-36</a>
                     </div>
                     <div class="phone mail-footer">
                         <i class="fa fa-envelope-o"></i>
@@ -140,16 +161,16 @@
                     </div>
                     <!-- <div class="soc-item">
                         <a href="#">
-                            <img src="<?php echo $this->basePath('img/icon/1.png') ?>" alt="">
+                            <img src="<?php echo $this->basePath('img/icon/1.png'); ?>" alt="">
                         </a>
                         <a href="#">
-                            <img src="<?php echo $this->basePath('img/icon/2.png') ?>" alt="">
+                            <img src="<?php echo $this->basePath('img/icon/2.png'); ?>" alt="">
                         </a>
                     </div> -->
                 </div>
             </div>
         </div>
-        <p class="copy">2017 - <?php echo date('Y') ?> @ Все права защищены</p>
+        <p class="copy">&copy; 2017&ndash;<?php echo date('Y'); ?>. Все права защищены.</p>
     </footer>
 
     <?php echo $this->inlineScript()

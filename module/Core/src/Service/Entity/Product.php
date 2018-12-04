@@ -25,12 +25,22 @@ class Product extends AbstractEntityService
     }
 
     /**
-     * Check if sofa
+     * Check whether product is sofa
      *
      * @return bool
      */
     public function isSofa()
     {
         return $this->getProduct() instanceof ProductEntity\Sofa;
+    }
+
+    /**
+     * Check whether product is bed
+     *
+     * @return bool
+     */
+    public function isBed()
+    {
+        return $this->getProduct() instanceof ProductEntity\Bed;
     }
 }

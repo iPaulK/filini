@@ -110,7 +110,7 @@ class OurWorkCategory
      *
      * @ORM\Column(name="meta_description", type="text", length=5000, nullable=true)
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Meta Descrition"})
+     * @AT\Options({"label":"Meta Description"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"false" })

@@ -1,0 +1,25 @@
+<?php
+/** @var \Core\Entity\ConversionType $conversionType */
+$conversionType = $this->conversionType;
+?>
+<tr>
+    <td><?php echo $conversionType->getId(); ?></td>
+    <td>
+        <?php if ($conversionType->getThumbnail()): ?>
+            <img src="<?php echo $conversionType->getThumbnail()->getRelativeUrl('preview'); ?>">
+        <?php endif; ?>
+    </td>
+    <td><?php echo $conversionType->getName(); ?></td>
+    <td><?php echo $conversionType->getCreatedAt()->format('d M Y, m:i'); ?></td>
+    <td><?php echo $conversionType->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="<?php echo $this->url('admin_product_conversion', ['action' => 'edit', 'id' => $conversionType->getId()]) ?>" class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>
+            <?php echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_product_conversion', ['action' => 'remove', 'id' => $conversionType->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+            <i class="fa fa-trash-o"></i>
+            <?php echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

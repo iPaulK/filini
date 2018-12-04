@@ -432,3 +432,6 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+button.btn.btn-primary.btn-sm.toggle {
+  min-width: 170px;
+}

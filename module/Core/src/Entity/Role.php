@@ -38,7 +38,7 @@ class Role
      *
      * @ORM\Column(name="description", type="text", length=255)
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Descrition"})
+     * @AT\Options({"label":"Description"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"true" })

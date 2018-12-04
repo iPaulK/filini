@@ -3,6 +3,7 @@
 namespace Admin\Controller;
 
 use Core\Controller\CoreController;
+use Core\Entity\ConversionType;
 use Core\Entity\Image;
 use Core\Entity\Product;
 use Core\Entity\Product\{
@@ -15,6 +16,8 @@ use DoctrineModule\Validator\NoObjectExists;
 
 class ProductController extends CoreController
 {
+    protected $conversionOptions = null;
+
     /**
      * Show list of products
      *
@@ -59,7 +62,7 @@ class ProductController extends CoreController
         $request = $this->getRequest();
         if ($request->isPost()) {
             // Do not allow to change product slug if another product with such slug already exits.
-            if($product->getSlug() != $request->getPost('slug')) {
+            if ($product->getSlug() != $request->getPost('slug')) {
                 $form = $this->attachSlugExistsValidator($form);
             }
         	$data = $request->getPost();
@@ -231,6 +234,14 @@ class ProductController extends CoreController
         $type = $this->params()->fromQuery('type', $defaultType);
 
         $form = $this->createForm($product);
+        /** @var \Zend\Form\Element\Select $conversionElement */
+        $conversionElement = $form->get('conversionType');
+        $options = $conversionElement->getValueOptions();
+        foreach ($this->getConversionOptions() as $conversionOption) {
+            /** @var ConversionType $conversionOption */
+            $options[$conversionOption->getId()] = $conversionOption->getName();
+        }
+        $conversionElement->setValueOptions($options);
         $form->setAttributes([
             'action' => $this->url()->fromRoute('admin_product', [
                 'action' => 'edit',
@@ -242,6 +253,15 @@ class ProductController extends CoreController
             ]),
         ]);
         return $form;
+    }
+
+    protected function getConversionOptions()
+    {
+        if ($this->conversionOptions === null) {
+            $this->conversionOptions = $this->getRepository(ConversionType::class)->findAll();
+        }
+
+        return $this->conversionOptions;
     }
 
     /**

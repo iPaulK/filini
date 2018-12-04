@@ -174,4 +174,20 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'translator' => [
+        'locale' => 'ru',
+        'translation_files' => [
+            [
+                'type'=> 'phpArray',
+                'filename' => 'module/Application/language/ru/Login.php',
+                'text_domain' => 'default',
+                'locale' => 'ru',
+            ],
+        ],
+    ],
+    'view_helpers' => array(
+        'factories' => array(
+            'layoutHelper' => 'Application\View\Helper\Factory\LayoutFactory',
+        ),
+    ),
 ];

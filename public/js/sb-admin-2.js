@@ -40,3 +40,15 @@ $(function() {
         }
     }
 });
+
+$(function() {
+    tinymce.init({
+        selector: '.rich-editor',
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        language: 'ru'
+    });
+});

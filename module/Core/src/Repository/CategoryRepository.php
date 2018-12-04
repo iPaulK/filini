@@ -2,7 +2,7 @@
 
 namespace Core\Repository;
 
-use \Core\Entity\Category as CategoryEntity;
+use \Core\Entity\Category;
 
 class CategoryRepository extends AbstractRepository
 {
@@ -63,5 +63,10 @@ class CategoryRepository extends AbstractRepository
         $queryBuilder->setParameter('status', '%' . $status . '%');
 
         return $queryBuilder;
+    }
+
+    public function getActive()
+    {
+        return $this->findByStatus(Category::STATUS_ENABLED);
     }
 }

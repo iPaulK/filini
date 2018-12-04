@@ -2,7 +2,7 @@
 
 namespace Core\Repository;
 
-use \Core\Entity\OurWorkCategory as OurWorkCategoryEntity;
+use \Core\Entity\OurWorkCategory;
 
 class OurWorkCategoryRepository extends AbstractRepository
 {
@@ -63,5 +63,10 @@ class OurWorkCategoryRepository extends AbstractRepository
         $queryBuilder->setParameter('status', '%' . $status . '%');
 
         return $queryBuilder;
+    }
+
+    public function getActive()
+    {
+        return $this->findByStatus(OurWorkCategory::STATUS_ENABLED);
     }
 }

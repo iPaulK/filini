@@ -49,6 +49,16 @@ return [
                     ],
                 ],
             ],
+            'admin_product_conversion' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin/conversion[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\ConversionTypeController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
             'admin_work' => [
                 'type' => Segment::class,
                 'options' => [
@@ -146,6 +156,7 @@ return [
             Controller\DashboardController::class => Controller\Factory\DashboardControllerFactory::class,
             Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,
             Controller\CategoryController::class => Controller\Factory\CategoryControllerFactory::class,
+            Controller\ConversionTypeController::class => Controller\Factory\ConversionTypeControllerFactory::class,
             Controller\OurWorkController::class => Controller\Factory\OurWorkControllerFactory::class,
             Controller\OurWorkCategoryController::class => Controller\Factory\OurWorkCategoryControllerFactory::class,
             Controller\NewsController::class => Controller\Factory\NewsControllerFactory::class,
@@ -167,6 +178,9 @@ return [
                 ['actions' => '*', 'allow' => '+product.manage']
             ],
             Controller\CategoryController::class => [
+                ['actions' => '*', 'allow' => '+category.manage']
+            ],
+            Controller\ConversionTypeController::class => [
                 ['actions' => '*', 'allow' => '+category.manage']
             ],
             Controller\OurWorkController::class => [
@@ -201,4 +215,24 @@ return [
         ],
         'strategies' => ['ViewJsonStrategy'],
     ],
+    'translator' => [
+        'locale' => 'ru',
+        'translation_files' => [
+            [
+                'type'=> 'phpArray',
+                'filename' => 'module/Admin/language/ru/Admin.php',
+                'text_domain' => 'default',
+                'locale' => 'ru',
+            ],
+        ],
+    ],
+
+    'form_elements' => array(
+        'aliases' => array(
+            'conversion_type_select' => 'Admin\Form\Element\ConversionTypeSelect',
+        ),
+        'factories' => array(
+            'Admin\Form\Element\ConversionTypeSelect' => 'Admin\Form\Element\ConversionTypeSelectFactory',
+        ),
+    ),
 ];

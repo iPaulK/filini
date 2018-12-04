@@ -33,7 +33,7 @@ class Category
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     * @AT\Options({"label":"Category Name: "})
+     * @AT\Options({"label":"Name"})
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})
      * @AT\Required({"required":"true" })
@@ -59,7 +59,7 @@ class Category
      *
      * @ORM\Column(name="status", type="integer", length=1)
      * @AT\Type("select")
-     * @AT\Options({"label":"Status: ", "required":true, "value_options":{
+     * @AT\Options({"label":"Status", "required":true, "value_options":{
      *      \Core\Entity\Category::STATUS_ENABLED :"Enabled",
      *      \Core\Entity\Category::STATUS_DISABLED :"Disabled"
      * }})
@@ -88,7 +88,7 @@ class Category
     /**
      * @ORM\ManyToOne(targetEntity="Core\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true )
-     * @AT\Options({"label":"Parent Category: "})
+     * @AT\Options({"label":"Parent Category"})
      * @AT\Required({"required":"true"})
      * @AT\Exclude
      **/
@@ -120,10 +120,10 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_description", type="text", length=5000, nullable=true)
+     * @ORM\Column(name="meta_description", type="text", length=10000, nullable=true)
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
-     * @AT\Options({"label":"Meta Descrition"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
+     * @AT\Options({"label":"Meta Description"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"10000"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"false" })
      */
@@ -133,7 +133,7 @@ class Category
      * @ORM\ManyToOne(targetEntity="Core\Entity\Image")
      * @ORM\JoinColumn(name="thumbnail_id", referencedColumnName="id", onDelete="SET NULL")
      * @AT\Type("Zend\Form\Element\Hidden")
-     * @AT\Options({"label":"Thumbnail: "})
+     * @AT\Options({"label":"Thumbnail"})
      */
     protected $thumbnail;
 

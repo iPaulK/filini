@@ -13,13 +13,10 @@ class WorkController extends CoreController
         $slug = $this->params()->fromRoute('slug', false);
         $curentCategory = $this->getRepository(OurWorkCategory::class)->findOneBySlug($slug);
 
-        $query = $this->getRepository(OurWorkCategory::class)->findByStatus(OurWorkCategory::STATUS_ENABLED);
-        $categories = $query->getResult();
         return new ViewModel([
             'curentCategory' => $curentCategory,
-            'categories' => $categories,
+            'categories' => $this->getOurWorkCategories(),
         ]);
-        return new ViewModel();
     }
 
     public function viewAction(): ViewModel
@@ -31,6 +28,7 @@ class WorkController extends CoreController
             $this->getResponse()->setStatusCode(404);
             return;
         }
+
         return new ViewModel([
             'work' => $work,
         ]);

@@ -42,19 +42,21 @@ $product = $this->product;
             <div class="product-text">
                 <ul>
                     <li class="li-text li-active"><?php echo $this->translate('Описание') ?></li>
-                    <li class="li-size"><?php echo $this->translate('Размеры') ?></li>
-                    <li class="li-complect"><?php echo $this->translate('Комплектация') ?></li>
-                    <?php if (count($product->getSchemas())): ?><li class="li-schema"><?php echo $this->translate('Чертежи') ?></li><?php endif; ?>
+                    <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
+                        <?php if (count($product->getSchemas())): ?><li class="li-size"><?php echo $this->translate('Размеры') ?></li><?php endif; ?>
+                        <li class="li-complect"><?php echo $this->translate('Комплектация') ?></li>
+                    <?php endif; ?>
                 </ul>
                 <p class="text"><?php echo $this->escapeHtml($product->getDescription()); ?></p>
-                <p class="size">&nbsp;</p>
-                <p class="complect">&nbsp;</p>
-                <?php if (count($product->getSchemas())): ?><p class="schema">
-                    <?php foreach ($product->getSchemas() as $schema): ?>
-                        <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
-                    <?php endforeach; ?>
-                </p><?php endif; ?>
-
+                <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
+                    <?php if (count($product->getSchemas())): ?>
+                        <p class="size"><?php foreach ($product->getSchemas() as $schema): ?>
+                            <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
+                        <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+                    <p class="complect">&nbsp;</p>
+                <?php endif; ?>
             </div>
         </div>
         <!-- <div class="row bonus-buy">

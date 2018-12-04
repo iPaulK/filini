@@ -37,11 +37,11 @@ $this->inlineScript()
     <div class="table-responsive">
         <table class="table" role="presentation">
             <thead>
-                <th>Превью</th>
-                <th>Имя файла</th>
-                <th>Размер</th>
-                <th>Тип</th>
-                <th>Опции</th>
+                <th><?php echo $this->translate('Thumbnail'); ?></th>
+                <th><?php echo $this->translate('Filename'); ?></th>
+                <th><?php echo $this->translate('Size'); ?></th>
+                <th><?php echo $this->translate('Type'); ?></th>
+                <th><?php echo $this->translate('Options'); ?></th>
             </thead>
             <tbody class="files">
                 <?php if ($product->getImages()): ?>
@@ -71,12 +71,12 @@ $this->inlineScript()
                                 <span class="size"><?php echo $file->getSize() ?></span>
                             </td>
                             <td>
-                                <span class="type"><?php echo $image->getImageType() == 'product' ? 'иллюстрация' : 'чертёж'; ?></span>
+                                <span class="type"><?php echo $this->translate($image->getImageType() == 'product' ? 'иллюстрация' : 'schema'); ?></span>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm toggle" data-url="<?php echo $this->url('admin_product', ['action' => 'toggle-image-type', 'id' => $image->getId()]);?>">
                                     <i class="glyphicon glyphicon-flag"></i>
-                                    <span><?php echo $this->translate($image->getImageType() == 'product' ? 'сделать чертежом' : 'сделать иллюстрацией') ?></span>
+                                    <span><?php echo $this->translate('Toggle to ' . ($image->getImageType() == 'product' ? 'schema' : 'picture')); ?></span>
                                 </button>
                                 <button class="btn btn-danger btn-sm delete" data-type="DELETE" data-url="<?php echo $this->url('admin_product', ['action' => 'delete-image', 'id' => $image->getId()]);?>">
                                     <i class="glyphicon glyphicon-trash"></i>

@@ -4,13 +4,22 @@ $product = $this->product;
 ?>
 <h1 class="heading"><?php echo $this->escapeHtml($product->getName()); ?></h1>
 
-<?php if ($product->getService()->isSofa()): ?>
+<?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
+    <p style="font-style: italic">все размеры и механизмы оговариваются с клиентом</p>
     <?php echo $this->partial('application/product/partials/details/sofa', ['product' => $product]); ?>
+<?php else: ?>
+    <p style="font-style: italic">все размеры, материал обивки, цвет ног и прочее согласовывается с заказчиком</p>
+    <div class="product-str">
+        <span class="name">Габариты (ШхВxГ):</span>
+        <span class="numb">
+        <?php echo sprintf('%sx%sx%s мм', 1, 1, 1); ?>
+    </span>
+    </div>
 <?php endif;?>
 
-<div class="product-important">
-    <span class="name">В наличие на складе</span>
-    <span class="numb"><i class="fa fa-check"></i></span>
+<div class="product-str">
+    <span class="name">Материал обивки:</span>
+    <span class="numb">Экокожа</span>
 </div>
 <div class="product-important">
     <span class="name">Стоимость</span>
@@ -20,6 +29,7 @@ $product = $this->product;
     <span class="name">Доставка на дом</span>
     <span class="numb">Бесплатно</span>
 </div>
+
 <hr>
 <ul class="product-soc">
     <li><a href=""><i class="fa fa-facebook"></i></a></li>

@@ -46,7 +46,7 @@ $product = $this->product;
                         <li class="li-complect"><?php echo $this->translate('Комплектация'); ?></li>
                     <?php endif; ?>
                 </ul>
-                <p class="text"><?php echo $this->escapeHtml($product->getDescription()); ?></p>
+                <p class="text"><?php echo $product->getDescription(); ?></p>
                 <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
                     <?php if (count($product->getSchemas())): ?>
                         <div class="size fotorama" data-maxwidth="90%" data-maxheight="300" data-allowfullscreen="false">

@@ -6,7 +6,7 @@ $product = $this->product;
     <div class="container">
         <div class="row">
             <ul>
-                <li><a href="<?php echo $this->url('application_catalog')?>"><?php echo $this->translate('Каталог') ?></a></li>
+                <li><a href="<?php echo $this->url('application_catalog')?>"><?php echo $this->translate('Каталог'); ?></a></li>
                 <li>
                     <a href="<?php echo $this->url('application_catalog', ['action' => 'view', 'slug' => $product->getCategory()->getSlug()])?>">
                         <?php echo $this->escapeHtml($product->getCategory()->getName()); ?>
@@ -17,7 +17,6 @@ $product = $this->product;
                         <?php echo $this->escapeHtml($product->getName()); ?>
                     </a>
                 </li>
-                <!-- <li><a href="<?php echo $this->url('application_catalog')?>">Брабус</a></li> -->
             </ul>
         </div>
     </div>
@@ -41,21 +40,25 @@ $product = $this->product;
         <div class="row">
             <div class="product-text">
                 <ul>
-                    <li class="li-text li-active"><?php echo $this->translate('Описание') ?></li>
+                    <li class="li-text li-active"><?php echo $this->translate('Описание'); ?></li>
                     <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
-                        <?php if (count($product->getSchemas())): ?><li class="li-size"><?php echo $this->translate('Размеры') ?></li><?php endif; ?>
-                        <li class="li-complect"><?php echo $this->translate('Комплектация') ?></li>
+                        <?php if (count($product->getSchemas())): ?><li class="li-size"><?php echo $this->translate('Размеры'); ?></li><?php endif; ?>
+                        <li class="li-complect"><?php echo $this->translate('Комплектация'); ?></li>
                     <?php endif; ?>
                 </ul>
-                <p class="text"><?php echo $this->escapeHtml($product->getDescription()); ?></p>
+                <p class="text"><?php echo $product->getDescription(); ?></p>
                 <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
                     <?php if (count($product->getSchemas())): ?>
-                        <p class="size"><?php foreach ($product->getSchemas() as $schema): ?>
-                            <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
-                        <?php endforeach; ?>
-                        </p>
+                        <div class="size fotorama" data-maxwidth="90%" data-maxheight="300" data-allowfullscreen="false">
+                            <?php foreach ($product->getSchemas() as $schema): ?>
+                                <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
+                                <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
+                            <?php endforeach; ?>
+                        </div>
                     <?php endif; ?>
-                    <p class="complect">&nbsp;</p>
+                    <?php if ($conversionType = $product->getConversionType()): ?>
+                        <p class="complect"><img src="<?php echo $conversionType->getThumbnail()->getRelativeUrl(); ?>" /></p>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>

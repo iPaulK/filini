@@ -7509,14 +7509,12 @@ footer nav ul li a {
 }
 
 .product-text .size {
-    display: none
+    display: none;
+    width: 600px;
+    margin: 20px auto;
 }
 
 .product-text .complect {
-    display: none
-}
-
-.product-text .schema {
     display: none
 }
 
@@ -8628,4 +8626,6 @@ footer nav ul li a {
     }
 }
 
-
+.fotorama__wrap {
+    margin: 0 auto;
+}

@@ -46,12 +46,11 @@ $product = $this->product;
                         <li class="li-complect"><?php echo $this->translate('Комплектация'); ?></li>
                     <?php endif; ?>
                 </ul>
-                <p class="text"><?php echo $product->getDescription(); ?></p>
+                <div class="text"><?php echo $product->getDescription(); ?></div>
                 <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
                     <?php if (count($product->getSchemas())): ?>
                         <div class="size fotorama" data-maxwidth="90%" data-maxheight="300" data-allowfullscreen="false">
                             <?php foreach ($product->getSchemas() as $schema): ?>
-                                <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
                                 <img src="<?php echo $schema->getRelativeUrl('medium'); ?>" />
                             <?php endforeach; ?>
                         </div>

@@ -70,10 +70,9 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=1000, nullable=true)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @ORM\Column(name="description", type="text", length=5000, nullable=true)
      * @AT\Options({"label":"Description"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"1000"}})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"false"})
      */

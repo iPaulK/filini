@@ -23,7 +23,7 @@ $product = $this->product;
 </div>
 <div class="product-important">
     <span class="name">Стоимость</span>
-    <span class="numb">12000 Р</span>
+    <span class="numb"><?php echo number_format($product->getPrice(), 2); ?> Р</span>
 </div>
 <div class="product-str">
     <span class="name">Доставка на дом</span>

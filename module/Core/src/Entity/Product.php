@@ -109,10 +109,9 @@ abstract class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=10000)
-     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @ORM\Column(name="description", type="text", length=5000)
      * @AT\Options({"label":"Description"})
-     * @AT\Validator({"name":"StringLength", "options":{"max":"10000"}})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"5000"}})
      * @AT\Attributes({"type":"textarea" })
      * @AT\Required({"required":"true" })
      */

@@ -6,7 +6,7 @@ $products = $category->getProducts();
 ?>
 <h2><?php echo $category->getName(); ?></h2>
 <?php if ($description = $category->getDescription()): ?>
-<p class="description"><?php echo $description; ?></p>
+    <?php echo $description; ?>
 <?php endif; ?>
 <div class="row">
     <?php if ($products->count() > 0): ?>

@@ -6977,6 +6977,11 @@ footer nav ul li a {
     padding-left: 30px
 }
 
+.catatolog-block div.row {
+    border-top: 3px solid #a29f9e;
+    padding-top: 20px;
+}
+
 .catalog-item {
     text-align: center;
     border: 1px solid transparent;
@@ -7472,13 +7477,12 @@ footer nav ul li a {
 .product-text p {
     max-width: 700px;
     margin: auto;
-    text-align: center;
     margin-top: 30px;
     font-size: 15px;
     color: #000
 }
 
-.product-text ul {
+.product-text > ul {
     background: url(../img/line4.png) 0 0 no-repeat, url(../img/line5.png) top right no-repeat;
     background-color: #e2e1e1;
     list-style-type: none;
@@ -7488,7 +7492,7 @@ footer nav ul li a {
     margin-top: 20px
 }
 
-.product-text ul li {
+.product-text > ul > li {
     display: inline-block;
     margin: 0 30px;
     font-size: 18px;
@@ -7516,6 +7520,11 @@ footer nav ul li a {
 
 .product-text .complect {
     display: none
+}
+
+.product-text .text {
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .bonus-buy {

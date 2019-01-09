@@ -29,6 +29,10 @@ $title = $form->getObject()->getId() ? 'Edit Category' : 'Add Category';
                                 ])->setLabelAttributes([
                                     'class' => 'control-label',
                                 ]);
+
+                                if ($name == 'description') {
+                                    $element->removeAttribute('required');
+                                }
                             ?>
 
                             <div class="form-group<?php echo $element->getMessages() ? ' has-error' : '';?>">

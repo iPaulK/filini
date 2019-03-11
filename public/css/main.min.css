@@ -6698,7 +6698,8 @@ footer nav ul li a {
     padding-top: 45px;
     -webkit-transition: right .5s ease;
     -o-transition: right .5s ease;
-    transition: right .5s ease
+    transition: right .5s ease;
+    display: none;
 }
 
 .mobile-nav ul li {
@@ -7643,6 +7644,12 @@ footer nav ul li a {
 
 #choice .index-block-item {
     margin-top: 50px
+}
+
+@media only screen and (max-width: 690px) {
+    .mobile-nav {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 1900px) {

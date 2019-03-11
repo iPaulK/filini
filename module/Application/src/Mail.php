@@ -23,7 +23,7 @@ class Mail
         $view = new PhpRenderer();
         $resolver = new TemplateMapResolver();
         $resolver->setMap([
-            'proposal' => __DIR__ . '/../../../view/application/mail/proposal.phtml'
+            'proposal' => __DIR__ . '/../../../view/application/mail/send-proposal.phtml'
         ]);
 
         $view->setResolver($resolver);

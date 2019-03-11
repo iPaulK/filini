@@ -98,8 +98,8 @@
         <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
         <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
             <form action="">
-                <input type="text" placeholder="Ваше имя">
-                <input type="text" placeholder="Телефон">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="text" name="phone" placeholder="Телефон" required>
                 <button class="button">заказать</button>
             </form>
         </div>
@@ -192,6 +192,24 @@
             loop:true,
         });
         });
+    </script>
+    <script>
+        $('#small-dialog form').submit(function (event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: "/send/proposal",
+                data: formData,
+                success: function(data) {
+                    location.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Proposal don\'t send. Please try again.');
+                }
+            });
+        })
     </script>
 </body>
 </html>

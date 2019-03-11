@@ -128,6 +128,16 @@ return [
                     ],
                 ],
             ],
+            'send_proposal' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/send/proposal',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'sendProposal',
+                    ],
+                ],
+            ],
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit

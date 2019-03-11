@@ -7,6 +7,7 @@
 
 namespace Application\Controller;
 
+use Application\Mail;
 use Core\Controller\CoreController;
 use Zend\View\Model\ViewModel;
 
@@ -17,5 +18,16 @@ class IndexController extends CoreController
         return new ViewModel([
             'categories' => $this->getActiveCategories(),
         ]);
+    }
+
+    public function sendProposalAction()
+    {
+        $mail = new Mail();
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $data = $this->params()->fromPost();
+            $mail->sendProposal($data['phone'], $data['name']);
+        }
     }
 }

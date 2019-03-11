@@ -10,6 +10,7 @@ return [
     'Logout'             => 'Выход',
     'Manage Permissions' => 'Управление правами',
     'Manage Products'    => 'Управление товарами',
+    'Money Rates'        => 'Управление курсами',
     'Manage Roles'       => 'Управление ролями',
     'Manage Users'       => 'Управление пользователями',
     'Manage Works'       => 'Управление работами',

@@ -39,6 +39,16 @@ return [
                     ],
                 ],
             ],
+            'admin_money_rate' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin/money-rates[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\MoneyRateController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
             'admin_product_category' => [
                 'type' => Segment::class,
                 'options' => [
@@ -165,6 +175,7 @@ return [
             Controller\UserController::class => Controller\Factory\UserControllerFactory::class,
             Controller\RoleController::class => Controller\Factory\RoleControllerFactory::class,
             Controller\PermissionController::class => Controller\Factory\PermissionControllerFactory::class,
+            Controller\MoneyRateController::class => Controller\Factory\MoneyRateControllerFactory::class,
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit
@@ -204,6 +215,10 @@ return [
                 ['actions' => '*', 'allow' => '+role.manage']
             ],
             Controller\PermissionController::class => [
+                // Allow access to authenticated users having "permission.manage" permission.
+                ['actions' => '*', 'allow' => '+permission.manage']
+            ],
+            Controller\MoneyRateController::class => [
                 // Allow access to authenticated users having "permission.manage" permission.
                 ['actions' => '*', 'allow' => '+permission.manage']
             ],

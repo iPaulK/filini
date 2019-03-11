@@ -4,9 +4,8 @@ namespace Admin\Controller;
 use Core\Controller\CoreController;
 use Core\Entity\Category;
 use Core\Entity\Image;
-use Zend\View\Model\{
-    ViewModel, JsonModel
-};
+use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class CategoryController extends CoreController
@@ -34,6 +33,7 @@ class CategoryController extends CoreController
      * Edit category action
      *
      * @return ViewModel
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function editAction(): ViewModel
     {
@@ -71,6 +71,7 @@ class CategoryController extends CoreController
      * Remove category action
      *
      * @return ViewModel
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function removeAction(): ViewModel
     {
@@ -135,6 +136,7 @@ class CategoryController extends CoreController
      * Delete thumbnail
      *
      * @return JsonModel
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function deleteThumbnailAction(): JsonModel
     {

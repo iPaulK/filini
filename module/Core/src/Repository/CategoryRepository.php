@@ -34,6 +34,7 @@ class CategoryRepository extends AbstractRepository
     /**
      * Find categories by status
      *
+     * @param $status
      * @return \Doctrine\ORM\Query
      */
     public function findByStatus($status)

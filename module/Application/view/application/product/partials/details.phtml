@@ -15,24 +15,26 @@ $product = $this->product;
         <?php echo sprintf('%sx%sx%s мм', 1, 1, 1); ?>
     </span>
     </div>
-<?php endif;?>
+<?php endif; ?>
 
-<div class="product-str">
-    <span class="name">Материал обивки:</span>
-    <span class="numb">Экокожа</span>
-</div>
 <div class="product-important">
     <span class="name">Стоимость</span>
     <span class="numb"><?php echo number_format($product->getPrice(), 2); ?> Р</span>
 </div>
-<div class="product-str">
-    <span class="name">Доставка на дом</span>
-    <span class="numb">Бесплатно</span>
-</div>
+<?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
+    <div class="product-str">
+        <span class="name">Доставка по Минску</span>
+        <span class="numb">Бесплатно</span>
+    </div>
+<?php endif; ?>
 
 <hr>
 <ul class="product-soc">
     <li><a href=""><i class="fa fa-facebook"></i></a></li>
-    <li><a href=""><i class="fa fa-vk"></i></a></li>
+    <li>
+        <a target="_blank"
+           href="https://www.instagram.com/p/Btn1QtIHTAM/?utm_source=ig_share_sheet&igshid=771djgdckxo3">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </li>
 </ul>
-<a href="#small-dialog" class="popup-with-zoom-anim button">заказать по телефону</a>

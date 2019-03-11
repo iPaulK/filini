@@ -55,17 +55,18 @@
                             <li><a href="<?php echo $this->url('home')?>">Главная</a></li>
                             <li><a href="<?php echo $this->url('application_catalog')?>">Каталог</a></li>
                             <li><a href="<?php echo $this->url('application_work_list')?>">Наши работы</a></li>
+                            <li><a href="<?php echo $this->url('application_installment')?>">Рассрочка</a></li>
                             <li><a href="<?php echo $this->url('application_designers')?>">Дизайнерам</a></li>
                             <li><a href="<?php echo $this->url('application_contact')?>">Контакты</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-md-1 col-sm-1 col-xs-1 mobile-lang" >
-                    <ul class="lang">
-                        <li><a href="<?php echo $this->url('home'); ?>" class="active">ru</a></li>
-                        <li><a href="#">en</a></li>
-                    </ul>
-                </div>
+<!--                <div class="col-md-1 col-sm-1 col-xs-1 mobile-lang" >-->
+<!--                    <ul class="lang">-->
+<!--                        <li><a href="--><?php //echo $this->url('home'); ?><!--" class="active">ru</a></li>-->
+<!--                        <li><a href="#">en</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
                 <!--Блок для 1170px и выше-->
                 <div class="col-md-2 col-xs-5 mobile-phone">
                     <div class="phone">
@@ -97,8 +98,8 @@
         <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
         <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
             <form action="">
-                <input type="text" placeholder="Ваше имя">
-                <input type="text" placeholder="Телефон">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="text" name="phone" placeholder="Телефон" required>
                 <button class="button">заказать</button>
             </form>
         </div>
@@ -159,6 +160,12 @@
                         <i class="fa fa-envelope-o"></i>
                         <a href="mailto:info@filini.by">info@filini.by</a>
                     </div>
+                    <div class="phone mail-footer">
+                        <i class="fa fa-instagram"></i>
+                        <a target="_blank" href="https://www.instagram.com/p/Btn1QtIHTAM/?utm_source=ig_share_sheet&igshid=771djgdckxo3">
+                            Instagram
+                        </a>
+                    </div>
                     <!-- <div class="soc-item">
                         <a href="#">
                             <img src="<?php echo $this->basePath('img/icon/1.png'); ?>" alt="">
@@ -185,6 +192,24 @@
             loop:true,
         });
         });
+    </script>
+    <script>
+        $('#small-dialog form').submit(function (event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: "/send/proposal",
+                data: formData,
+                success: function(data) {
+                    location.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Proposal don\'t send. Please try again.');
+                }
+            });
+        })
     </script>
 </body>
 </html>

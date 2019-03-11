@@ -85,6 +85,16 @@ return [
                     ],
                 ],
             ],
+            'application_installment' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/installment',
+                    'defaults' => [
+                        'controller' => Controller\InstallmentController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'application_product' => [
                 'type' => Segment::class,
                 'options' => [
@@ -118,6 +128,16 @@ return [
                     ],
                 ],
             ],
+            'send_proposal' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/send/proposal',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'sendProposal',
+                    ],
+                ],
+            ],
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit
@@ -145,6 +165,9 @@ return [
             Controller\WorkController::class => [
                 ['actions' => '*', 'allow' => '*']
             ],
+            Controller\InstallmentController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
         ]
     ],
     'controllers' => [
@@ -152,6 +175,7 @@ return [
             Controller\IndexController::class =>  Controller\Factory\IndexControllerFactory::class,
             Controller\ContactController::class => Controller\Factory\ContactControllerFactory::class,
             Controller\CatalogController::class => Controller\Factory\CatalogControllerFactory::class,
+            Controller\InstallmentController::class => Controller\Factory\InstallmentControllerFactory::class,
             Controller\WorkController::class => Controller\Factory\WorkControllerFactory::class,
             Controller\DesignersController::class => Controller\Factory\DesignersControllerFactory::class,
             Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,

@@ -27,7 +27,7 @@ return [
         // Session validators (used for security).
         'validators' => [
             RemoteAddr::class,
-            HttpUserAgent::class,
+//            HttpUserAgent::class,
         ]
     ],
     // Session storage configuration.

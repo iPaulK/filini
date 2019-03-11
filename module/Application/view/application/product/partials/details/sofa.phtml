@@ -5,10 +5,15 @@ $product = $this->product;
 <div class="product-str">
     <span class="name">Габариты (ШхВxГ):</span>
     <span class="numb">
-        <?php echo sprintf('%sx%sx%s мм', $product->getWeight(), $product->getHeight(), $product->getDepth()); ?>
+        <?php echo sprintf('%sx%sx%s см', $product->getWeight() / 10, $product->getHeight() / 10, $product->getDepth() / 10); ?>
     </span>
 </div>
 <div class="product-str">
     <span class="name">Спальное место:</span>
     <span class="numb">140х200 см</span>
+</div>
+<div class="product-str" style="margin-bottom: 30px">
+    <span class="name">Материал обивки:</span>
+    <span class="numb">Ткань, Экокожа, <span style="float: right">Натуральная кожа</span></span>
+    <span style="clear: both"></span>
 </div>

@@ -64,10 +64,10 @@ class Category extends \Core\Entity\Category implements \Doctrine\ORM\Proxy\Prox
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'products', 'createdAt', 'updatedAt', 'service'];
+            return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'description', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'products', 'createdAt', 'updatedAt', 'service'];
         }
 
-        return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'products', 'createdAt', 'updatedAt', 'service'];
+        return ['__isInitialized__', 'id', 'name', 'slug', 'status', 'description', 'children', 'parent', 'metaTitle', 'metaKeywords', 'metaDescription', 'thumbnail', 'products', 'createdAt', 'updatedAt', 'service'];
     }
 
     /**
@@ -274,6 +274,28 @@ class Category extends \Core\Entity\Category implements \Doctrine\ORM\Proxy\Prox
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStatus', []);
 
         return parent::getStatus();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDescription($description)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', [$description]);
+
+        return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
+
+        return parent::getDescription();
     }
 
     /**

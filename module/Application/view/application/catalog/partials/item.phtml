@@ -4,27 +4,29 @@ $category = $this->category;
 /** @var ArrayCollection $products */
 $products = $category->getProducts();
 ?>
-<h2><?php echo $category->getName(); ?></h2>
+    <h2><?php echo $category->getName(); ?></h2>
+    <div class="row">
+        <?php if ($products->count() > 0): ?>
+            <?php foreach ($products as $product): ?>
+                <!--start-->
+                <div class="col-md-4 col-xs-6">
+                    <a href="<?php echo $this->url('application_product', ['action' => 'view', 'slug' => $product->getSlug()]) ?>"
+                       class="catalog-item">
+                        <?php if ($product->getImages()->count() > 0): ?>
+                            <img src="<?php echo $product->getImages()->first()->getRelativeUrl('preview'); ?>"
+                                 alt="<?php echo $product->getName(); ?>" class="img-responsive">
+                        <?php endif; ?>
+                        <hr>
+                        <div class="name"><?php echo $product->getName(); ?></div>
+                        <div class="price"><?php echo sprintf('%01.2f BYN', $product->getPrice()); ?></div>
+                    </a>
+                </div>
+                <!--end-->
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p><?php echo $this->translate('Товаров не найдено.'); ?></p>
+        <?php endif; ?>
+    </div>
 <?php if ($description = $category->getDescription()): ?>
-    <?php echo $description; ?>
+    <div style="text-indent: 1.5em"><?php echo $description; ?></div>
 <?php endif; ?>
-<div class="row">
-    <?php if ($products->count() > 0): ?>
-        <?php foreach ($products as $product): ?>
-        <!--start-->
-        <div class="col-md-4 col-xs-6">
-            <a href="<?php echo $this->url('application_product', ['action' => 'view', 'slug' => $product->getSlug()]) ?>" class="catalog-item">
-                <?php if ($product->getImages()->count() > 0): ?>
-                    <img src="<?php echo $product->getImages()->first()->getRelativeUrl('preview'); ?>" alt="<?php echo $product->getName(); ?>" class="img-responsive">
-                <?php endif; ?>
-                <hr>
-                <div class="name"><?php echo $product->getName(); ?></div>
-                <div class="price"><?php echo sprintf('%01.2f BYN', $product->getPrice()); ?></div>
-            </a>
-        </div>
-        <!--end-->
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p><?php echo $this->translate('Товаров не найдено.'); ?></p>
-    <?php endif; ?>
-</div>

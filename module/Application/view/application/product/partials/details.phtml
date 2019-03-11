@@ -17,18 +17,16 @@ $product = $this->product;
     </div>
 <?php endif; ?>
 
-<div class="product-str">
-    <span class="name">Материал обивки:</span>
-    <span class="numb">Экокожа</span>
-</div>
 <div class="product-important">
     <span class="name">Стоимость</span>
     <span class="numb"><?php echo number_format($product->getPrice(), 2); ?> Р</span>
 </div>
-<div class="product-str">
-    <span class="name">Доставка на дом</span>
-    <span class="numb">Бесплатно</span>
-</div>
+<?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
+    <div class="product-str">
+        <span class="name">Доставка по Минску</span>
+        <span class="numb">Бесплатно</span>
+    </div>
+<?php endif; ?>
 
 <hr>
 <ul class="product-soc">

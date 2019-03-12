@@ -81,6 +81,30 @@ class Promotion
     protected $status;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Core\Entity\Image")
+     * @ORM\JoinColumn(name="promotion_image_id", referencedColumnName="id", onDelete="SET NULL")
+     * @AT\Type("Zend\Form\Element\Hidden")
+     * @AT\Options({"label":"Promotion image"})
+     */
+    protected $promotionImage;
+
+    /**
+     * @return mixed
+     */
+    public function getPromotionImage()
+    {
+        return $this->promotionImage;
+    }
+
+    /**
+     * @param mixed $promotionImage
+     */
+    public function setPromotionImage($promotionImage)
+    {
+        $this->promotionImage = $promotionImage;
+    }
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")

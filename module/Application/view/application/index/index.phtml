@@ -94,11 +94,17 @@ $promotions = $this->promotions;
                     foreach ($promotions as $promotion): ?>
                         <!--start-->
                         <div class="item">
-                            <div class="col-md-8 col-sm-8">
-                                <img class="new-block-photo" src="img/new-photo.jpg">
-                                <!--                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>-->
-                            </div>
-                            <div class="col-md-4 col-sm-4">
+                            <?php if (!is_null($promotion->getPromotionImage())): ?>
+                                <?php $classes = 'col-md-4 col-sm-4' ?>
+                                <div class="col-md-8 col-sm-8">
+
+                                    <img src="<?php echo $promotion->getPromotionImage()->getRelativeUrl('medium'); ?>"
+                                         alt="<?php echo $promotion->getTitle(); ?>" class="img-responsive">
+                                </div>
+                            <?php else: ?>
+                                <?php $classes = 'col-md-8 col-sm-8'; ?>
+                            <?php endif; ?>
+                            <div class="<?php echo $classes ?>">
                                 <h3><?php echo $promotion->getTitle(); ?></h3>
                                 <p><?php echo $promotion->getDescription(); ?></p>
                             </div>

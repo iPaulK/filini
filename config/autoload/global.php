@@ -66,6 +66,15 @@ return [
                 'small' => ['x' => 100,'y' => 80, 'crop' => true],
             ],
         ],
+        'promotion' => [
+            'path' => './public/uploads/promotion/',
+            'presets' => [
+                // to do set resolution
+                'medium' => ['x' => 600,'y' => 480, 'crop' => true],
+                'preview' => ['x' => 200,'y' => 160,  'crop' => true],
+                'small' => ['x' => 100,'y' => 80, 'crop' => true],
+            ],
+        ],
         'product' => [
             'path' => './public/uploads/product/',
             'presets' => [

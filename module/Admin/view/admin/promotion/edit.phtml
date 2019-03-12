@@ -36,12 +36,19 @@ $title = $form->getObject()->getId() ? 'Edit Promotion' : 'Add Promotion';
                             ?>
 
                             <div class="form-group<?php echo $element->getMessages() ? ' has-error' : ''; ?>">
-                                <label><?php echo $this->formLabel($element); ?>:</label>
-                                <?php echo $this->formElement($element); ?>
-                                <?php echo $this->formElementErrors()->render($element); ?>
+                                <?php if ($name != 'promotionImage'): ?>
+                                    <label><?php echo $this->formLabel($element); ?>:</label>
+                                    <?php echo $this->formElement($element); ?>
+                                    <?php echo $this->formElementErrors()->render($element); ?>
+                                <?php endif; ?>
 
                                 <!-- <p class="help-block">Example block-level help text here.</p> -->
                             </div>
+
+                            <?php if ($name == 'promotionImage'): ?>
+                                <h2><?php echo $this->translate('Promotion Image'); ?></h2>
+                                    <?php echo $this->partial('admin/promotion/partials/fileupload', ['element' => $element]); ?>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                     <div class="col-lg-2 hidden"></div>

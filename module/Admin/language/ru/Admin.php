@@ -74,5 +74,6 @@ return [
     'Money Rate'          => 'Значение курса',
     'Promotions'          => 'Акции',
     'Inactive'            => 'Не активная',
-    'Active'            => 'Активная',
+    'Active'              => 'Активная',
+    'Promotion Image'     => 'Изображение акции',
 ];

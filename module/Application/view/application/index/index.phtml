@@ -1,137 +1,112 @@
 <?php
 $categories = $this->categories;
+$promotions = $this->promotions;
 ?>
 <?php if (count($categories) > 0): ?>
-<section class="category">
-    <div class="container">
-        <div class="row">
-            <?php $i=0; foreach ($categories as $category): ?>
+    <section class="category">
+        <div class="container">
+            <div class="row">
+                <?php $i = 0;
+                foreach ($categories as $category): ?>
+                    <!--start-->
+                    <div class="col-md-3 col-xs-4">
+                        <a href="<?php echo $this->url('application_catalog', ['action' => 'index', 'slug' => $category->getSlug()]) ?>"
+                           class="category-item">
+                            <?php if ($category->getThumbnail()): ?>
+                                <img src="<?php echo $category->getThumbnail()->getRelativeUrl('preview'); ?>"
+                                     alt="<?php echo $category->getName(); ?>">
+                            <?php endif; ?>
+                            <span><?php echo $category->getName(); ?></span>
+                        </a>
+                    </div>
+                    <!--end-->
+
+                    <?php if ($i % 5 == 0): ?>
+                        <div class="visible-xs visible-sm col-xs-2"></div>
+                    <?php endif; ?>
+                    <?php $i++; endforeach; ?>
+
+                <?php if ($i % 5 != 0): ?>
+                    <div class="visible-xs visible-sm col-xs-2"></div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
+
+    <section class="index-block">
+        <div class="container">
+            <div class="row">
+                <h1 class="h1-index">
+                    <span><?php echo $this->translate('Мягкая мебель: классика, и новаторство') ?></span>
+                </h1>
+
                 <!--start-->
-                <div class="col-md-3 col-xs-4">
-                    <a href="<?php echo $this->url('application_catalog', ['action' => 'index', 'slug' => $category->getSlug()])?>" class="category-item">
-                        <?php if ($category->getThumbnail()): ?>
-                            <img src="<?php echo $category->getThumbnail()->getRelativeUrl('preview'); ?>" alt="<?php echo $category->getName(); ?>">
-                        <?php endif; ?>
-                        <span><?php echo $category->getName(); ?></span>
+                <div class="col-md-4 col-sm-6 col-xs-6 index-block-first">
+                    <a href="<?php echo $this->url('application_designers') ?>" class="index-block-item">
+                        <img src="<?php echo $this->basePath('img/index-nav/1.jpg') ?>" alt="" class="img-desctop">
+                        <img src="<?php echo $this->basePath('img/index-nav/5.png') ?>" alt="" class="img-mobile">
+                        <span><?php echo $this->translate('Дизайнерские вещи') ?></span>
                     </a>
                 </div>
                 <!--end-->
 
-                <?php if ($i%5 == 0): ?>
-                    <div class="visible-xs visible-sm col-xs-2"></div>
-                <?php endif; ?>
-            <?php $i++; endforeach; ?>
+                <!--start-->
+                <div class="col-md-4 col-sm-6 col-xs-6 index-block-second">
+                    <a href="<?php echo $this->url('application_work_list') ?>"
+                       class="index-block-item index-block-item-mobile">
+                        <img src="<?php echo $this->basePath('img/index-nav/2.jpg') ?>" alt="" class="">
+                        <span><?php echo $this->translate('Готовые проекты') ?></span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=0O2aH4XLbto"
+                       class="popup-youtube index-block-item index-block-item-mobile">
+                        <img src="<?php echo $this->basePath('img/index-nav/3.jpg') ?>" alt="">
+                        <div class="play"><i class="fa fa-play"></i></div>
+                    </a>
+                </div>
+                <!--end-->
 
-            <?php if ($i%5 != 0): ?>
-                <div class="visible-xs visible-sm col-xs-2"></div>
-            <?php endif; ?>
+                <!--start-->
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <a href="<?php echo $this->url('application_catalog') ?>"
+                       class="index-block-item col-md-12 col-sm-6 col-xs-6 index-block-third">
+                        <img src="<?php echo $this->basePath('img/index-nav/4.jpg') ?>" alt="">
+                        <span><?php echo $this->translate('Как выбрать мебель') ?></span>
+                    </a>
+                    <p class="index-block-p col-sm-6 col-md-12 col-xs-6">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                    </p>
+                </div>
+                <!--end-->
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+<?php if (count($promotions) > 0): ?>
+    <section class="new-block">
+        <div class="container">
+            <div class="row">
+                <h2 class="heading">Действующая/новая акция</h2>
+            </div>
+            <div class="row">
+                <div class="owl-carousel owl-theme">
+                    <?php $i = 0;
+                    foreach ($promotions as $promotion): ?>
+                        <!--start-->
+                        <div class="item">
+                            <div class="col-md-8 col-sm-8">
+                                <img class="new-block-photo" src="img/new-photo.jpg">
+                                <!--                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>-->
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <h3><?php echo $promotion->getTitle(); ?></h3>
+                                <p><?php echo $promotion->getDescription(); ?></p>
+                            </div>
+                        </div>
+                        <!--end-->
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
 <?php endif; ?>
-
-<section class="index-block">
-    <div class="container">
-        <div class="row">
-            <h1 class="h1-index">
-                <span><?php echo $this->translate('Мягкая мебель: классика, и новаторство') ?></span>
-            </h1>
-            
-            <!--start-->
-            <div class="col-md-4 col-sm-6 col-xs-6 index-block-first">
-                <a href="<?php echo $this->url('application_designers')?>" class="index-block-item">
-                    <img src="<?php echo $this->basePath('img/index-nav/1.jpg') ?>" alt="" class="img-desctop">
-                    <img src="<?php echo $this->basePath('img/index-nav/5.png') ?>" alt="" class="img-mobile">
-                    <span><?php echo $this->translate('Дизайнерские вещи') ?></span>
-                </a>
-            </div>
-            <!--end-->
-
-            <!--start-->
-            <div class="col-md-4 col-sm-6 col-xs-6 index-block-second">
-                <a href="<?php echo $this->url('application_work_list')?>" class="index-block-item index-block-item-mobile">
-                    <img src="<?php echo $this->basePath('img/index-nav/2.jpg') ?>" alt="" class="">
-                    <span><?php echo $this->translate('Готовые проекты') ?></span>
-                </a>
-                <a href="http://www.youtube.com/watch?v=0O2aH4XLbto" class="popup-youtube index-block-item index-block-item-mobile">
-                    <img src="<?php echo $this->basePath('img/index-nav/3.jpg') ?>" alt="">
-                    <div class="play"><i class="fa fa-play"></i></div>
-                </a>
-            </div>
-            <!--end-->
-            
-            <!--start-->
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <a href="<?php echo $this->url('application_catalog')?>" class="index-block-item col-md-12 col-sm-6 col-xs-6 index-block-third">
-                    <img src="<?php echo $this->basePath('img/index-nav/4.jpg') ?>" alt="">
-                    <span><?php echo $this->translate('Как выбрать мебель') ?></span>
-                </a>
-                <p class="index-block-p col-sm-6 col-md-12 col-xs-6">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                </p>
-            </div>
-            <!--end-->
-        </div>
-    </div>
-</section>
-
-<section class="new-block">
-    <div class="container">
-        <div class="row">
-            <h2 class="heading">Действующая/новая акция</h2>
-        </div>
-        
-        <div class="owl-carousel owl-theme">
-            <!--start-->
-            <div class="item">
-                <div class="col-md-8 col-sm-8">
-                    <img class="new-block-photo" src="img/new-photo.jpg">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <h3>Новая акция</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                    sed do eiusmod <b> tempor incididunt </b>ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                </div>
-            </div>
-            <!--end-->
-    
-            <!--start-->
-            <div class="item">
-                <div class="col-md-8 col-sm-8">
-                <img class="new-block-photo" src="img/new-photo.jpg">
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <h3>Новая акция</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                    sed do eiusmod <b> tempor incididunt </b>ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                </div>
-            </div>
-            <!--end-->
-    
-            <!--start-->
-            <div class="item">
-                <div class="col-md-8 col-sm-8">
-                    <img class="new-block-photo" src="img/new-photo.jpg">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <h3>Новая акция</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                    sed do eiusmod <b> tempor incididunt </b>ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                </div>
-            </div>
-            <!--end-->
-        </div>
-    </div>
-</section>

@@ -73,4 +73,6 @@ return [
     'View'                => 'Просмотр',
     'Money Rate'          => 'Значение курса',
     'Promotions'          => 'Акции',
+    'Inactive'            => 'Не активная',
+    'Active'            => 'Активная',
 ];

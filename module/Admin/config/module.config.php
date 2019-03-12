@@ -102,7 +102,7 @@ return [
             'admin_promotions' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/admin/news[/:action[/:id]]',
+                    'route' => '/admin/promotion[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\PromotionController::class,
                         'action' => 'index',

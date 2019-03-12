@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->translate('Promotions') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Promotions') ?>
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <a href="<?php echo $this->url('admin_promotions', ['action' => 'edit']) ?>"
+                           class="btn btn-default btn-xs">
+                            <i class="fa fa-plus"></i>
+                            <?php echo $this->translate('Add new') ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- .panel-heading -->
+            <!--  todo: добавить главное фото для акции по желанию          -->
+            <div class="panel-body">
+                <?php echo $this->partial('admin/promotion/partials/list', ['paginator' => $this->paginator]); ?>
+            </div>
+            <!-- .panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>

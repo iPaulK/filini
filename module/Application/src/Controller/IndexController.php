@@ -17,6 +17,7 @@ class IndexController extends CoreController
     {
         return new ViewModel([
             'categories' => $this->getActiveCategories(),
+            'promotions' => $this->getActivePromotions()
         ]);
     }
 

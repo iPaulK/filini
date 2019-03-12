@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation as AT;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
-use Core\Service\Entity\Category as EntityService;
+use Core\Service\Entity\Promotion as EntityService;
 
 /**
  * @ORM\Entity(repositoryClass="Core\Repository\PromotionRepository")
@@ -18,6 +18,22 @@ class Promotion
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 2;
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
 
     /**
      * @var int

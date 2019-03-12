@@ -552,6 +552,30 @@ abstract class Product
     }
 
     /**
+     * Set rate type
+     *
+     * @param MoneyRate $rateType
+     *
+     * @return Product
+     */
+    public function setRateType(\Core\Entity\MoneyRate $rateType = null)
+    {
+        $this->rateType = $rateType;
+
+        return $this;
+    }
+
+    /**
+     * Get rate type
+     *
+     * @return int
+     */
+    public function getRateType()
+    {
+        return $this->rateType;
+    }
+
+    /**
      * Set conversion type
      *
      * @param \Core\Entity\ConversionType $conversionType

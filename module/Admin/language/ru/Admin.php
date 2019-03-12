@@ -72,4 +72,5 @@ return [
     'Updated At'          => 'Обновлено',
     'View'                => 'Просмотр',
     'Money Rate'          => 'Значение курса',
+    'Promotions'          => 'Акции',
 ];

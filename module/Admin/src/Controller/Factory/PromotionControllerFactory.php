@@ -4,9 +4,9 @@ namespace Admin\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Admin\Controller\NewsController;
+use Admin\Controller\PromotionController;
 
-class NewsControllerFactory implements FactoryInterface
+class PromotionControllerFactory implements FactoryInterface
 {
     public function __invoke(
         ContainerInterface $container, 
@@ -15,6 +15,6 @@ class NewsControllerFactory implements FactoryInterface
     ) {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
         
-        return new NewsController($entityManager);
+        return new PromotionController($entityManager);
     }
 }

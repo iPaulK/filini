@@ -99,12 +99,12 @@ return [
                     ],
                 ],
             ],
-            'admin_news' => [
+            'admin_promotions' => [
                 'type' => Segment::class,
                 'options' => [
                     'route' => '/admin/news[/:action[/:id]]',
                     'defaults' => [
-                        'controller' => Controller\NewsController::class,
+                        'controller' => Controller\PromotionController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -169,7 +169,7 @@ return [
             Controller\ConversionTypeController::class => Controller\Factory\ConversionTypeControllerFactory::class,
             Controller\OurWorkController::class => Controller\Factory\OurWorkControllerFactory::class,
             Controller\OurWorkCategoryController::class => Controller\Factory\OurWorkCategoryControllerFactory::class,
-            Controller\NewsController::class => Controller\Factory\NewsControllerFactory::class,
+            Controller\PromotionController::class => Controller\Factory\PromotionControllerFactory::class,
             Controller\PageController::class => Controller\Factory\PageControllerFactory::class,
             Controller\SettingController::class => Controller\Factory\SettingControllerFactory::class,
             Controller\UserController::class => Controller\Factory\UserControllerFactory::class,
@@ -197,7 +197,7 @@ return [
             Controller\OurWorkController::class => [
                 ['actions' => '*', 'allow' => '+ourwork.manage']
             ],
-            Controller\NewsController::class => [
+            Controller\PromotionController::class => [
                 ['actions' => '*', 'allow' => '+news.manage']
             ],
             Controller\PageController::class => [

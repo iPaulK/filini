@@ -50,7 +50,7 @@ class MoneyRateController extends CoreController
     }
 
     /**
-     * Remove category action
+     * Remove money rate action
      *
      * @return \Zend\Http\Response
      * @throws \Doctrine\ORM\OptimisticLockException

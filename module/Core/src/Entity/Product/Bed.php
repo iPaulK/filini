@@ -40,6 +40,19 @@ class Bed extends ProductEntity
      */
     protected $height;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="depth", type="float", precision=2, scale=2, nullable=true)
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"9"}})
+     * @AT\Validator({"name":"float"})
+     * @AT\Options({"label":"Depth (mm.)"})
+     * @AT\Attributes({"value":"0"})
+     * @AT\Required({"required":"true" })
+     */
+    protected $depth;
+
     public function __construct()
     {
         parent::__construct();
@@ -91,5 +104,29 @@ class Bed extends ProductEntity
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Set depth
+     *
+     * @param float $depth
+     *
+     * @return Sofa
+     */
+    public function setDepth($depth)
+    {
+        $this->depth = $depth;
+
+        return $this;
+    }
+
+    /**
+     * Get depth
+     *
+     * @return float
+     */
+    public function getDepth()
+    {
+        return $this->depth;
     }
 }

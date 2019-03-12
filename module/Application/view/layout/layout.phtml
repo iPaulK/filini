@@ -8,6 +8,10 @@
         $ourWorkCategories = $layoutHelper->getOurWorkCategories();
     }
 
+    if (!$promotions = $this->promotions) {
+        $promotions = $layoutHelper->getActivePromotions();
+    }
+
     echo $this->doctype();
 ?>
 <html lang="ru">
@@ -36,7 +40,7 @@
                 <!--Блок для 724px-->
                 <div class="col-sm-12  hidden-md hidden-lg table-phone">
                     <div class="phone">
-                        <i class="fa fa-mobile"></i> 
+                        <i class="fa fa-mobile"></i>
                         <a href="tel:+375447112336">+375&nbsp;44&nbsp;711-23-36</a>
                     </div>
                     <a href="#small-dialog" class="popup-with-zoom-anim button">
@@ -68,7 +72,7 @@
 <!--                    </ul>-->
 <!--                </div>-->
                 <!--Блок для 1170px и выше-->
-                <div class="col-md-2 col-xs-5 mobile-phone">
+                <div class="col-md-2 col-md-push-0 col-xs-5 col-xs-push-5 mobile-phone">
                     <div class="phone">
                         <i class="fa fa-mobile"></i>
                         <a href="tel:+375447112336">+375&nbsp;44&nbsp;711-23-36</a>
@@ -86,6 +90,7 @@
                             <li><a href="<?php echo $this->url('application_catalog')?>">Каталог</a></li>
                             <li><a href="<?php echo $this->url('application_work_list')?>">Наши работы</a></li>
                             <li><a href="<?php echo $this->url('application_designers')?>">Дизайнерам</a></li>
+                            <li><a href="<?php echo $this->url('application_installment')?>">Рассрочка</a></li>
                             <li><a href="<?php echo $this->url('application_contact')?>">Контакты</a></li>
                         </ul>
                     </nav>

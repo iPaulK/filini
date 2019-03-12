@@ -2,6 +2,7 @@
 
 namespace Core\Controller;
 
+use Core\Entity\Promotion;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Core\Entity\{
@@ -21,6 +22,9 @@ class CoreController extends AbstractActionController
 
     /** @var array */
     protected $ourWorkCategories;
+
+    /** @var array */
+    protected $activePromotions;
 
     /**
      * Execute the request
@@ -71,5 +75,15 @@ class CoreController extends AbstractActionController
         }
 
         return $this->ourWorkCategories;
+    }
+
+    protected function getActivePromotions()
+    {
+        if ($this->activePromotions === null) {
+            $query = $this->getRepository(Promotion::class)->getActive();
+            $this->activePromotions = $query->getResult();
+        }
+
+        return $this->activePromotions;
     }
 }

@@ -1,0 +1,78 @@
+<?php
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->prepare();
+$title = $form->getObject()->getId() ? 'Edit Promotion' : 'Add Promotion';
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?php echo $this->translate('Promotions'); ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <?php echo $this->form()->openTag($form); ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate($title); ?>
+            </div>
+            <!-- .panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <?php foreach ($form->getElements() as $name => $element): ?>
+                            <?php
+                            $element->setAttributes([
+                                'class' => 'form-control' . ($name == 'description' ? ' rich-editor' : ''),
+                                'placeholder' => $element->getLabel(),
+                            ])->setLabelAttributes([
+                                'class' => 'control-label',
+                            ]);
+
+                            if ($name == 'description') {
+                                $element->removeAttribute('required');
+                            }
+                            ?>
+
+                            <div class="form-group<?php echo $element->getMessages() ? ' has-error' : ''; ?>">
+                                <?php if ($name != 'promotionImage'): ?>
+                                    <label><?php echo $this->formLabel($element); ?>:</label>
+                                    <?php echo $this->formElement($element); ?>
+                                    <?php echo $this->formElementErrors()->render($element); ?>
+                                <?php endif; ?>
+
+                                <!-- <p class="help-block">Example block-level help text here.</p> -->
+                            </div>
+
+                            <?php if ($name == 'promotionImage'): ?>
+                                <h2><?php echo $this->translate('Promotion Image'); ?></h2>
+                                    <?php echo $this->partial('admin/promotion/partials/fileupload', ['element' => $element]); ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="col-lg-2 hidden"></div>
+                </div>
+            </div>
+            <!-- .panel-body -->
+
+            <!-- .panel-footer -->
+            <div class="panel-footer">
+                <a href="<?php echo $this->url('admin_promotions') ?>" class="btn btn-default">
+                    <i class="fa fa-arrow-left"></i>
+                    <?php echo $this->translate('Back'); ?>
+                </a>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn btn-primary">
+                        <i class="fa fa-send-o"></i>
+                        <?php echo $this->translate('Submit'); ?>
+                    </button>
+                    <button type="reset" class="btn btn-warning"><?php echo $this->translate('Reset'); ?></button>
+                </div>
+            </div>
+            <!-- /.panel-footer -->
+        </div>
+        <!-- /.panel -->
+        <?php echo $this->form()->closeTag(); ?>
+    </div>
+</div>

@@ -102,6 +102,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="<?php echo $this->url('admin_money_rate', ['action' => 'index'])?>">
+                                        <?php echo $this->translate('Money Rates') ?>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="<?php echo $this->url('admin_product_category', ['action' => 'index'])?>">
                                         <?php echo $this->translate('Categories') ?>
                                     </a>
@@ -135,9 +140,9 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="<?php echo $this->url('admin_news', ['action' => 'index']) ?>">
+                            <a href="<?php echo $this->url('admin_promotions', ['action' => 'index']) ?>">
                                 <i class="fa fa-newspaper-o"></i>
-                                <?php echo $this->translate('News') ?>
+                                <?php echo $this->translate('Promotions') ?>
                             </a>
                         </li>
                         <li>

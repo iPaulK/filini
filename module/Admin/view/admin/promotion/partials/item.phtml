@@ -1,0 +1,32 @@
+<?php
+/** @var \Core\Entity\Promotion $promotion */
+$promotion = $this->promotion;
+?>
+<tr>
+    <td><?php echo $promotion->getId(); ?></td>
+    <td><?php echo $promotion->getTitle(); ?></td>
+    <td><?php echo $promotion->getDescription(); ?></td>
+    <td>
+        <?php if ($promotion->getService()->isActive()): ?>
+            <span class="label label-success">
+                <?php echo $this->translate('Active'); ?>
+            </span>
+        <?php else: ?>
+            <span class="label label-warning">
+                <?php echo $this->translate('Inactive'); ?>
+            </span>
+        <?php endif; ?>
+    </td>
+    <td><?php echo $promotion->getCreatedAt()->format('d M Y, m:i'); ?></td>
+    <td><?php echo $promotion->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="<?php echo $this->url('admin_promotions', ['action' => 'edit', 'id' => $promotion->getId()]) ?>" class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>
+            <?php echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_promotions', ['action' => 'remove', 'id' => $promotion->getId()]) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are u sure?');">
+            <i class="fa fa-trash-o"></i>
+            <?php echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

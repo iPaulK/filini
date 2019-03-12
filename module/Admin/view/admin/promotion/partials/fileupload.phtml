@@ -1,0 +1,215 @@
+<?php
+/** @var Zend\Form\Element\Hidden $element */
+$element = $this->element;
+/** @var Core\Entity\Image $thumbnail */
+$thumbnail = ($element->getValue() instanceof \Core\Entity\Image) ? $element->getValue() : false;
+/** @var int $index */
+$index = 100;
+
+$this->headLink()
+    ->appendStylesheet($this->basePath('libs/jQuery-File-Upload/css/jquery.fileupload.css'))
+    ->appendStylesheet($this->basePath('libs/jQuery-File-Upload/css/jquery.fileupload-ui.css'))
+;
+
+$this->inlineScript()
+    ->setAllowArbitraryAttributes(true)
+    ->offsetSetFile($index++, $this->basePath('libs/jquery/jquery.ui.widget.js'))
+    ->offsetSetFile($index++, '//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js')
+    ->offsetSetFile($index++, '//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js')
+    ->offsetSetFile($index++, '//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js')
+    ->offsetSetFile($index++, '//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js')
+    ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.iframe-transport.js'))
+    ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload.js')) // The basic File Upload plugin
+    ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-process.js')) // The File Upload processing plugin
+    ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-image.js')) // The File Upload image preview & resize plugin
+    // ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-audio.js')) // The File Upload audio preview plugin
+    // ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-video.js')) // The File Upload video preview plugin
+    ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-validate.js')) // The File Upload validation plugin
+    ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-ui.js')) //The File Upload user interface plugin
+    // ->offsetSetFile($index++, $this->basePath('libs/jQuery-File-Upload/js/jquery.fileupload-jquery-ui.js')) // The File Upload jQuery UI plugin 
+;
+
+?>
+<div class="form-group" id="fileupload">
+    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+    <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+    <!-- The table listing the files available for upload/download -->
+    <div class="table-responsive">
+        <table class="table" role="presentation">
+            <tbody class="files">
+            <?php if ($thumbnail ) :?>
+                <?php
+                /** @var Core\Entity\File */
+                $file = $thumbnail->getFile();
+                ?>
+                <tr class="template-download">
+                    <td>
+                            <span class="preview">
+                                <?php if ($file): ?>
+                                    <a href="<?php echo $file->getRelativeUrl(); ?>" title="<?php echo $file->getName() ?>" target="_blanc">
+                                        <img src="<?php echo $file->getRelativeUrl('preview'); ?>">
+                                    </a>
+                                <?php endif; ?>
+                            </span>
+                    </td>
+                    <td>
+                        <p class="name">
+                            <a href="<?php echo $file->getRelativeUrl(); ?>" title="<?php echo $file->getName() ?>" target="_blanc"><?php echo $file->getName() ?></a>
+                            <input type="hidden" name="<?php echo $element->getName(); ?>" value="<?php echo $thumbnail->getId() ?>">
+                        </p>
+                    </td>
+                    <td>
+                        <span class="size"><?php echo $file->getSize() ?></span>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm delete" data-type="DELETE" data-url="<?php echo $this->url('admin_promotions', ['action' => 'delete-thumbnail', 'id' => $thumbnail->getId()]);?>">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span><?php echo $this->translate('Delete') ?></span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle">
+                    </td>
+                </tr>
+            <?php else: ?>
+                <p><?php echo $this->translate('Thumbnail was not uploaded')?></p>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.table-responsive -->
+
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row fileupload-buttonbar">
+        <div class="col-lg-7">
+            <!-- The fileinput-button span is used to style the file input field as button -->
+            <span class="btn btn-success btn-sm fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span><?php echo $this->translate('Add files') ?>...</span>
+                <input type="file" name="files[]" multiple>
+            </span>
+            <button type="submit" class="btn btn-primary btn-sm start">
+                <i class="glyphicon glyphicon-upload"></i>
+                <span><?php echo $this->translate('Start upload') ?></span>
+            </button>
+            <button type="reset" class="btn btn-warning btn-sm cancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span><?php echo $this->translate('Cancel upload') ?></span>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm delete">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span><?php echo $this->translate('Delete') ?></span>
+            </button>
+            <input type="checkbox" class="toggle">
+            <!-- The global file processing state -->
+            <span class="fileupload-process"></span>
+        </div>
+        <!-- The global progress state -->
+        <div class="col-lg-5 fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+            </div>
+            <!-- The extended global progress state -->
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary btn-sm start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning btn-sm cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" arget="_blanc"><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" arget="_blanc">{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+                <input type="hidden" name="<?php echo $element->getName(); ?>" value="{%=file.imageId%}">
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger btn-sm delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning btn-sm cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+
+<script type="text/javascript">
+    (function($) {
+        $(document).ready(function() {
+            'use strict';
+
+            // Initialize the jQuery File Upload widget:
+            $('#fileupload').fileupload({
+                url: '<?php echo $this->url('admin_promotions', ['action' => 'upload-thumbnail'])?>',
+                // Enable image resizing, except for Android and Opera,
+                // which actually support image resizing, but fail to
+                // send Blob objects via XHR requests:
+                disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator.userAgent),
+                maxFileSize: 2000000, // 2Mb
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                dataType: 'json',
+                maxNumberOfFiles: 1,
+            });
+        });
+    })(jQuery);
+</script>

@@ -185,6 +185,17 @@ abstract class Product
     protected $images;
 
     /**
+     * @var int
+     *
+     * @ORM\OneToOne(targetEntity="Core\Entity\MoneyRate")
+     * @ORM\JoinColumn(name="money_rate_id", referencedColumnName="id", onDelete="SET NULL")
+     * @AT\Type("DoctrineORMModule\Form\Element\EntitySelect")
+     * @AT\Options({"label":"Money Rate", "property":"name", "target_class":"Core\Entity\MoneyRate"})
+     * @AT\Required({"required":"true"})
+     */
+    protected $rateType;
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -538,6 +549,30 @@ abstract class Product
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set rate type
+     *
+     * @param MoneyRate $rateType
+     *
+     * @return Product
+     */
+    public function setRateType(\Core\Entity\MoneyRate $rateType = null)
+    {
+        $this->rateType = $rateType;
+
+        return $this;
+    }
+
+    /**
+     * Get rate type
+     *
+     * @return int
+     */
+    public function getRateType()
+    {
+        return $this->rateType;
     }
 
     /**

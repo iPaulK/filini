@@ -2,19 +2,19 @@
 
 namespace Admin\Controller\Factory;
 
+use Admin\Controller\MoneyRateController;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Admin\Controller\NewsController;
 
-class NewsControllerFactory implements FactoryInterface
+class MoneyRateControllerFactory implements FactoryInterface
 {
     public function __invoke(
-        ContainerInterface $container, 
+        ContainerInterface $container,
         $requestedName,
         array $options = null
     ) {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
-        
-        return new NewsController($entityManager);
+
+        return new MoneyRateController($entityManager);
     }
 }

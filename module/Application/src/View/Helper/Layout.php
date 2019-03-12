@@ -2,6 +2,7 @@
 
 namespace Application\View\Helper;
 
+use Core\Entity\Promotion;
 use Doctrine\ORM\EntityManager;
 use Zend\View\Helper\AbstractHelper;
 use Zend\Authentication\AuthenticationService;
@@ -24,6 +25,11 @@ class Layout extends AbstractHelper
      * @var array
      */
     private $ourWorkCategories;
+
+    /**
+     * @var array
+     */
+    private $activePromotions;
 
     /**
      *
@@ -66,5 +72,18 @@ class Layout extends AbstractHelper
         }
 
         return $this->ourWorkCategories;
+    }
+
+    /**
+     * @return array
+     */
+    public function getActivePromotions()
+    {
+        if ($this->activePromotions === null) {
+            $query = $this->entityManager->getRepository(Promotion::class)->getActive();
+            $this->activePromotions = $query->getResult();
+        }
+
+        return $this->activePromotions;
     }
 }

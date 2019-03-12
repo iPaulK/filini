@@ -10,6 +10,7 @@ return [
     'Logout'             => 'Выход',
     'Manage Permissions' => 'Управление правами',
     'Manage Products'    => 'Управление товарами',
+    'Money Rates'        => 'Управление курсами',
     'Manage Roles'       => 'Управление ролями',
     'Manage Users'       => 'Управление пользователями',
     'Manage Works'       => 'Управление работами',
@@ -70,4 +71,9 @@ return [
     'Type'                => 'Тип',
     'Updated At'          => 'Обновлено',
     'View'                => 'Просмотр',
+    'Money Rate'          => 'Значение курса',
+    'Promotions'          => 'Акции',
+    'Inactive'            => 'Не активная',
+    'Active'              => 'Активная',
+    'Promotion Image'     => 'Изображение акции',
 ];

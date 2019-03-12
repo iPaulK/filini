@@ -1,17 +1,18 @@
 <?php
+
 namespace Admin\Controller;
 
 use Core\Controller\CoreController;
-use Core\Entity\Category;
+use Core\Entity\Promotion;
 use Core\Entity\Image;
-use Zend\View\Model\ViewModel;
-use Zend\View\Model\JsonModel;
-use Doctrine\Common\Collections\ArrayCollection;
+use Zend\View\Model\{
+    ViewModel, JsonModel
+};
 
-class CategoryController extends CoreController
+class PromotionController extends CoreController
 {
     /**
-     * Show list of categories
+     * Show list of promotions
      *
      * @return ViewModel
      */
@@ -20,7 +21,7 @@ class CategoryController extends CoreController
         $page = $this->params()->fromQuery('page', 1);
         $limit = $this->params()->fromQuery('limit', 10);
 
-        $query = $this->getRepository(Category::class)->findCategories();
+        $query = $this->getRepository(Promotion::class)->findPromotions();
 
         $paginator = $this->getPaginatorByQuery($query, $page, $limit);
 
@@ -29,36 +30,32 @@ class CategoryController extends CoreController
         ]);
     }
 
-    /**
-     * Edit category action
-     *
-     * @return ViewModel
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function editAction(): ViewModel
+    public function editAction()
     {
-        /** @var \Core\Entity\Category $category */
-        $category = $this->getEntity(Category::class, $this->params()->fromRoute('id'));
-        if (!$category) {
-            $category = new Category();
+        /** @var \Core\Entity\Promotion $promotion */
+        $promotion = $this->getEntity(Promotion::class, $this->params()->fromRoute('id'));
+
+        if (!$promotion) {
+            $promotion = new Promotion();
         }
 
-        $form = $this->createCategoryForm($category);
-
+        $form = $this->createPromotionForm($promotion);
         $request = $this->getRequest();
+
         if ($request->isPost()) {
             $form->setData($request->getPost());
 
-            $thumbnail = $form->get('thumbnail')->getValue();
-            if (is_numeric($thumbnail)) {
-                $image = $this->getRepository(Image::class)->findOneBy(['id' => $thumbnail]);
-                $form->get('thumbnail')->setValue($image);
+            $promotionImage = $form->get('promotionImage')->getValue();
+            if (is_numeric($promotionImage)) {
+                $image = $this->getRepository(Image::class)->findOneBy(['id' => $promotionImage]);
+                $form->get('promotionImage')->setValue($image);
             }
-            
+
             if ($form->isValid()) {
-                $this->getEm()->persist($category);
+                $this->getEm()->persist($promotion);
                 $this->getEm()->flush();
-                return $this->redirect()->toRoute('admin_product_category');
+
+                return $this->redirect()->toRoute('admin_promotions');
             }
         }
 
@@ -68,19 +65,21 @@ class CategoryController extends CoreController
     }
 
     /**
-     * Remove category action
+     * Remove promotion action
      *
-     * @return ViewModel
+     * @return \Zend\Http\Response
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function removeAction(): ViewModel
+    public function removeAction()
     {
-        $category = $this->getEntity(Category::class, $this->params()->fromRoute('id'));
-        if ($category) {
-            $this->getEm()->remove($category);
+        $promotion = $this->getEntity(Promotion::class, $this->params()->fromRoute('id'));
+
+        if ($promotion) {
+            $this->getEm()->remove($promotion);
             $this->getEm()->flush();
         }
-        return $this->redirect()->toRoute('admin_product_category');
+
+        return $this->redirect()->toRoute('admin_promotions');
     }
 
     /**
@@ -93,7 +92,7 @@ class CategoryController extends CoreController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $thumbnail = $request->getFiles()->get('files')[0];
-            $preset = 'category';
+            $preset = 'promotion';
 
             //upload file to the server and create File entity
             if (!isset($thumbnail)) {
@@ -118,14 +117,14 @@ class CategoryController extends CoreController
             /** @var Core\Entity\Image */
             $image = $this->uploader()->generateImageEntity($file, $preset); // Generate Image Entity
             $this->uploader()->generateImagePresets($image, $preset); // Generate presests
-            
+
             $data['files'][] = [
                 'imageId' => $image->getId(),
                 'name' =>  $file->getName(),
                 'url' =>  $file->getRelativeUrl(),
                 'thumbnailUrl' => $file->getRelativeUrl('preview'),
                 'size' => $file->getSize(),
-                'deleteUrl' => $this->url()->fromRoute('admin_product_category', ['action' => 'delete-thumbnail', 'id' => $image->getId()]),
+                'deleteUrl' => $this->url()->fromRoute('admin_promotions', ['action' => 'delete-thumbnail', 'id' => $image->getId()]),
                 'deleteType' => 'DELETE',
             ];
             return new JsonModel($data);
@@ -149,15 +148,16 @@ class CategoryController extends CoreController
     }
 
     /**
-     * @param \Core\Entity\Category $category
+     * @param \Core\Entity\Promotion $promotion
      * @return \Zend\Form\Form
      */
-    protected function createCategoryForm($category)
+    protected function createPromotionForm($promotion)
     {
-        $form = $this->createForm($category);
+        $form = $this->createForm($promotion);
         $form->setAttributes([
-            'action' => $this->url()->fromRoute('admin_product_category', ['action' => 'edit', 'id' => $category->getId()]),
+            'action' => $this->url()->fromRoute('admin_promotions', ['action' => 'edit', 'id' => $promotion->getId()]),
         ]);
+
         return $form;
     }
 }

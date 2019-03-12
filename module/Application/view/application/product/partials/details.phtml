@@ -19,7 +19,12 @@ $product = $this->product;
 
 <div class="product-important">
     <span class="name">Стоимость</span>
-    <span class="numb"><?php echo number_format($product->getPrice(), 2); ?> Р</span>
+    <span class="numb">
+        <?php
+        $price = number_format($product->getPrice(), 2);
+        $rateValue =  number_format($product->getRateType()->getRateValue(), 2);
+        echo number_format($price * $rateValue, 2);
+        ?> BYN</span>
 </div>
 <?php if ($product->getService()->isSofa() || $product->getService()->isBed()): ?>
     <div class="product-str">

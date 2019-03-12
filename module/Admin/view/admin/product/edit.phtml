@@ -22,7 +22,7 @@ $title = $form->getObject()->getId() ? 'Edit Product' : 'Add Product';
                 <div class="row">
                     <div class="col-lg-10">
                         <h2><?php echo $this->translate('General information'); ?></h2>
-                        <?php foreach (['name', 'slug', 'status', 'price', 'category', 'conversionType'] as $name): ?>
+                        <?php foreach (['name', 'slug', 'status', 'price', 'category', 'conversionType', 'rateType'] as $name): ?>
                             <?php echo $this->partial('admin/product/partials/edit/form/element', ['form' => $form, 'name' => $name]); ?>
                         <?php endforeach; ?>
                         <?php echo $this->partial('admin/product/partials/edit/form/element', ['form' => $form, 'name' => 'description', 'class' => 'rich-editor']); ?>

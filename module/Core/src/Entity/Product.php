@@ -185,6 +185,17 @@ abstract class Product
     protected $images;
 
     /**
+     * @var int
+     *
+     * @ORM\OneToOne(targetEntity="Core\Entity\MoneyRate")
+     * @ORM\JoinColumn(name="money_rate_id", referencedColumnName="id", onDelete="SET NULL")
+     * @AT\Type("DoctrineORMModule\Form\Element\EntitySelect")
+     * @AT\Options({"label":"Money Rate", "property":"name", "target_class":"Core\Entity\MoneyRate"})
+     * @AT\Required({"required":"true"})
+     */
+    protected $rateType;
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")

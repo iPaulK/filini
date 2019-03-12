@@ -16,6 +16,9 @@ use Core\Service\Entity\Category as EntityService;
  */
 class Promotion
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+
     /**
      * @var int
      *
@@ -47,6 +50,19 @@ class Promotion
      * @AT\Required({"required":"true" })
      */
     protected $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="integer", length=1)
+     * @AT\Type("select")
+     * @AT\Options({"label":"Status", "required":true, "value_options":{
+     *      \Core\Entity\Promotion::STATUS_ACTIVE :"Active",
+     *      \Core\Entity\Promotion::STATUS_INACTIVE :"Inactive"
+     * }})
+     * @AT\Required({"required":"true"})
+     */
+    protected $status;
 
     /**
      * @var DateTime

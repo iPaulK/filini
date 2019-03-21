@@ -158,7 +158,7 @@ class MoneyRate
      *
      * @param \DateTime $createdAt
      *
-     * @return Category
+     * @return MoneyRate
      */
     public function setCreatedAt($createdAt)
     {

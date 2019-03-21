@@ -18,7 +18,12 @@ $products = $category->getProducts();
                         <?php endif; ?>
                         <hr>
                         <div class="name"><?php echo $product->getName(); ?></div>
-                        <div class="price"><?php echo sprintf('%01.2f BYN', $product->getPrice()); ?></div>
+                        <div class="price"><?php
+//                            echo sprintf('%01.2f BYN', $product->getPrice());
+                            $price = number_format($product->getPrice(), 2);
+                            $rateValue =  number_format($product->getRateType()->getRateValue(), 2);
+                            echo number_format($price * $rateValue, 2);
+                            ?> BYN</div>
                     </a>
                 </div>
                 <!--end-->

@@ -4,14 +4,16 @@
 namespace Core\Repository;
 
 
+use Doctrine\ORM\Query;
+
 class VideoReviewRepository extends AbstractRepository
 {
-    const TABLE_ALIAS = 'conversion_types';
+    const TABLE_ALIAS = 'video_reviews';
 
     /**
      * Retrieve video reviews
      *
-     * @return \Doctrine\ORM\Query
+     * @return Query
      */
     public function findVideoReviews()
     {

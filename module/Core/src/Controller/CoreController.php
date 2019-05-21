@@ -3,6 +3,7 @@
 namespace Core\Controller;
 
 use Core\Entity\Promotion;
+use Core\Entity\VideoReview;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Core\Entity\{
@@ -27,9 +28,14 @@ class CoreController extends AbstractActionController
     protected $activePromotions;
 
     /**
+     * @var array
+     */
+    protected $videoReviews;
+
+    /**
      * Execute the request
      *
-     * @param  MvcEvent $e
+     * @param MvcEvent $e
      * @return mixed
      * @throws \Exception|\DomainException
      */
@@ -39,7 +45,7 @@ class CoreController extends AbstractActionController
 
         $controller = $e->getTarget();
         $controllerClass = get_class($controller);
-        
+
         if ($controllerClass == 'Application\Controller\AuthController') {
             $controller->layout('layout/login');
         } else if (strpos($controllerClass, 'Admin') !== false) {
@@ -48,11 +54,12 @@ class CoreController extends AbstractActionController
             $controller->layout('layout/layout');
             $controller->layout()
                 ->setVariable('categories', $this->getActiveCategories())
+                ->setVariable('videoReviews', $this->getVideoReviews())
                 ->setVariable('ourWorkCategories', $this->getOurWorkCategories());
         }
     }
 
-    public function __construct($entityManager) 
+    public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -65,6 +72,16 @@ class CoreController extends AbstractActionController
         }
 
         return $this->activeCategories;
+    }
+
+    protected function getVideoReviews()
+    {
+        if ($this->videoReviews === null) {
+            $query = $this->getRepository(VideoReview::class)->findVideoReviews();
+            $this->activeCategories = $query->getResult();
+        }
+
+        return $this->videoReviews;
     }
 
     protected function getOurWorkCategories()

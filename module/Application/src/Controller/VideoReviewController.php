@@ -10,6 +10,9 @@ class VideoReviewController extends CoreController
 {
     public function indexAction(): ViewModel
     {
-        return new ViewModel();
+        return new ViewModel([
+            'categories' => $this->getActiveCategories(),
+            'videoReviews' => $this->getVideoReviews()
+        ]);
     }
 }

@@ -1,0 +1,16 @@
+<?php
+/** @var ArrayCollection $videoReviews */
+$videoReviews = $this->videoReviews;
+?>
+
+<?php foreach ($videoReviews as $videoReview): ?>
+    <h2>
+        <?php echo $videoReview->getTitle() ?>
+    </h2>
+    <div class="col-12">
+        <?php echo $videoReview->getText() ?>
+        <iframe width="600" height="400" src="<?php echo $videoReview->getYoutubeLink()?>" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+<?php endforeach; ?>

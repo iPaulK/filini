@@ -7,6 +7,7 @@
 
 namespace Application;
 
+use Application\Controller\VideoReviewController;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -95,6 +96,16 @@ return [
                     ],
                 ],
             ],
+            'application_video_review' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/video-review',
+                    'defaults' => [
+                        'controller' => Controller\VideoReviewController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'application_product' => [
                 'type' => Segment::class,
                 'options' => [
@@ -168,6 +179,9 @@ return [
             Controller\InstallmentController::class => [
                 ['actions' => '*', 'allow' => '*']
             ],
+            Controller\VideoReviewController::class => [
+                ['actions' => '*', 'allow' => '*']
+            ],
         ]
     ],
     'controllers' => [
@@ -176,6 +190,7 @@ return [
             Controller\ContactController::class => Controller\Factory\ContactControllerFactory::class,
             Controller\CatalogController::class => Controller\Factory\CatalogControllerFactory::class,
             Controller\InstallmentController::class => Controller\Factory\InstallmentControllerFactory::class,
+            Controller\VideoReviewController::class => Controller\Factory\VideoReviewControllerFactory::class,
             Controller\WorkController::class => Controller\Factory\WorkControllerFactory::class,
             Controller\DesignersController::class => Controller\Factory\DesignersControllerFactory::class,
             Controller\ProductController::class => Controller\Factory\ProductControllerFactory::class,

@@ -49,6 +49,16 @@ return [
                     ],
                 ],
             ],
+            'admin_video_review' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/admin/video_review[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\VideoReviewController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
             'admin_product_category' => [
                 'type' => Segment::class,
                 'options' => [
@@ -176,6 +186,7 @@ return [
             Controller\RoleController::class => Controller\Factory\RoleControllerFactory::class,
             Controller\PermissionController::class => Controller\Factory\PermissionControllerFactory::class,
             Controller\MoneyRateController::class => Controller\Factory\MoneyRateControllerFactory::class,
+            Controller\VideoReviewController::class => Controller\Factory\VideoReviewControllerFactory::class,
         ],
     ],
     // The 'access_filter' key is used by the User module to restrict or permit
@@ -219,6 +230,10 @@ return [
                 ['actions' => '*', 'allow' => '+permission.manage']
             ],
             Controller\MoneyRateController::class => [
+                // Allow access to authenticated users having "permission.manage" permission.
+                ['actions' => '*', 'allow' => '+permission.manage']
+            ],
+            Controller\VideoReviewController::class => [
                 // Allow access to authenticated users having "permission.manage" permission.
                 ['actions' => '*', 'allow' => '+permission.manage']
             ],

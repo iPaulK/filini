@@ -1,0 +1,24 @@
+<?php
+/** @var \Core\Entity\VideoReview $videoReview */
+$videoReview = $this->videoReview;
+?>
+<tr>
+    <td><?php echo $videoReview->getId(); ?></td>
+    <td><?php echo $videoReview->getTitle(); ?></td>
+    <td><?php echo $videoReview->getText(); ?></td>
+    <td><?php echo $videoReview->getYoutubeLink(); ?></td>
+    <td><?php echo $videoReview->getCreatedAt()->format('d M Y, m:i'); ?></td>
+    <td><?php echo $videoReview->getUpdatedAt()->format('d M Y, m:i'); ?></td>
+    <td>
+        <a href="<?php echo $this->url('admin_video_review', ['action' => 'edit', 'id' => $videoReview->getId()]) ?>"
+           class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i>
+            <?php echo $this->translate('Edit') ?>
+        </a>
+        <a href="<?php echo $this->url('admin_video_review', ['action' => 'remove', 'id' => $videoReview->getId()]) ?>"
+           class="btn btn-danger btn-sm" onclick="return confirm('Are u sure?');">
+            <i class="fa fa-trash-o"></i>
+            <?php echo $this->translate('Remove') ?>
+        </a>
+    </td>
+</tr>

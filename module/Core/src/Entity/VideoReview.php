@@ -1,19 +1,20 @@
 <?php
 
+
 namespace Core\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation as AT;
-use Core\Service\Entity\ConversionType as EntityService;
+use Core\Service\Entity\VideoReview as EntityService;
 
 /**
- * @ORM\Entity(repositoryClass="Core\Repository\ConversionTypeRepository")
- * @ORM\Table(name="conversion_types")
+ * @ORM\Entity(repositoryClass="Core\Repository\VideoReviewRepository")
+ * @ORM\Table(name="video_reviews")
  * @ORM\HasLifecycleCallbacks
- * @AT\Name("Conversion Type")
+ * @AT\Name("Video Reviews")
  */
-class ConversionType
+class VideoReview
 {
     /**
      * @var int
@@ -29,20 +30,34 @@ class ConversionType
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     * @AT\Options({"label":"Name"})
+     * @AT\Options({"label":"Title"})
      * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
      * @AT\Validator({"name":"StringLength", "options":{"max":"255"}})
      * @AT\Required({"required":"true" })
      */
-    protected $name;
+    protected $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Core\Entity\Image")
-     * @ORM\JoinColumn(name="thumbnail_id", referencedColumnName="id", onDelete="SET NULL")
-     * @AT\Type("Zend\Form\Element\Hidden")
-     * @AT\Options({"label":"Thumbnail"})
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     * @AT\Options({"label":"Text"})
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"1024"}})
+     * @AT\Required({"required":"false" })
      */
-    protected $thumbnail;
+    protected $text;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     * @AT\Options({"label":"Youtube link"})
+     * @AT\Filter({"name":"StringTrim", "name":"StripTags"})
+     * @AT\Validator({"name":"StringLength", "options":{"max":"1024"}})
+     * @AT\Required({"required":"true" })
+     */
+    protected $youtubeLink;
 
     /**
      * @var DateTime
@@ -94,10 +109,9 @@ class ConversionType
         return $this->service;
     }
 
+
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -105,27 +119,75 @@ class ConversionType
     }
 
     /**
-     * Set name
+     * @param int $id
      *
-     * @param string $name
-     *
-     * @return ConversionType
+     * @return VideoReview
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return VideoReview
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     *
+     * @return VideoReview
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getYoutubeLink()
+    {
+        return $this->youtubeLink;
+    }
+
+    /**
+     * @param string $youtubeLink
+     *
+     * @return VideoReview
+     */
+    public function setYoutubeLink($youtubeLink)
+    {
+        $this->youtubeLink = $youtubeLink;
+
+        return $this;
     }
 
     /**
@@ -133,7 +195,7 @@ class ConversionType
      *
      * @param \DateTime $createdAt
      *
-     * @return ConversionType
+     * @return VideoReview
      */
     public function setCreatedAt($createdAt)
     {
@@ -157,7 +219,7 @@ class ConversionType
      *
      * @param \DateTime $updatedAt
      *
-     * @return ConversionType
+     * @return VideoReview
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -174,29 +236,5 @@ class ConversionType
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set thumbnail
-     *
-     * @param \Core\Entity\Image $thumbnail
-     *
-     * @return ConversionType
-     */
-    public function setThumbnail(\Core\Entity\Image $thumbnail = null)
-    {
-        $this->thumbnail = $thumbnail;
-
-        return $this;
-    }
-
-    /**
-     * Get thumbnail
-     *
-     * @return \Core\Entity\Image
-     */
-    public function getThumbnail()
-    {
-        return $this->thumbnail;
     }
 }
